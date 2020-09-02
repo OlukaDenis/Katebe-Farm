@@ -5,6 +5,14 @@
  */
 package app;
 
+import connector.DbConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Eco
@@ -153,6 +161,29 @@ public class Login extends javax.swing.JFrame {
        } else {
            phone_required.setVisible(false);
            password_required.setVisible(false);
+           
+           Connection con = DbConnection.getConnection();
+           PreparedStatement ps;
+           try {
+               ps = con.prepareStatement("SELECT * FROM user WHERE contact = ? AND password = ?");
+               ps.setString(1, phone_number.getText());
+               ps.setString(2, String.valueOf(user_password.getPassword()));
+               
+               ResultSet res = ps.executeQuery();
+               if (res.next()) {
+                   System.out.println("User found");
+                   MainApp mainApp = new MainApp();
+                   mainApp.setVisible(true);
+                   mainApp.pack();
+                   mainApp.setLocationRelativeTo(null);
+                   this.dispose();
+               } else {
+                    System.out.println("User doesnt exist");
+               }
+           } catch (SQLException ex) {
+               Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
        }
     }//GEN-LAST:event_button_loginActionPerformed
 
