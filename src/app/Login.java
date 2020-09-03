@@ -5,6 +5,7 @@
  */
 package app;
 
+import app.utils.AppUtils;
 import connector.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -59,11 +61,14 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Password");
 
+        phone_number.setText("0773047940");
         phone_number.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 phone_numberActionPerformed(evt);
             }
         });
+
+        user_password.setText("admin");
 
         button_login.setText("Login");
         button_login.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +78,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         button_exit.setText("Exit");
+        button_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_exitActionPerformed(evt);
+            }
+        });
 
         phone_required.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         phone_required.setForeground(new java.awt.Color(255, 51, 51));
@@ -176,6 +186,8 @@ public class Login extends javax.swing.JFrame {
                    mainApp.setVisible(true);
                    mainApp.pack();
                    mainApp.setLocationRelativeTo(null);
+                   mainApp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                   mainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
                    this.dispose();
                } else {
                     System.out.println("User doesnt exist");
@@ -186,6 +198,10 @@ public class Login extends javax.swing.JFrame {
            
        }
     }//GEN-LAST:event_button_loginActionPerformed
+
+    private void button_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_exitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_button_exitActionPerformed
 
     /**
      * @param args the command line arguments
