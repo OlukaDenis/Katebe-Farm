@@ -48,6 +48,8 @@ public class MainApp extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         AllGoatsTable = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        searchGoat = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,6 +152,14 @@ public class MainApp extends javax.swing.JFrame {
                 AllGoatsTableMouseClicked(evt);
             }
         });
+        AllGoatsTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AllGoatsTableKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                AllGoatsTableKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(AllGoatsTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -158,7 +168,7 @@ public class MainApp extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE))
+                .addComponent(jScrollPane1))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,6 +176,18 @@ public class MainApp extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel4.setText("Search Goat");
+
+        searchGoat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchGoatKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchGoatKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,7 +200,11 @@ public class MainApp extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchGoat, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -188,7 +214,10 @@ public class MainApp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel4)
+                    .addComponent(searchGoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -238,6 +267,23 @@ public class MainApp extends javax.swing.JFrame {
         
     }//GEN-LAST:event_AllGoatsTableMouseClicked
 
+    private void searchGoatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchGoatKeyTyped
+        
+    }//GEN-LAST:event_searchGoatKeyTyped
+
+    private void AllGoatsTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AllGoatsTableKeyReleased
+        
+    }//GEN-LAST:event_AllGoatsTableKeyReleased
+
+    private void AllGoatsTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AllGoatsTableKeyPressed
+
+    }//GEN-LAST:event_AllGoatsTableKeyPressed
+
+    private void searchGoatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchGoatKeyReleased
+       AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate"}));
+        AppUtils.fillGoatTable(AllGoatsTable, searchGoat.getText());
+    }//GEN-LAST:event_searchGoatKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -281,10 +327,12 @@ public class MainApp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel registered_goats;
+    private javax.swing.JTextField searchGoat;
     // End of variables declaration//GEN-END:variables
 }

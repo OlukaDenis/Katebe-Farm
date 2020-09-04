@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -284,6 +285,7 @@ public class AddGoat extends javax.swing.JFrame {
             
             AppUtils.manipulateGoat(AppUtils.INSERT, goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
+            MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate"}));
             AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
         }
         

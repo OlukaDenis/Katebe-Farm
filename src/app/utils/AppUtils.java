@@ -71,7 +71,7 @@ public class AppUtils {
         
         try {
             ps = conn.prepareStatement("SELECT * FROM goat WHERE CONCAT(ID, name, breed, sex, source, birthdate) LIKE ?");
-            ps.setString(1, "%" + searchText + "");
+            ps.setString(1, "%" + searchText + "%");
             
             ResultSet rs = ps.executeQuery();
             DefaultTableModel model = (DefaultTableModel)table.getModel();
