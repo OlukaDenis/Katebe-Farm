@@ -284,7 +284,7 @@ public class AddGoat extends javax.swing.JFrame {
             
             AppUtils.manipulateGoat(AppUtils.INSERT, goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
-            
+            AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
         }
         
     }//GEN-LAST:event_button_add_goatActionPerformed
