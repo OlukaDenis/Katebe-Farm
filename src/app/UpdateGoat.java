@@ -7,12 +7,18 @@ package app;
 
 import app.models.Goat;
 import app.utils.AppUtils;
+import java.awt.FileDialog;
+import java.awt.Image;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,12 +31,13 @@ public class UpdateGoat extends javax.swing.JFrame {
     /**
      * Creates new form UpdateGoat
      */
-    public Goat selectedGoat;
+    private Goat goat;
     public UpdateGoat() {
         initComponents();
         ButtonGroup bg = new ButtonGroup();
         bg.add(updateMale);
         bg.add(updateFemale);
+         goat = new Goat();
     }
 
     /**
@@ -60,6 +67,20 @@ public class UpdateGoat extends javax.swing.JFrame {
         updateCancel = new javax.swing.JButton();
         buttonUpdateGoat = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        updateBuckID = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        updateDoeID = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        updateFrontImage = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        updateSideImage = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        updateRearImage = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        chooseFront = new javax.swing.JLabel();
+        chooseSide = new javax.swing.JLabel();
+        chooseRear = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +117,8 @@ public class UpdateGoat extends javax.swing.JFrame {
             }
         });
 
+        buttonUpdateGoat.setBackground(new java.awt.Color(255, 102, 0));
+        buttonUpdateGoat.setForeground(new java.awt.Color(255, 255, 255));
         buttonUpdateGoat.setText("Update Goat");
         buttonUpdateGoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,91 +135,273 @@ public class UpdateGoat extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel8.setText("Buck ID");
+
+        updateBuckID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBuckIDActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel9.setText("Doe ID");
+
+        updateDoeID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateDoeIDActionPerformed(evt);
+            }
+        });
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        updateFrontImage.setBackground(new java.awt.Color(255, 255, 255));
+        updateFrontImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateFrontImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateFrontImageMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updateFrontImage, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updateFrontImage, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        updateSideImage.setBackground(new java.awt.Color(255, 255, 255));
+        updateSideImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateSideImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateSideImageMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updateSideImage, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updateSideImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        updateRearImage.setBackground(new java.awt.Color(255, 255, 255));
+        updateRearImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateRearImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateRearImageMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updateRearImage, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updateRearImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jLabel14.setText("Select Images");
+
+        chooseFront.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        chooseFront.setText("Choose front");
+        chooseFront.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chooseFrontMouseClicked(evt);
+            }
+        });
+
+        chooseSide.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        chooseSide.setText("Choose side");
+        chooseSide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chooseSideMouseClicked(evt);
+            }
+        });
+
+        chooseRear.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        chooseRear.setText("Choose rear");
+        chooseRear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chooseRearMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(updateCancel))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(updateMale)
+                                .addGap(40, 40, 40)
+                                .addComponent(updateFemale))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(updateBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(updateSource)
+                                    .addComponent(updateBreed, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(updateCancel))
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(17, 17, 17)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(updateGoatID)
+                            .addComponent(updateGoatName, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 36, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(updateMale)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(updateFemale))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(updateBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(updateSource)
-                                            .addComponent(updateBreed, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(67, 67, 67)
-                                        .addComponent(buttonUpdateGoat))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel9)
+                                                .addGap(41, 41, 41)
+                                                .addComponent(updateDoeID, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel8)
+                                                .addGap(34, 34, 34)
+                                                .addComponent(updateBuckID, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(75, 75, 75))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel14)
+                                        .addGap(146, 146, 146)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(17, 17, 17)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(updateGoatID)
-                                    .addComponent(updateGoatName, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                                .addComponent(chooseFront)
+                                .addGap(60, 60, 60)
+                                .addComponent(chooseSide)
+                                .addGap(55, 55, 55)
+                                .addComponent(chooseRear)
+                                .addGap(14, 14, 14))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(buttonUpdateGoat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addGap(52, 52, 52))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(342, 342, 342)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateGoatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateGoatName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateMale)
-                    .addComponent(updateFemale)
-                    .addComponent(jLabel5))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(updateBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateCancel)
-                    .addComponent(buttonUpdateGoat)
-                    .addComponent(jButton1))
-                .addGap(30, 30, 30))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(updateGoatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(updateGoatName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(updateBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(updateMale)
+                            .addComponent(updateFemale)
+                            .addComponent(jLabel5))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(updateSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(updateBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(updateCancel)
+                            .addComponent(buttonUpdateGoat)
+                            .addComponent(jButton1))
+                        .addGap(30, 30, 30))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel8)
+                                    .addComponent(updateBuckID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(updateDoeID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(73, 73, 73))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chooseSide)
+                            .addComponent(chooseRear)
+                            .addComponent(chooseFront))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -234,7 +439,7 @@ public class UpdateGoat extends javax.swing.JFrame {
     }
     
     private void buttonUpdateGoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateGoatActionPerformed
-         Goat goat = new Goat();
+
         String sex = "Male";
         if (updateFemale.isSelected()) {
             sex = "Female";
@@ -258,11 +463,12 @@ public class UpdateGoat extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonUpdateGoatActionPerformed
 
     public void populateGoat(Goat goat) {
-        Logger.getLogger(MainApp.class.getName()).log(Level.INFO, goat.getName());
         
         updateGoatID.setText(goat.getID());
         updateGoatName.setText(goat.getName());
         updateBreed.setText(goat.getBreed());
+        updateBuckID.setText(goat.getBuck_id());
+        updateDoeID.setText(goat.getDoe_id());
 
         if (goat.getSex().equals("Male")) {
             updateMale.setSelected(true);
@@ -279,6 +485,24 @@ public class UpdateGoat extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        ImageIcon imageFront = new ImageIcon(new ImageIcon(goat.getImage_front())
+                .getImage()
+                .getScaledInstance(updateFrontImage.getWidth(), updateFrontImage.getWidth(), Image.SCALE_SMOOTH)
+        );
+        
+        ImageIcon imageRear = new ImageIcon(new ImageIcon(goat.getImage_rear())
+                .getImage()
+                .getScaledInstance(updateRearImage.getWidth(), updateRearImage.getWidth(), Image.SCALE_SMOOTH)
+        );
+        
+        ImageIcon imageSide = new ImageIcon(new ImageIcon(goat.getImage_side())
+                .getImage()
+                .getScaledInstance(updateSideImage.getWidth(), updateSideImage.getWidth(), Image.SCALE_SMOOTH)
+        );
+        updateFrontImage.setIcon(imageFront);
+        updateRearImage.setIcon(imageRear);
+        updateSideImage.setIcon(imageSide);
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -294,6 +518,99 @@ public class UpdateGoat extends javax.swing.JFrame {
         // cancel 
         this.dispose();
     }//GEN-LAST:event_updateCancelActionPerformed
+
+    private void updateBuckIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBuckIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateBuckIDActionPerformed
+
+    private void updateDoeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDoeIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateDoeIDActionPerformed
+
+    private void updateFrontImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateFrontImageMouseClicked
+         
+    }//GEN-LAST:event_updateFrontImageMouseClicked
+
+    private void updateSideImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSideImageMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_updateSideImageMouseClicked
+
+    private void updateRearImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateRearImageMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_updateRearImageMouseClicked
+
+    private void chooseFrontMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseFrontMouseClicked
+       FileInputStream fis = null;
+
+        FileDialog fd = new FileDialog(this);
+        fd.show();
+        String path = fd.getDirectory()+fd.getFile();
+        updateFrontImage.setIcon(AppUtils.resizeImage(path, updateFrontImage));
+
+        try {
+            File image = new File(path);
+            fis = new FileInputStream(image);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            for(int readNum; (readNum=fis.read(buffer))!=-1;) {
+                bos.write(buffer, 0, readNum);
+            }
+            goat.setImage_front(bos.toByteArray());
+        } catch (Exception ex) {
+            Logger.getLogger(AddGoat.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_chooseFrontMouseClicked
+
+    private void chooseSideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseSideMouseClicked
+        // TODO add your handling code here:
+        FileInputStream fis = null;
+
+        FileDialog fd = new FileDialog(this);
+        fd.show();
+        String path = fd.getDirectory()+fd.getFile();
+        updateSideImage.setIcon(AppUtils.resizeImage(path, updateSideImage));
+
+        try {
+            File image = new File(path);
+            fis = new FileInputStream(image);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            for(int readNum; (readNum=fis.read(buffer))!=-1;) {
+                bos.write(buffer, 0, readNum);
+            }
+            goat.setImage_side(bos.toByteArray());
+        } catch (Exception ex) {
+            Logger.getLogger(AddGoat.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_chooseSideMouseClicked
+
+    private void chooseRearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseRearMouseClicked
+        // TODO add your handling code here:
+        FileInputStream fis = null;
+
+        FileDialog fd = new FileDialog(this);
+        fd.show();
+        String path = fd.getDirectory()+fd.getFile();
+        updateRearImage.setIcon(AppUtils.resizeImage(path, updateRearImage));
+
+        try {
+            File image = new File(path);
+            fis = new FileInputStream(image);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            for(int readNum; (readNum=fis.read(buffer))!=-1;) {
+                bos.write(buffer, 0, readNum);
+            }
+            goat.setImage_rear(bos.toByteArray());
+        } catch (Exception ex) {
+            Logger.getLogger(AddGoat.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_chooseRearMouseClicked
 
     /**
      * @param args the command line arguments
@@ -332,22 +649,36 @@ public class UpdateGoat extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonUpdateGoat;
+    private javax.swing.JLabel chooseFront;
+    private javax.swing.JLabel chooseRear;
+    private javax.swing.JLabel chooseSide;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     public static com.toedter.calendar.JDateChooser updateBirthDate;
     public static javax.swing.JTextField updateBreed;
+    private javax.swing.JTextField updateBuckID;
     private javax.swing.JButton updateCancel;
+    private javax.swing.JTextField updateDoeID;
     public static javax.swing.JRadioButton updateFemale;
+    private javax.swing.JLabel updateFrontImage;
     public static javax.swing.JTextField updateGoatID;
     public static javax.swing.JTextField updateGoatName;
     public static javax.swing.JRadioButton updateMale;
+    private javax.swing.JLabel updateRearImage;
+    private javax.swing.JLabel updateSideImage;
     public static javax.swing.JTextField updateSource;
     // End of variables declaration//GEN-END:variables
 

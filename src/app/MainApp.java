@@ -251,12 +251,13 @@ public class MainApp extends javax.swing.JFrame {
        Goat mGoat = AppUtils.singleGoat(model.getValueAt(rowIndex, 0).toString());
               
         UpdateGoat updateGoat = new UpdateGoat();
+        updateGoat.populateGoat(mGoat);
+        
         updateGoat.setVisible(true);
         updateGoat.pack();
         updateGoat.setLocationRelativeTo(null);
         updateGoat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        updateGoat.populateGoat(mGoat);
         
     }//GEN-LAST:event_AllGoatsTableMouseClicked
 
