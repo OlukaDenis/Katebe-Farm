@@ -70,11 +70,8 @@ public class AppUtils {
         }
     }
     
-    public static void manipulateGoat(String operation, Goat goat, AddGoat addGoat, UpdateGoat updateGoat) {
-        
-        switch(operation) {
-            case UPDATE:
-                try {
+    public static void updateOneGoat(Goat goat, UpdateGoat updateGoat) {
+        try {
                     ps = conn.prepareStatement("UPDATE goat SET name = ?, breed = ?, sex = ?, source = ?, birthdate = ?, buck_id = ?, doe_id = ? WHERE ID = ?");
                     
                     ps.setString(1, goat.getName());
@@ -95,33 +92,26 @@ public class AppUtils {
                     Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
-                break;
-               
-                
-            case DELETE:
-                try {
-                    ps = conn.prepareStatement("DELETE FROM `goat` WHERE ID = ?");
-                    ps.setString(1, goat.getID());
+    }
+    
+    public static void deleteGoat(Goat goat, UpdateGoat updateGoat) {
+        try {
+            ps = conn.prepareStatement("DELETE FROM `goat` WHERE ID = ?");
+            ps.setString(1, goat.getID());
 
-                    if (ps.executeUpdate() > 0) {
-                       JOptionPane.showMessageDialog(null, "Goat deleted successfully!");
-                       updateGoat.dispose();
-                    }
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "Goat deleted successfully!");
+               updateGoat.dispose();
+            }
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                }
-                break;
-                
-            default:
-                break;
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
     
-    public static void fillGoatTable(JTable table, String searchText) {
-        PreparedStatement ps;
-        
+    
+    public static void fillGoatTable(JTable table, String searchText) {        
         try {
             ps = conn.prepareStatement("SELECT * FROM goat WHERE CONCAT(ID, name, breed, sex, source, birthdate, buck_id, doe_id) LIKE ?");
             ps.setString(1, "%" + searchText + "%");
@@ -150,6 +140,38 @@ public class AppUtils {
         } catch (SQLException ex) {
             Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static Goat singleGoat(String goatID) {
+        Goat goat = new Goat();
+        try {
+            ps = conn.prepareStatement("SELECT * FROM goat WHERE CONCAT(ID, name, breed, sex, source, birthdate, buck_id, doe_id, image_front, image_rear, image_side) WHERE ID = ?");
+            ps.setString(1, goatID);
+            
+            ResultSet rs = ps.executeQuery();
+                       
+            while(rs.next()) {
+                
+                goat.setID(rs.getString(1));
+                goat.setName(rs.getString(2));  
+                goat.setBreed(rs.getString(3));
+                goat.setSex(rs.getString(4));
+                goat.setSource(rs.getString(5));
+                goat.setBirthDate(rs.getString(6));
+                goat.setBuck_id(rs.getString(7));
+                goat.setDoe_id(rs.getString(8));
+                goat.setImage_front(rs.getBytes(9));
+                goat.setImage_rear(rs.getBytes(10));                  
+                goat.setImage_side(rs.getBytes(11));  
+
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+        return goat;
     }
     
     public static ImageIcon resizeImage(String path, JLabel label) {
