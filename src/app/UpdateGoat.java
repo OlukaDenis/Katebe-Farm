@@ -5,7 +5,13 @@
  */
 package app;
 
+import app.models.Goat;
+import app.utils.AppUtils;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -49,8 +55,11 @@ public class UpdateGoat extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         updateCancel = new javax.swing.JButton();
         buttonUpdateGoat = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        updateGoatID.setEnabled(false);
 
         jLabel2.setText("Name");
 
@@ -77,11 +86,25 @@ public class UpdateGoat extends javax.swing.JFrame {
         jLabel7.setText("BirthDate");
 
         updateCancel.setText("Cancel");
+        updateCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateCancelActionPerformed(evt);
+            }
+        });
 
         buttonUpdateGoat.setText("Update Goat");
         buttonUpdateGoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonUpdateGoatActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(255, 51, 102));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -91,48 +114,48 @@ public class UpdateGoat extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(170, 170, 170)
-                            .addComponent(jLabel1))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGap(78, 78, 78)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel7))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(29, 29, 29)
-                                            .addComponent(updateMale)
-                                            .addGap(40, 40, 40)
-                                            .addComponent(updateFemale))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addGap(18, 18, 18)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(updateBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(updateSource)
-                                                .addComponent(updateBreed, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(18, 18, 18))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(17, 17, 17)))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(updateGoatID)
-                                        .addComponent(updateGoatName, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(updateCancel)
-                        .addGap(117, 117, 117)
-                        .addComponent(buttonUpdateGoat)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                        .addGap(170, 170, 170)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(updateCancel))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addComponent(updateMale)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(updateFemale))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(updateBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(updateSource)
+                                            .addComponent(updateBreed, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(67, 67, 67)
+                                        .addComponent(buttonUpdateGoat))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(17, 17, 17)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(updateGoatID)
+                                    .addComponent(updateGoatName, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(52, 52, 52))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +190,8 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateCancel)
-                    .addComponent(buttonUpdateGoat))
+                    .addComponent(buttonUpdateGoat)
+                    .addComponent(jButton1))
                 .addGap(30, 30, 30))
         );
 
@@ -191,9 +215,56 @@ public class UpdateGoat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_updateMaleActionPerformed
 
+    public boolean validateText() {
+        
+        if (updateGoatID.getText().equals("") || updateGoatName.getText().equals("") || updateBreed.getText().equals("")
+                || updateBirthDate.getDate() == null || updateSource.getText().equals("") ) {
+            JOptionPane.showMessageDialog(null, "All fields must be filled!");
+            return false;
+        } else if (updateBirthDate.getDate().compareTo(new Date()) > 0) {
+            JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
+            return false;
+        } else {       
+            return true;
+        }
+    }
+    
     private void buttonUpdateGoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateGoatActionPerformed
-        // TODO add your handling code here:
+         Goat goat = new Goat();
+        String sex = "Male";
+        if (updateFemale.isSelected()) {
+            sex = "Female";
+        }
+        goat.setID(updateGoatID.getText());
+        goat.setName(updateGoatName.getText());
+        goat.setBreed(updateBreed.getText());
+        goat.setSex(sex);
+        goat.setSource(updateSource.getText());
+        
+        if (validateText()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String bdate = dateFormat.format(updateBirthDate.getDate());
+            goat.setBirthDate(bdate);
+            
+            AppUtils.manipulateGoat(AppUtils.UPDATE, goat, null, this);
+            MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
+            MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate"}));
+            AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
+        }
     }//GEN-LAST:event_buttonUpdateGoatActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Goat goat = new Goat(updateGoatID.getText());
+        
+         AppUtils.manipulateGoat(AppUtils.DELETE, goat, null, this);
+         MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
+         MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate"}));
+         AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void updateCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCancelActionPerformed
+         this.dispose();
+    }//GEN-LAST:event_updateCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,6 +303,7 @@ public class UpdateGoat extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonUpdateGoat;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

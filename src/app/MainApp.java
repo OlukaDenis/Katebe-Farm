@@ -6,6 +6,7 @@
 package app;
 
 import app.utils.AppUtils;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,9 +24,13 @@ public class MainApp extends javax.swing.JFrame {
     /**
      * Creates new form LoginForm
      */
+    DefaultTableModel model;
     public MainApp() {
         initComponents();
         AppUtils.fillGoatTable(AllGoatsTable, "");
+        model = (DefaultTableModel)AllGoatsTable.getModel();
+        AllGoatsTable.setRowHeight(40);
+        AllGoatsTable.setSelectionBackground(Color.decode("#6A9CC3"));
     }
 
     /**
@@ -136,11 +141,11 @@ public class MainApp extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Breed", "Sex", "Source", "BirthDate"
+                "ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -177,7 +182,7 @@ public class MainApp extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel4.setText("Search Goat");
 
         searchGoat.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -237,8 +242,7 @@ public class MainApp extends javax.swing.JFrame {
     private void AllGoatsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AllGoatsTableMouseClicked
         
         int rowIndex = AllGoatsTable.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel)AllGoatsTable.getModel();
-
+       
         UpdateGoat updateGoat = new UpdateGoat();
         updateGoat.setVisible(true);
         updateGoat.pack();
@@ -280,7 +284,7 @@ public class MainApp extends javax.swing.JFrame {
     }//GEN-LAST:event_AllGoatsTableKeyPressed
 
     private void searchGoatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchGoatKeyReleased
-       AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate"}));
+       AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
         AppUtils.fillGoatTable(AllGoatsTable, searchGoat.getText());
     }//GEN-LAST:event_searchGoatKeyReleased
 
