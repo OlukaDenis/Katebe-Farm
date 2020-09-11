@@ -7,8 +7,11 @@ package app;
 
 import app.models.Goat;
 import app.utils.AppUtils;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +25,7 @@ public class UpdateGoat extends javax.swing.JFrame {
     /**
      * Creates new form UpdateGoat
      */
+    public Goat selectedGoat;
     public UpdateGoat() {
         initComponents();
         ButtonGroup bg = new ButtonGroup();
@@ -246,24 +250,49 @@ public class UpdateGoat extends javax.swing.JFrame {
             String bdate = dateFormat.format(updateBirthDate.getDate());
             goat.setBirthDate(bdate);
             
-            AppUtils.manipulateGoat(AppUtils.UPDATE, goat, null, this);
+            AppUtils.updateOneGoat(goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
             MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate"}));
             AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
         }
     }//GEN-LAST:event_buttonUpdateGoatActionPerformed
 
+    public void populateGoat(Goat goat) {
+        Logger.getLogger(MainApp.class.getName()).log(Level.INFO, goat.getName());
+        
+        updateGoatID.setText(goat.getID());
+        updateGoatName.setText(goat.getName());
+        updateBreed.setText(goat.getBreed());
+
+        if (goat.getSex().equals("Male")) {
+            updateMale.setSelected(true);
+        } else {
+            updateFemale.setSelected(true);
+
+        }
+        updateSource.setText(goat.getSource());
+            
+        Date bdate;
+        try {
+            bdate = new SimpleDateFormat("yyyy-MM-dd").parse(goat.getBirthDate());
+            updateBirthDate.setDate(bdate);
+        } catch (ParseException ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Goat goat = new Goat(updateGoatID.getText());
         
-         AppUtils.manipulateGoat(AppUtils.DELETE, goat, null, this);
+         AppUtils.deleteGoat(goat, this);
          MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
          MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate"}));
          AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void updateCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCancelActionPerformed
-         this.dispose();
+        // cancel 
+        this.dispose();
     }//GEN-LAST:event_updateCancelActionPerformed
 
     /**
@@ -321,4 +350,5 @@ public class UpdateGoat extends javax.swing.JFrame {
     public static javax.swing.JRadioButton updateMale;
     public static javax.swing.JTextField updateSource;
     // End of variables declaration//GEN-END:variables
+
 }

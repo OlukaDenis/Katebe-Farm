@@ -143,15 +143,16 @@ public class AppUtils {
     }
     
     public static Goat singleGoat(String goatID) {
-        Goat goat = new Goat();
+        PreparedStatement preparedStatement = null;
+        Goat goat = null;
         try {
-            ps = conn.prepareStatement("SELECT * FROM goat WHERE CONCAT(ID, name, breed, sex, source, birthdate, buck_id, doe_id, image_front, image_rear, image_side) WHERE ID = ?");
-            ps.setString(1, goatID);
+            preparedStatement = conn.prepareStatement("SELECT * FROM goat WHERE ID = ? ");
+            preparedStatement.setString(1, goatID);
             
-            ResultSet rs = ps.executeQuery();
-                       
+            ResultSet rs = preparedStatement.executeQuery();
+                     
             while(rs.next()) {
-                
+                goat = new Goat();
                 goat.setID(rs.getString(1));
                 goat.setName(rs.getString(2));  
                 goat.setBreed(rs.getString(3));

@@ -5,6 +5,7 @@
  */
 package app;
 
+import app.models.Goat;
 import app.utils.AppUtils;
 import java.awt.Color;
 import java.text.ParseException;
@@ -100,6 +101,11 @@ public class MainApp extends javax.swing.JFrame {
         registered_goats.setText("0");
 
         jButton1.setText("Logout");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -242,32 +248,15 @@ public class MainApp extends javax.swing.JFrame {
     private void AllGoatsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AllGoatsTableMouseClicked
         
         int rowIndex = AllGoatsTable.getSelectedRow();
-       
+       Goat mGoat = AppUtils.singleGoat(model.getValueAt(rowIndex, 0).toString());
+              
         UpdateGoat updateGoat = new UpdateGoat();
         updateGoat.setVisible(true);
         updateGoat.pack();
         updateGoat.setLocationRelativeTo(null);
         updateGoat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        updateGoat.updateGoatID.setText(model.getValueAt(rowIndex, 0).toString());
-        updateGoat.updateGoatName.setText(model.getValueAt(rowIndex, 1).toString());
-        updateGoat.updateBreed.setText(model.getValueAt(rowIndex, 2).toString());
-
-        if (model.getValueAt(rowIndex, 3).toString().equals("Male")) {
-            updateGoat.updateMale.setSelected(true);
-        } else {
-            updateGoat.updateFemale.setSelected(true);
-
-        }
-        updateGoat.updateSource.setText(model.getValueAt(rowIndex, 4).toString());
-            
-        Date bdate;
-        try {
-            bdate = new SimpleDateFormat("yyyy-MM-dd").parse(model.getValueAt(rowIndex, 5).toString());
-            updateGoat.updateBirthDate.setDate(bdate);
-        } catch (ParseException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        updateGoat.populateGoat(mGoat);
         
     }//GEN-LAST:event_AllGoatsTableMouseClicked
 
@@ -287,6 +276,15 @@ public class MainApp extends javax.swing.JFrame {
        AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
         AppUtils.fillGoatTable(AllGoatsTable, searchGoat.getText());
     }//GEN-LAST:event_searchGoatKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Logout
+        Login login = new Login();
+        login.setVisible(true);
+        login.pack();
+        login.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
