@@ -439,16 +439,18 @@ public class UpdateGoat extends javax.swing.JFrame {
     }
     
     private void buttonUpdateGoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateGoatActionPerformed
-
+        goat.displayGoat();
         String sex = "Male";
         if (updateFemale.isSelected()) {
             sex = "Female";
         }
-        goat.setID(updateGoatID.getText());
+        
         goat.setName(updateGoatName.getText());
         goat.setBreed(updateBreed.getText());
         goat.setSex(sex);
         goat.setSource(updateSource.getText());
+        goat.setBuck_id(updateBuckID.getText());        
+        goat.setDoe_id(updateDoeID.getText());
         
         if (validateText()) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -457,46 +459,46 @@ public class UpdateGoat extends javax.swing.JFrame {
             
             AppUtils.updateOneGoat(goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
-            MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate"}));
+            MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
             AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
         }
     }//GEN-LAST:event_buttonUpdateGoatActionPerformed
 
-    public void populateGoat(Goat goat) {
-        
-        updateGoatID.setText(goat.getID());
-        updateGoatName.setText(goat.getName());
-        updateBreed.setText(goat.getBreed());
-        updateBuckID.setText(goat.getBuck_id());
-        updateDoeID.setText(goat.getDoe_id());
+    public void populateGoat(Goat selectedGoat) {
+        goat = selectedGoat;
+        updateGoatID.setText(selectedGoat.getID());
+        updateGoatName.setText(selectedGoat.getName());
+        updateBreed.setText(selectedGoat.getBreed());
+        updateBuckID.setText(selectedGoat.getBuck_id());
+        updateDoeID.setText(selectedGoat.getDoe_id());
 
-        if (goat.getSex().equals("Male")) {
+        if (selectedGoat.getSex().equals("Male")) {
             updateMale.setSelected(true);
         } else {
             updateFemale.setSelected(true);
 
         }
-        updateSource.setText(goat.getSource());
+        updateSource.setText(selectedGoat.getSource());
             
         Date bdate;
         try {
-            bdate = new SimpleDateFormat("yyyy-MM-dd").parse(goat.getBirthDate());
+            bdate = new SimpleDateFormat("yyyy-MM-dd").parse(selectedGoat.getBirthDate());
             updateBirthDate.setDate(bdate);
         } catch (ParseException ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ImageIcon imageFront = new ImageIcon(new ImageIcon(goat.getImage_front())
+        ImageIcon imageFront = new ImageIcon(new ImageIcon(selectedGoat.getImage_front())
                 .getImage()
                 .getScaledInstance(updateFrontImage.getWidth(), updateFrontImage.getWidth(), Image.SCALE_SMOOTH)
         );
         
-        ImageIcon imageRear = new ImageIcon(new ImageIcon(goat.getImage_rear())
+        ImageIcon imageRear = new ImageIcon(new ImageIcon(selectedGoat.getImage_rear())
                 .getImage()
                 .getScaledInstance(updateRearImage.getWidth(), updateRearImage.getWidth(), Image.SCALE_SMOOTH)
         );
         
-        ImageIcon imageSide = new ImageIcon(new ImageIcon(goat.getImage_side())
+        ImageIcon imageSide = new ImageIcon(new ImageIcon(selectedGoat.getImage_side())
                 .getImage()
                 .getScaledInstance(updateSideImage.getWidth(), updateSideImage.getWidth(), Image.SCALE_SMOOTH)
         );
@@ -506,11 +508,11 @@ public class UpdateGoat extends javax.swing.JFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Goat goat = new Goat(updateGoatID.getText());
+        Goat mGoat = new Goat(updateGoatID.getText());
         
-         AppUtils.deleteGoat(goat, this);
+         AppUtils.deleteGoat(mGoat, this);
          MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
-         MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate"}));
+         MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
          AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
     }//GEN-LAST:event_jButton1ActionPerformed
 

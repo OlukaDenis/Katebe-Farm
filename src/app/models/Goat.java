@@ -112,6 +112,17 @@ public class Goat {
     }
 
     
-
+    public void displayGoat() {
+        String m = ""+getName()
+                + "," + getSex()
+                + "," + getSource()
+                + "," + getBreed()
+                + "," + getBirthDate()
+                + "," + getBuck_id()
+                + "," + getImage_front().toString();
+        
+        System.out.println(m);
+        
+    }
     
 }

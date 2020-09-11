@@ -72,26 +72,31 @@ public class AppUtils {
     
     public static void updateOneGoat(Goat goat, UpdateGoat updateGoat) {
         try {
-                    ps = conn.prepareStatement("UPDATE goat SET name = ?, breed = ?, sex = ?, source = ?, birthdate = ?, buck_id = ?, doe_id = ? WHERE ID = ?");
-                    
-                    ps.setString(1, goat.getName());
-                    ps.setString(2, goat.getBreed());
-                    ps.setString(3, goat.getSex());
-                    ps.setString(4, goat.getSource());
-                    ps.setString(5, goat.getBirthDate());                    
-                    ps.setString(6, goat.getID());
-                    ps.setString(7, goat.getBuck_id());
-                    ps.setString(8, goat.getBuck_id());
+            ps = conn.prepareStatement("UPDATE goat SET name = ?, breed = ?, sex = ?, source = ?, birthdate = ?, buck_id = ?, doe_id = ?,  image_front = ?, image_rear = ?, image_side = ? WHERE ID = ?");
 
-                    if (ps.executeUpdate() > 0) {
-                       JOptionPane.showMessageDialog(null, "Goat updated successfully!");
-                       updateGoat.dispose();
-                    }
+            ps.setString(1, goat.getName());
+            ps.setString(2, goat.getBreed());
+            ps.setString(3, goat.getSex());
+            ps.setString(4, goat.getSource());
+            ps.setString(5, goat.getBirthDate());
+            ps.setString(6, goat.getBuck_id());
+            ps.setString(7, goat.getDoe_id());
+            ps.setBytes(8, goat.getImage_front());
+            ps.setBytes(9, goat.getImage_rear());
+            ps.setBytes(10, goat.getImage_side());
+            ps.setString(11, goat.getID());
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                }
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "Goat updated successfully!");
+               updateGoat.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error while updating goat!");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
     
     public static void deleteGoat(Goat goat, UpdateGoat updateGoat) {

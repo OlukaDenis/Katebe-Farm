@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -181,7 +182,6 @@ public class Login extends javax.swing.JFrame {
                
                ResultSet res = ps.executeQuery();
                if (res.next()) {
-                   System.out.println("User found");
                    MainApp mainApp = new MainApp();
                    mainApp.setVisible(true);
                    mainApp.pack();
@@ -190,10 +190,11 @@ public class Login extends javax.swing.JFrame {
                    mainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
                    this.dispose();
                } else {
-                    System.out.println("User doesnt exist");
+                    JOptionPane.showMessageDialog(null, "User doesn't exist!");
                }
            } catch (SQLException ex) {
                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage());
            }
            
        }
