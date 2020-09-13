@@ -186,7 +186,7 @@ public class Login extends javax.swing.JFrame {
                    mainApp.setVisible(true);
                    mainApp.pack();
                    mainApp.setLocationRelativeTo(null);
-                   mainApp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//                   mainApp.setExtendedState(JFrame.MAXIMIZED_BOTH);
                    mainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
                    this.dispose();
                } else {
