@@ -6,6 +6,8 @@
 package app;
 
 import app.models.Goat;
+import app.screens.Health;
+import app.screens.Home;
 import app.utils.AppUtils;
 import java.awt.Color;
 import java.text.ParseException;
@@ -22,9 +24,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MainApp extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LoginForm
-     */
+  
+    Color panelDefault;
+    Color panelClick;
+    
     DefaultTableModel model;
     public MainApp() {
         initComponents();
@@ -32,6 +35,14 @@ public class MainApp extends javax.swing.JFrame {
         model = (DefaultTableModel)AllGoatsTable.getModel();
         AllGoatsTable.setRowHeight(40);
         AllGoatsTable.setSelectionBackground(Color.decode("#6A9CC3"));
+        
+        panelDefault = new Color(61, 149, 119);
+        panelClick = new Color(146, 211, 189);
+        homeJpanel.setBackground(panelClick);        
+        healthJpanel.setBackground(panelDefault);
+        
+        Home home = new Home();
+        container.add(home).setVisible(true);
        
     }
 
@@ -47,8 +58,10 @@ public class MainApp extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        healthButton = new javax.swing.JButton();
-        homeButton = new javax.swing.JButton();
+        healthJpanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        homeJpanel = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         registered_goats = new javax.swing.JLabel();
@@ -73,25 +86,65 @@ public class MainApp extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("KATEBE FARM");
 
-        healthButton.setBackground(new java.awt.Color(32, 108, 64));
-        healthButton.setForeground(new java.awt.Color(255, 255, 255));
-        healthButton.setText("HEALTH");
-        healthButton.setBorder(null);
-        healthButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                healthButtonActionPerformed(evt);
+        healthJpanel.setBackground(new java.awt.Color(61, 149, 119));
+        healthJpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                healthJpanelMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                healthJpanelMouseClicked(evt);
             }
         });
 
-        homeButton.setBackground(new java.awt.Color(32, 108, 64));
-        homeButton.setForeground(new java.awt.Color(255, 255, 255));
-        homeButton.setText("HOME");
-        homeButton.setBorder(null);
-        homeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeButtonActionPerformed(evt);
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("HEALTH");
+
+        javax.swing.GroupLayout healthJpanelLayout = new javax.swing.GroupLayout(healthJpanel);
+        healthJpanel.setLayout(healthJpanelLayout);
+        healthJpanelLayout.setHorizontalGroup(
+            healthJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(healthJpanelLayout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jLabel6)
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+        healthJpanelLayout.setVerticalGroup(
+            healthJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(healthJpanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        homeJpanel.setBackground(new java.awt.Color(61, 149, 119));
+        homeJpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                homeJpanelMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeJpanelMouseClicked(evt);
             }
         });
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("HOME");
+
+        javax.swing.GroupLayout homeJpanelLayout = new javax.swing.GroupLayout(homeJpanel);
+        homeJpanel.setLayout(homeJpanelLayout);
+        homeJpanelLayout.setHorizontalGroup(
+            homeJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeJpanelLayout.createSequentialGroup()
+                .addGap(119, 119, 119)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        homeJpanelLayout.setVerticalGroup(
+            homeJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeJpanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,14 +156,11 @@ public class MainApp extends javax.swing.JFrame {
                         .addGap(80, 80, 80)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(healthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(76, 76, 76))
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(healthJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(homeJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,11 +169,11 @@ public class MainApp extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(healthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addGap(62, 62, 62)
+                .addComponent(homeJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(healthJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, -1));
@@ -205,7 +255,7 @@ public class MainApp extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(AllGoatsTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 270, 156));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 270, 156));
 
         jButton2.setText("Add new Goat");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -296,16 +346,27 @@ public class MainApp extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void healthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_healthButtonActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_healthButtonActionPerformed
+    private void homeJpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeJpanelMousePressed
+         homeJpanel.setBackground(panelClick);        
+        healthJpanel.setBackground(panelDefault);
+    }//GEN-LAST:event_homeJpanelMousePressed
 
-    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-        // TODO add your handling code here:
-        
+    private void healthJpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_healthJpanelMousePressed
+        homeJpanel.setBackground(panelDefault);        
+        healthJpanel.setBackground(panelClick);
+    }//GEN-LAST:event_healthJpanelMousePressed
 
-    }//GEN-LAST:event_homeButtonActionPerformed
+    private void homeJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeJpanelMouseClicked
+        container.removeAll();
+        Home home = new Home();
+        container.add(home).setVisible(true);
+    }//GEN-LAST:event_homeJpanelMouseClicked
+
+    private void healthJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_healthJpanelMouseClicked
+        container.removeAll(); 
+        Health health = new Health();
+        container.add(health).setVisible(true);
+    }//GEN-LAST:event_healthJpanelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -346,14 +407,16 @@ public class MainApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable AllGoatsTable;
     private javax.swing.JDesktopPane container;
-    private javax.swing.JButton healthButton;
-    private javax.swing.JButton homeButton;
+    private javax.swing.JPanel healthJpanel;
+    private javax.swing.JPanel homeJpanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

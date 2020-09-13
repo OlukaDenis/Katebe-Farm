@@ -11,12 +11,12 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  *
  * @author Eco
  */
-public class Home extends javax.swing.JInternalFrame {
+public class Health extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Home
+     * Creates new form Health
      */
-    public Home() {
+    public Health() {
         initComponents();
         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -39,25 +39,25 @@ public class Home extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(920, 620));
 
-        jPanel1.setBackground(new java.awt.Color(152, 184, 173));
+        jPanel1.setBackground(new java.awt.Color(127, 167, 152));
 
-        jLabel1.setText("HOME");
+        jLabel1.setText("HEALTH");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(432, 432, 432)
+                .addGap(384, 384, 384)
                 .addComponent(jLabel1)
-                .addContainerGap(462, Short.MAX_VALUE))
+                .addContainerGap(385, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(14, 14, 14))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -65,14 +65,15 @@ public class Home extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 538, Short.MAX_VALUE))
+                .addGap(0, 532, Short.MAX_VALUE))
         );
 
         pack();
