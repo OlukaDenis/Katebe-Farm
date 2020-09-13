@@ -544,7 +544,6 @@ public class UpdateGoat extends javax.swing.JFrame {
     }//GEN-LAST:event_updateRearImageMouseClicked
 
     private void chooseFrontMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseFrontMouseClicked
-       FileInputStream fis = null;
 
         FileDialog fd = new FileDialog(this);
         fd.show();
@@ -553,7 +552,7 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         try {
             File image = new File(path);
-            fis = new FileInputStream(image);
+            FileInputStream fis = new FileInputStream(image);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
             for(int readNum; (readNum=fis.read(buffer))!=-1;) {
@@ -568,8 +567,6 @@ public class UpdateGoat extends javax.swing.JFrame {
 
     private void chooseSideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseSideMouseClicked
         // TODO add your handling code here:
-        FileInputStream fis = null;
-
         FileDialog fd = new FileDialog(this);
         fd.show();
         String path = fd.getDirectory()+fd.getFile();
@@ -577,7 +574,7 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         try {
             File image = new File(path);
-            fis = new FileInputStream(image);
+            FileInputStream fis = new FileInputStream(image);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
             for(int readNum; (readNum=fis.read(buffer))!=-1;) {
@@ -592,8 +589,6 @@ public class UpdateGoat extends javax.swing.JFrame {
 
     private void chooseRearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseRearMouseClicked
         // TODO add your handling code here:
-        FileInputStream fis = null;
-
         FileDialog fd = new FileDialog(this);
         fd.show();
         String path = fd.getDirectory()+fd.getFile();
@@ -601,7 +596,7 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         try {
             File image = new File(path);
-            fis = new FileInputStream(image);
+            FileInputStream fis = new FileInputStream(image);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
             for(int readNum; (readNum=fis.read(buffer))!=-1;) {

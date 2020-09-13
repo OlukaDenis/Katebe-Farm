@@ -6,7 +6,6 @@ import app.UpdateGoat;
 import app.models.Goat;
 import connector.DbConnection;
 import java.awt.Image;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,9 +21,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class AppUtils {
     private static Connection conn = DbConnection.getConnection();
-    public static final String INSERT = "INSERT";
-    public static final String UPDATE = "UPDATE";
-    public static final String DELETE = "DELETE";
     private static PreparedStatement ps;
     
     public static int countData(String tableName) {
@@ -45,7 +41,7 @@ public class AppUtils {
     
     public static void addNewGoat(Goat goat, AddGoat addGoat) {
         try {
-            ps = conn.prepareStatement("INSERT INTO goat(ID, name, breed, sex, source, birthdate, buck_id, doe_id, image_front, image_rear, image_side) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO goat(ID, name, breed, sex, source, birthdate, buckID, doeID, imageFront, imageRear, imageSide) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, goat.getID());
             ps.setString(2, goat.getName());
             ps.setString(3, goat.getBreed());
@@ -118,7 +114,7 @@ public class AppUtils {
     
     public static void fillGoatTable(JTable table, String searchText) {        
         try {
-            ps = conn.prepareStatement("SELECT * FROM goat WHERE CONCAT(ID, name, breed, sex, source, birthdate, buck_id, doe_id) LIKE ?");
+            ps = conn.prepareStatement("SELECT * FROM goat WHERE CONCAT(ID, name, breed, sex, source, birthdate, buckID, doeID) LIKE ?");
             ps.setString(1, "%" + searchText + "%");
             
             ResultSet rs = ps.executeQuery();
