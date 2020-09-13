@@ -6,6 +6,7 @@
 package app;
 
 import app.models.Goat;
+import app.screens.Home;
 import app.utils.AppUtils;
 import java.awt.FileDialog;
 import java.awt.Image;
@@ -500,8 +501,8 @@ public class AddGoat extends javax.swing.JFrame {
 //            AppUtils.manipulateGoat(AppUtils.INSERT, goat, this, null);
             AppUtils.addNewGoat(goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
-            MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
-            AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
+            Home.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
+            AppUtils.fillGoatTable(Home.AllGoatsTable, "");
         }
         
     }//GEN-LAST:event_button_add_goatActionPerformed

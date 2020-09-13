@@ -6,6 +6,7 @@
 package app;
 
 import app.models.Goat;
+import app.screens.Home;
 import app.utils.AppUtils;
 import java.awt.FileDialog;
 import java.awt.Image;
@@ -459,8 +460,8 @@ public class UpdateGoat extends javax.swing.JFrame {
             
             AppUtils.updateOneGoat(goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
-            MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
-            AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
+            Home.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
+            AppUtils.fillGoatTable(Home.AllGoatsTable, "");
         }
     }//GEN-LAST:event_buttonUpdateGoatActionPerformed
 
@@ -512,8 +513,8 @@ public class UpdateGoat extends javax.swing.JFrame {
         
          AppUtils.deleteGoat(mGoat, this);
          MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
-         MainApp.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
-         AppUtils.fillGoatTable(MainApp.AllGoatsTable, "");
+         Home.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
+         AppUtils.fillGoatTable(Home.AllGoatsTable, "");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void updateCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCancelActionPerformed

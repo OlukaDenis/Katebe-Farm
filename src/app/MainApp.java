@@ -31,11 +31,7 @@ public class MainApp extends javax.swing.JFrame {
     DefaultTableModel model;
     public MainApp() {
         initComponents();
-        AppUtils.fillGoatTable(AllGoatsTable, "");
-        model = (DefaultTableModel)AllGoatsTable.getModel();
-        AllGoatsTable.setRowHeight(40);
-        AllGoatsTable.setSelectionBackground(Color.decode("#6A9CC3"));
-        
+            
         panelDefault = new Color(61, 149, 119);
         panelClick = new Color(146, 211, 189);
         homeJpanel.setBackground(panelClick);        
@@ -66,11 +62,6 @@ public class MainApp extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         registered_goats = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        AllGoatsTable = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        searchGoat = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         container = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -173,10 +164,10 @@ public class MainApp extends javax.swing.JFrame {
                 .addComponent(homeJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(healthJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(381, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 670));
 
         jPanel2.setBackground(new java.awt.Color(169, 205, 182));
 
@@ -224,61 +215,6 @@ public class MainApp extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 920, -1));
 
-        AllGoatsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        AllGoatsTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AllGoatsTableMouseClicked(evt);
-            }
-        });
-        AllGoatsTable.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                AllGoatsTableKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                AllGoatsTableKeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(AllGoatsTable);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 270, 156));
-
-        jButton2.setText("Add new Goat");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 468, -1, -1));
-
-        searchGoat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                searchGoatKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                searchGoatKeyTyped(evt);
-            }
-        });
-        getContentPane().add(searchGoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 548, 240, -1));
-
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel4.setText("Search Goat");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 502, -1, -1));
-
         javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
         container.setLayout(containerLayout);
         containerLayout.setHorizontalGroup(
@@ -295,47 +231,6 @@ public class MainApp extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        AddGoat addGoat = new AddGoat();
-        addGoat.setVisible(true);
-        addGoat.pack();
-        addGoat.setLocationRelativeTo(null);
-        addGoat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void AllGoatsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AllGoatsTableMouseClicked
-        
-        int rowIndex = AllGoatsTable.getSelectedRow();
-       Goat mGoat = AppUtils.singleGoat(model.getValueAt(rowIndex, 0).toString());
-              
-        UpdateGoat updateGoat = new UpdateGoat();
-        updateGoat.populateGoat(mGoat);
-        
-        updateGoat.setVisible(true);
-        updateGoat.pack();
-        updateGoat.setLocationRelativeTo(null);
-        updateGoat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        
-    }//GEN-LAST:event_AllGoatsTableMouseClicked
-
-    private void searchGoatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchGoatKeyTyped
-        
-    }//GEN-LAST:event_searchGoatKeyTyped
-
-    private void AllGoatsTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AllGoatsTableKeyReleased
-        
-    }//GEN-LAST:event_AllGoatsTableKeyReleased
-
-    private void AllGoatsTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AllGoatsTableKeyPressed
-
-    }//GEN-LAST:event_AllGoatsTableKeyPressed
-
-    private void searchGoatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchGoatKeyReleased
-       AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
-        AppUtils.fillGoatTable(AllGoatsTable, searchGoat.getText());
-    }//GEN-LAST:event_searchGoatKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Logout
@@ -405,22 +300,17 @@ public class MainApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTable AllGoatsTable;
     private javax.swing.JDesktopPane container;
     private javax.swing.JPanel healthJpanel;
     private javax.swing.JPanel homeJpanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel registered_goats;
-    private javax.swing.JTextField searchGoat;
     // End of variables declaration//GEN-END:variables
 }
