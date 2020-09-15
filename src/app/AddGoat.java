@@ -41,9 +41,7 @@ public class AddGoat extends javax.swing.JFrame {
         bg.add(rb_female);
         rb_male.setSelected(true);
         goat = new Goat();
-        currentStatus.addItem("In the farm");        
-        currentStatus.addItem("Not in the farm");
-
+        
     }
 
     /**
@@ -171,7 +169,7 @@ public class AddGoat extends javax.swing.JFrame {
                 button_add_goatActionPerformed(evt);
             }
         });
-        jPanel1.add(button_add_goat, new org.netbeans.lib.awtextra.AbsoluteConstraints(603, 539, 126, -1));
+        jPanel1.add(button_add_goat, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 520, 126, -1));
 
         button_cancel_add.setBackground(new java.awt.Color(255, 51, 51));
         button_cancel_add.setForeground(new java.awt.Color(255, 255, 255));
@@ -181,7 +179,7 @@ public class AddGoat extends javax.swing.JFrame {
                 button_cancel_addActionPerformed(evt);
             }
         });
-        jPanel1.add(button_cancel_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 539, -1, -1));
+        jPanel1.add(button_cancel_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, -1, -1));
         jPanel1.add(goat_birth_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 331, 213, -1));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
@@ -352,7 +350,7 @@ public class AddGoat extends javax.swing.JFrame {
         jLabel10.setText("Doe ID");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
 
-        currentStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        currentStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "In the farm", "Not in the farm" }));
         currentStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 currentStatusActionPerformed(evt);
@@ -369,8 +367,8 @@ public class AddGoat extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -430,6 +428,7 @@ public class AddGoat extends javax.swing.JFrame {
         goat.setSource(goat_source.getText());
         goat.setBuck_id(buck_id.getText());        
         goat.setDoe_id(doe_id.getText());
+        goat.setCurrentStatus(String.valueOf(currentStatus.getSelectedItem()));
         
         if (validateText()) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

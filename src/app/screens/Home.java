@@ -156,7 +156,7 @@ public class Home extends javax.swing.JInternalFrame {
 
         int rowIndex = AllGoatsTable.getSelectedRow();
         Goat mGoat = AppUtils.singleGoat(model.getValueAt(rowIndex, 0).toString());
-
+                
         UpdateGoat updateGoat = new UpdateGoat();
         updateGoat.populateGoat(mGoat);
 

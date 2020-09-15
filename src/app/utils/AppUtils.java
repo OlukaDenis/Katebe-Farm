@@ -41,7 +41,7 @@ public class AppUtils {
     
     public static void addNewGoat(Goat goat, AddGoat addGoat) {
         try {
-            ps = conn.prepareStatement("INSERT INTO goat(ID, name, breed, sex, source, birthdate, buckID, doeID, imageFront, imageRear, imageSide) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO goat(ID, name, breed, sex, source, birthdate, buckID, doeID, currentStatus, imageFront, imageRear, imageSide) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, goat.getID());
             ps.setString(2, goat.getName());
             ps.setString(3, goat.getBreed());
@@ -49,10 +49,11 @@ public class AppUtils {
             ps.setString(5, goat.getSource());
             ps.setString(6, goat.getBirthDate());
             ps.setString(7, goat.getBuck_id());
-            ps.setString(8, goat.getDoe_id());
-            ps.setBytes(9, goat.getImage_front());
-            ps.setBytes(10, goat.getImage_rear());
-            ps.setBytes(11, goat.getImage_side());
+            ps.setString(8, goat.getDoe_id());            
+            ps.setString(9, goat.getCurrentStatus());
+            ps.setBytes(10, goat.getImage_front());
+            ps.setBytes(11, goat.getImage_rear());
+            ps.setBytes(12, goat.getImage_side());
 
 
             if (ps.executeUpdate() > 0) {
@@ -162,9 +163,11 @@ public class AppUtils {
                 goat.setBirthDate(rs.getString(6));
                 goat.setBuck_id(rs.getString(7));
                 goat.setDoe_id(rs.getString(8));
-                goat.setImage_front(rs.getBytes(9));
-                goat.setImage_rear(rs.getBytes(10));                  
-                goat.setImage_side(rs.getBytes(11));  
+                goat.setCurrentStatus(rs.getString(9));
+                goat.setAlive(rs.getBoolean(10));
+                goat.setImage_front(rs.getBytes(11));
+                goat.setImage_rear(rs.getBytes(12));                  
+                goat.setImage_side(rs.getBytes(13));  
 
             }
             

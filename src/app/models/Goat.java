@@ -12,6 +12,8 @@ public class Goat {
     private String source;
     private String buck_id;
     private String doe_id;
+    private String currentStatus;
+    private boolean alive;
     private byte[] image_front;
     private byte[] image_side;
     private byte[] image_rear;
@@ -82,6 +84,24 @@ public class Goat {
     public String getDoe_id() {
         return doe_id;
     }
+
+    public String getCurrentStatus() {
+        return currentStatus;
+    }
+
+    public void setCurrentStatus(String currentStatus) {
+        this.currentStatus = currentStatus;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+    
+    
 
     public void setDoe_id(String doe_id) {
         this.doe_id = doe_id;
