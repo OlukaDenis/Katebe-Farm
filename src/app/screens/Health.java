@@ -37,7 +37,7 @@ public class Health extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(920, 620));
+        setPreferredSize(new java.awt.Dimension(920, 610));
 
         jPanel1.setBackground(new java.awt.Color(127, 167, 152));
 
