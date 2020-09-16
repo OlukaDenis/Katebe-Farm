@@ -85,7 +85,7 @@ public class Login extends javax.swing.JFrame {
                 button_loginActionPerformed(evt);
             }
         });
-        jPanel1.add(button_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 95, -1));
+        jPanel1.add(button_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 100, 40));
 
         button_exit.setBackground(new java.awt.Color(255, 51, 51));
         button_exit.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
@@ -96,7 +96,7 @@ public class Login extends javax.swing.JFrame {
                 button_exitActionPerformed(evt);
             }
         });
-        jPanel1.add(button_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 90, -1));
+        jPanel1.add(button_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 90, 40));
 
         phone_required.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         phone_required.setForeground(new java.awt.Color(255, 51, 51));

@@ -1,8 +1,10 @@
 
 package app.utils;
 
+import app.AddDeworming;
 import app.AddGoat;
 import app.UpdateGoat;
+import app.models.Deworming;
 import app.models.Goat;
 import connector.DbConnection;
 import java.awt.Image;
@@ -39,6 +41,7 @@ public class AppUtils {
         return total;
     }
     
+    //GOAT
     public static void addNewGoat(Goat goat, AddGoat addGoat) {
         try {
             ps = conn.prepareStatement("INSERT INTO goat(ID, name, breed, sex, source, birthdate, buckID, doeID, currentStatus, imageFront, imageRear, imageSide) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -179,6 +182,55 @@ public class AppUtils {
         }
         
         return goat;
+    }
+    
+    //DEWORMING
+    public static void addDeworming(Deworming deworming, AddDeworming addDeworming) {
+        try {
+            ps = conn.prepareStatement("INSERT INTO deworming(dewormingDate, dewormerUsed, doseAdministered, nextDueDate, goatID) VALUES (?, ?, ?, ?, ?)");
+            ps.setString(1, deworming.getDewormingDate());
+            ps.setString(2, deworming.getDewormUsed());
+            ps.setString(3, deworming.getDoseAdministered());
+            ps.setString(4, deworming.getNextDueDate());
+            ps.setString(5, deworming.getGoatTag());
+            
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "New deworming record added successfully!");
+               addDeworming.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public static void fillDewormingTable(JTable table, String searchText) {        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM deworming WHERE CONCAT(id, dewormingDate, dewormerUsed, doseAdministered, nextDueDate, goatID) LIKE ?");
+            ps.setString(1, "%" + searchText + "%");
+            
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[8];
+                
+                row[0] = rs.getString(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);
+                row[4] = rs.getString(5);
+                row[5] = rs.getString(6);  
+                
+                model.addRow(row);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static ImageIcon resizeImage(String path, JLabel label) {

@@ -6,7 +6,7 @@
 package app;
 
 import app.models.Goat;
-import app.screens.Deworming;
+import app.screens.DewormingScreen;
 import app.screens.DoeKidding;
 import app.screens.Home;
 import app.screens.Vaccination;
@@ -350,7 +350,7 @@ public class MainApp extends javax.swing.JFrame {
 
     private void dewormingJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dewormingJpanelMouseClicked
         container.removeAll(); 
-        Deworming deworm = new Deworming();
+        DewormingScreen deworm = new DewormingScreen();
         container.add(deworm).setVisible(true);
     }//GEN-LAST:event_dewormingJpanelMouseClicked
 

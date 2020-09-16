@@ -5,19 +5,31 @@
  */
 package app.screens;
 
+import app.AddDeworming;
+import static app.screens.Home.AllGoatsTable;
+import app.utils.AppUtils;
+import java.awt.Color;
+import javax.swing.JFrame;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Eco
  */
-public class Deworming extends javax.swing.JInternalFrame {
+public class DewormingScreen extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Health
      */
-    public Deworming() {
+    DefaultTableModel model;
+    public DewormingScreen() {
         initComponents();
+        
+        AppUtils.fillDewormingTable(dewormingTable, "");
+        model = (DefaultTableModel)dewormingTable.getModel();
+        dewormingTable.setRowHeight(40);
+        dewormingTable.setSelectionBackground(Color.decode("#66cc99"));
         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
@@ -34,7 +46,7 @@ public class Deworming extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        addDewormingRecord = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         dewormingTable = new javax.swing.JTable();
 
@@ -43,10 +55,10 @@ public class Deworming extends javax.swing.JInternalFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Add Deworming");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addDewormingRecord.setText("Add Deworming");
+        addDewormingRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addDewormingRecordActionPerformed(evt);
             }
         });
 
@@ -66,7 +78,7 @@ public class Deworming extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jButton1)
+                .addComponent(addDewormingRecord)
                 .addContainerGap(772, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE))
@@ -75,7 +87,7 @@ public class Deworming extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jButton1)
+                .addComponent(addDewormingRecord)
                 .addContainerGap(536, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -97,14 +109,18 @@ public class Deworming extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void addDewormingRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDewormingRecordActionPerformed
+        AddDeworming addDeworming = new AddDeworming();
+        addDeworming.setVisible(true);
+        addDeworming.pack();
+        addDeworming.setLocationRelativeTo(null);
+        addDeworming.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_addDewormingRecordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable dewormingTable;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton addDewormingRecord;
+    public static javax.swing.JTable dewormingTable;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

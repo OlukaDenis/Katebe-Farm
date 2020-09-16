@@ -198,7 +198,7 @@
         <Component class="javax.swing.JButton" name="button_add_goat">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="9b" green="80" red="2e" type="rgb"/>
+              <Color blue="77" green="95" red="3d" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -210,7 +210,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="600" y="520" width="126" height="-1"/>
+              <AbsoluteConstraints x="586" y="508" width="140" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -229,7 +229,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="140" y="520" width="-1" height="-1"/>
+              <AbsoluteConstraints x="140" y="508" width="110" height="40"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -161,7 +161,7 @@ public class AddGoat extends javax.swing.JFrame {
         });
         jPanel1.add(rb_female, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 242, -1, -1));
 
-        button_add_goat.setBackground(new java.awt.Color(46, 128, 155));
+        button_add_goat.setBackground(new java.awt.Color(61, 149, 119));
         button_add_goat.setForeground(new java.awt.Color(255, 255, 255));
         button_add_goat.setText("Add");
         button_add_goat.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +169,7 @@ public class AddGoat extends javax.swing.JFrame {
                 button_add_goatActionPerformed(evt);
             }
         });
-        jPanel1.add(button_add_goat, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 520, 126, -1));
+        jPanel1.add(button_add_goat, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 508, 140, 40));
 
         button_cancel_add.setBackground(new java.awt.Color(255, 51, 51));
         button_cancel_add.setForeground(new java.awt.Color(255, 255, 255));
@@ -179,7 +179,7 @@ public class AddGoat extends javax.swing.JFrame {
                 button_cancel_addActionPerformed(evt);
             }
         });
-        jPanel1.add(button_cancel_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, -1, -1));
+        jPanel1.add(button_cancel_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 508, 110, 40));
         jPanel1.add(goat_birth_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 331, 213, -1));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
@@ -435,7 +435,6 @@ public class AddGoat extends javax.swing.JFrame {
             String bdate = dateFormat.format(goat_birth_date.getDate());
             goat.setBirthDate(bdate);
             
-//            AppUtils.manipulateGoat(AppUtils.INSERT, goat, this, null);
             AppUtils.addNewGoat(goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
             Home.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
