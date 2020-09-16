@@ -39,7 +39,6 @@ public class UpdateGoat extends javax.swing.JFrame {
         ButtonGroup bg = new ButtonGroup();
         bg.add(updateMale);
         bg.add(updateFemale);
-         goat = new Goat();
     }
 
     /**
@@ -238,7 +237,7 @@ public class UpdateGoat extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(updateSideImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(updateSideImage, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -267,7 +266,7 @@ public class UpdateGoat extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(updateRearImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(updateRearImage, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -400,14 +399,20 @@ public class UpdateGoat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonUpdateGoatActionPerformed
 
-    public void populateGoat(Goat selectedGoat) {
-        goat = selectedGoat;
-        
-        updateGoatID.setText(selectedGoat.getID());
-        updateGoatName.setText(selectedGoat.getName());
-        updateBreed.setText(selectedGoat.getBreed());
-        updateBuckID.setText(selectedGoat.getBuck_id());
-        updateDoeID.setText(selectedGoat.getDoe_id());
+    public void getSelectedGoat(Goat selectedgoat) {
+         goat = selectedgoat;
+         if (goat != null) {
+          populateGoat();
+         }
+         
+    }
+    
+    public void populateGoat() {       
+        updateGoatID.setText(goat.getID());
+        updateGoatName.setText(goat.getName());
+        updateBreed.setText(goat.getBreed());
+        updateBuckID.setText(goat.getBuck_id());
+        updateDoeID.setText(goat.getDoe_id());
         
         String itemOne = goat.getCurrentStatus();
         String itemTwo = "";
@@ -436,33 +441,33 @@ public class UpdateGoat extends javax.swing.JFrame {
         DefaultComboBoxModel lm = new javax.swing.DefaultComboBoxModel<>(new String[] { livingOne, livingTwo });
         livingStatus.setModel(lm);
 
-        if (selectedGoat.getSex().equals("Male")) {
+        if (goat.getSex().equals("Male")) {
             updateMale.setSelected(true);
         } else {
             updateFemale.setSelected(true);
 
         }
-        updateSource.setText(selectedGoat.getSource());
+        updateSource.setText(goat.getSource());
             
         Date bdate;
         try {
-            bdate = new SimpleDateFormat("yyyy-MM-dd").parse(selectedGoat.getBirthDate());
+            bdate = new SimpleDateFormat("yyyy-MM-dd").parse(goat.getBirthDate());
             updateBirthDate.setDate(bdate);
         } catch (ParseException ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ImageIcon imageFront = new ImageIcon(new ImageIcon(selectedGoat.getImage_front())
+        ImageIcon imageFront = new ImageIcon(new ImageIcon(goat.getImage_front())
                 .getImage()
                 .getScaledInstance(updateFrontImage.getWidth(), updateFrontImage.getWidth(), Image.SCALE_SMOOTH)
         );
         
-        ImageIcon imageRear = new ImageIcon(new ImageIcon(selectedGoat.getImage_rear())
+        ImageIcon imageRear = new ImageIcon(new ImageIcon(goat.getImage_rear())
                 .getImage()
                 .getScaledInstance(updateRearImage.getWidth(), updateRearImage.getWidth(), Image.SCALE_SMOOTH)
         );
         
-        ImageIcon imageSide = new ImageIcon(new ImageIcon(selectedGoat.getImage_side())
+        ImageIcon imageSide = new ImageIcon(new ImageIcon(goat.getImage_side())
                 .getImage()
                 .getScaledInstance(updateSideImage.getWidth(), updateSideImage.getWidth(), Image.SCALE_SMOOTH)
         );
