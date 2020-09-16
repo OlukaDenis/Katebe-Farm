@@ -189,7 +189,6 @@ public class AddDeworming extends javax.swing.JFrame {
             
             while(rs.next()) {
                 goatTags.addItem(rs.getString(1));
-                System.err.println(rs.getString(1));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);

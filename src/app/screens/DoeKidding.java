@@ -5,6 +5,8 @@
  */
 package app.screens;
 
+import app.AddKiddingRecord;
+import javax.swing.JFrame;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -36,7 +38,7 @@ public class DoeKidding extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        addKiddingBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(920, 610));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,7 +55,12 @@ public class DoeKidding extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Add Kidding Record");
+        addKiddingBtn.setText("Add Kidding Record");
+        addKiddingBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addKiddingBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -62,14 +69,14 @@ public class DoeKidding extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(addKiddingBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 24, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(addKiddingBtn)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -79,11 +86,19 @@ public class DoeKidding extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addKiddingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addKiddingBtnActionPerformed
+        AddKiddingRecord kidding = new AddKiddingRecord();
+        kidding.setVisible(true);
+        kidding.pack();
+        kidding.setLocationRelativeTo(null);
+        kidding.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_addKiddingBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton addKiddingBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
