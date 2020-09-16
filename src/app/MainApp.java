@@ -6,7 +6,7 @@
 package app;
 
 import app.models.Goat;
-import app.screens.Health;
+import app.screens.Deworming;
 import app.screens.Home;
 import app.utils.AppUtils;
 import java.awt.Color;
@@ -70,7 +70,7 @@ public class MainApp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(76, 180, 119));
+        jPanel1.setBackground(new java.awt.Color(32, 96, 64));
 
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -266,7 +266,7 @@ public class MainApp extends javax.swing.JFrame {
 
     private void healthJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_healthJpanelMouseClicked
         container.removeAll(); 
-        Health health = new Health();
+        Deworming health = new Deworming();
         container.add(health).setVisible(true);
     }//GEN-LAST:event_healthJpanelMouseClicked
 

@@ -30,7 +30,7 @@ public class Home extends javax.swing.JInternalFrame {
         AppUtils.fillGoatTable(AllGoatsTable, "");
         model = (DefaultTableModel)AllGoatsTable.getModel();
         AllGoatsTable.setRowHeight(40);
-        AllGoatsTable.setSelectionBackground(Color.decode("#6A9CC3"));
+        AllGoatsTable.setSelectionBackground(Color.decode("#66cc99"));
         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();

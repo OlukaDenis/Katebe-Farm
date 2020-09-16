@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -54,7 +55,6 @@ public class UpdateGoat extends javax.swing.JFrame {
         updateBreed = new javax.swing.JTextField();
         updateGoatID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         updateGoatName = new javax.swing.JTextField();
         updateMale = new javax.swing.JRadioButton();
@@ -82,17 +82,30 @@ public class UpdateGoat extends javax.swing.JFrame {
         chooseFront = new javax.swing.JLabel();
         chooseSide = new javax.swing.JLabel();
         chooseRear = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        updateCurrentStatus = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        livingStatus = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(updateBreed, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 224, 216, -1));
 
         updateGoatID.setEnabled(false);
+        jPanel1.add(updateGoatID, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 107, 216, -1));
 
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel2.setText("Name");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 173, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel1.setText("Update Goat");
-
+        jLabel3.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel3.setText("ID");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 113, -1, -1));
+        jPanel1.add(updateGoatName, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 167, 216, -1));
 
         updateMale.setText("Male");
         updateMale.addActionListener(new java.awt.event.ActionListener() {
@@ -100,16 +113,28 @@ public class UpdateGoat extends javax.swing.JFrame {
                 updateMaleActionPerformed(evt);
             }
         });
+        jPanel1.add(updateMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 270, -1, -1));
 
         updateFemale.setText("Female");
+        jPanel1.add(updateFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 270, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel4.setText("Breed");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 230, -1, -1));
+        jPanel1.add(updateSource, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 318, 216, -1));
 
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel5.setText("Sex");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 271, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel6.setText("Source");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, 20));
+        jPanel1.add(updateBirthDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 368, 216, -1));
 
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel7.setText("BirthDate");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, -1, 20));
 
         updateCancel.setText("Cancel");
         updateCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +142,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 updateCancelActionPerformed(evt);
             }
         });
+        jPanel1.add(updateCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 508, -1, -1));
 
         buttonUpdateGoat.setBackground(new java.awt.Color(255, 102, 0));
         buttonUpdateGoat.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,6 +152,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 buttonUpdateGoatActionPerformed(evt);
             }
         });
+        jPanel1.add(buttonUpdateGoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 508, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 51, 102));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -135,24 +162,29 @@ public class UpdateGoat extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(701, 508, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel8.setText("Buck ID");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 106, -1, 30));
 
         updateBuckID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBuckIDActionPerformed(evt);
             }
         });
+        jPanel1.add(updateBuckID, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 208, -1));
 
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel9.setText("Doe ID");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 156, -1, 30));
 
         updateDoeID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateDoeIDActionPerformed(evt);
             }
         });
+        jPanel1.add(updateDoeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 208, -1));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -181,6 +213,8 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 303, -1, -1));
+
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         updateSideImage.setBackground(new java.awt.Color(255, 255, 255));
@@ -207,6 +241,8 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .addComponent(updateSideImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 303, -1, 107));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -235,188 +271,80 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 303, -1, 107));
+
+        jLabel14.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel14.setText("Select Images");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 280, -1, -1));
 
         chooseFront.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        chooseFront.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chooseFront.setText("Choose front");
         chooseFront.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chooseFrontMouseClicked(evt);
             }
         });
+        jPanel1.add(chooseFront, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 418, 110, -1));
 
         chooseSide.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        chooseSide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chooseSide.setText("Choose side");
         chooseSide.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chooseSideMouseClicked(evt);
             }
         });
+        jPanel1.add(chooseSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 110, -1));
 
         chooseRear.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        chooseRear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chooseRear.setText("Choose rear");
         chooseRear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chooseRearMouseClicked(evt);
             }
         });
+        jPanel1.add(chooseRear, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 110, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(updateCancel))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(updateMale)
-                                .addGap(40, 40, 40)
-                                .addComponent(updateFemale))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(updateBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(updateSource)
-                                    .addComponent(updateBreed, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(17, 17, 17)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(updateGoatID)
-                            .addComponent(updateGoatName, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 36, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel9)
-                                                .addGap(41, 41, 41)
-                                                .addComponent(updateDoeID, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel8)
-                                                .addGap(34, 34, 34)
-                                                .addComponent(updateBuckID, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(75, 75, 75))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(146, 146, 146)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(chooseFront)
-                                .addGap(60, 60, 60)
-                                .addComponent(chooseSide)
-                                .addGap(55, 55, 55)
-                                .addComponent(chooseRear)
-                                .addGap(14, 14, 14))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(buttonUpdateGoat)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addGap(52, 52, 52))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(342, 342, 342)
+        jLabel10.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel10.setText("Current status");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 416, -1, 30));
+
+        jPanel1.add(updateCurrentStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 208, -1));
+
+        jPanel2.setBackground(new java.awt.Color(61, 149, 119));
+
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Update Record");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(346, 346, 346)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(361, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateGoatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateGoatName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateBreed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateMale)
-                            .addComponent(updateFemale)
-                            .addComponent(jLabel5))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateSource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(updateBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateCancel)
-                            .addComponent(buttonUpdateGoat)
-                            .addComponent(jButton1))
-                        .addGap(30, 30, 30))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(updateBuckID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(updateDoeID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(73, 73, 73))
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(chooseSide)
-                            .addComponent(chooseRear)
-                            .addComponent(chooseFront))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 70));
+
+        jLabel11.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel11.setText("Current status");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 218, -1, -1));
+
+        jPanel1.add(livingStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 200, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -452,6 +380,13 @@ public class UpdateGoat extends javax.swing.JFrame {
         goat.setSource(updateSource.getText());
         goat.setBuck_id(updateBuckID.getText());        
         goat.setDoe_id(updateDoeID.getText());
+        goat.setCurrentStatus(String.valueOf(updateCurrentStatus.getSelectedItem()));
+        
+        if (String.valueOf(livingStatus.getSelectedItem()).equals("Alive")) {
+            goat.setAlive(true);
+        } else {
+            goat.setAlive(false);
+        }
         
         if (validateText()) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -467,11 +402,39 @@ public class UpdateGoat extends javax.swing.JFrame {
 
     public void populateGoat(Goat selectedGoat) {
         goat = selectedGoat;
+        
         updateGoatID.setText(selectedGoat.getID());
         updateGoatName.setText(selectedGoat.getName());
         updateBreed.setText(selectedGoat.getBreed());
         updateBuckID.setText(selectedGoat.getBuck_id());
         updateDoeID.setText(selectedGoat.getDoe_id());
+        
+        String itemOne = goat.getCurrentStatus();
+        String itemTwo = "";
+        if (itemOne.equals("In the farm")) {
+            itemTwo = "Not in the farm";
+        } else if(itemOne.equals("Not in the farm")) {
+            itemTwo = "In the farm";
+        }
+       
+        DefaultComboBoxModel dModel = new javax.swing.DefaultComboBoxModel<>(new String[] { itemOne, itemTwo });
+        updateCurrentStatus.setModel(dModel);
+        
+        
+        String livingOne = "";
+        String livingTwo = "";
+        
+        if (goat.isAlive()) {
+            livingOne = "Alive";
+            livingTwo = "Dead";
+            
+        } else {
+            livingOne = "Dead";
+            livingTwo = "Alive";
+        }
+               
+        DefaultComboBoxModel lm = new javax.swing.DefaultComboBoxModel<>(new String[] { livingOne, livingTwo });
+        livingStatus.setModel(lm);
 
         if (selectedGoat.getSex().equals("Male")) {
             updateMale.setSelected(true);
@@ -652,6 +615,8 @@ public class UpdateGoat extends javax.swing.JFrame {
     private javax.swing.JLabel chooseSide;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -662,13 +627,16 @@ public class UpdateGoat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JComboBox<String> livingStatus;
     public static com.toedter.calendar.JDateChooser updateBirthDate;
     public static javax.swing.JTextField updateBreed;
     private javax.swing.JTextField updateBuckID;
     private javax.swing.JButton updateCancel;
+    private javax.swing.JComboBox<String> updateCurrentStatus;
     private javax.swing.JTextField updateDoeID;
     public static javax.swing.JRadioButton updateFemale;
     private javax.swing.JLabel updateFrontImage;

@@ -69,7 +69,7 @@ public class AppUtils {
     
     public static void updateOneGoat(Goat goat, UpdateGoat updateGoat) {
         try {
-            ps = conn.prepareStatement("UPDATE goat SET name = ?, breed = ?, sex = ?, source = ?, birthdate = ?, buck_id = ?, doe_id = ?,  image_front = ?, image_rear = ?, image_side = ? WHERE ID = ?");
+            ps = conn.prepareStatement("UPDATE goat SET name = ?, breed = ?, sex = ?, source = ?, birthDate = ?, buckID = ?, doeID = ?, currentStatus = ?, alive = ?,  imageFront = ?, imageRear = ?, imageSide = ? WHERE ID = ?");
 
             ps.setString(1, goat.getName());
             ps.setString(2, goat.getBreed());
@@ -78,10 +78,12 @@ public class AppUtils {
             ps.setString(5, goat.getBirthDate());
             ps.setString(6, goat.getBuck_id());
             ps.setString(7, goat.getDoe_id());
-            ps.setBytes(8, goat.getImage_front());
-            ps.setBytes(9, goat.getImage_rear());
-            ps.setBytes(10, goat.getImage_side());
-            ps.setString(11, goat.getID());
+            ps.setString(8, goat.getCurrentStatus());
+            ps.setBoolean(9, goat.isAlive());
+            ps.setBytes(10, goat.getImage_front());
+            ps.setBytes(11, goat.getImage_rear());
+            ps.setBytes(12, goat.getImage_side());
+            ps.setString(13, goat.getID());
 
             if (ps.executeUpdate() > 0) {
                JOptionPane.showMessageDialog(null, "Goat updated successfully!");
