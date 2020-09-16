@@ -5,6 +5,8 @@
  */
 package app.screens;
 
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 /**
  *
  * @author Eco
@@ -16,6 +18,10 @@ public class Vaccination extends javax.swing.JInternalFrame {
      */
     public Vaccination() {
         initComponents();
+        
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
+        bi.setNorthPane(null);
     }
 
     /**
