@@ -6,8 +6,12 @@
 package app.screens;
 
 import app.AddKiddingRecord;
+import static app.screens.DewormingScreen.dewormingTable;
+import app.utils.AppUtils;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,8 +22,15 @@ public class DoeKidding extends javax.swing.JInternalFrame {
     /**
      * Creates new form DoeKidding
      */
+    
+    DefaultTableModel model;
     public DoeKidding() {
         initComponents();
+        
+        AppUtils.fillKiddingTable(kiddingTable, "");
+        model = (DefaultTableModel)kiddingTable.getModel();
+        kiddingTable.setRowHeight(40);
+        kiddingTable.setSelectionBackground(Color.decode("#66cc99"));
         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
@@ -37,7 +48,7 @@ public class DoeKidding extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        kiddingTable = new javax.swing.JTable();
         addKiddingBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(920, 610));
@@ -45,15 +56,15 @@ public class DoeKidding extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        kiddingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Goat Tag"
+                "ID", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Doe Tag"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(kiddingTable);
 
         addKiddingBtn.setText("Add Kidding Record");
         addKiddingBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +110,6 @@ public class DoeKidding extends javax.swing.JInternalFrame {
     private javax.swing.JButton addKiddingBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable1;
+    public static javax.swing.JTable kiddingTable;
     // End of variables declaration//GEN-END:variables
 }

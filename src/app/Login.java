@@ -71,6 +71,11 @@ public class Login extends javax.swing.JFrame {
                 phone_numberActionPerformed(evt);
             }
         });
+        phone_number.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                phone_numberKeyPressed(evt);
+            }
+        });
         jPanel1.add(phone_number, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 142, -1));
 
         user_password.setText("admin");
@@ -208,6 +213,15 @@ public class Login extends javax.swing.JFrame {
     private void button_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_exitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_button_exitActionPerformed
+
+    private void phone_numberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phone_numberKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)) {
+            phone_number.setEditable(false);
+        } else {
+            phone_number.setEditable(true);
+        }
+    }//GEN-LAST:event_phone_numberKeyPressed
 
     /**
      * @param args the command line arguments

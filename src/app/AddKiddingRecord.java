@@ -7,6 +7,7 @@ package app;
 
 import app.models.Kidding;
 import app.screens.DewormingScreen;
+import app.screens.DoeKidding;
 import app.utils.AppUtils;
 import connector.DbConnection;
 import java.sql.Connection;
@@ -159,6 +160,12 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         jPanel1.add(rbFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
 
         jPanel1.add(goatTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 210, -1));
+
+        birthWeight.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                birthWeightKeyPressed(evt);
+            }
+        });
         jPanel1.add(birthWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 220, -1));
 
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -256,9 +263,10 @@ public class AddKiddingRecord extends javax.swing.JFrame {
             sex = "Female";
         }
         
+        double weight = Double.parseDouble(birthWeight.getText());
         kidding.setSex(sex);
         kidding.setKidName(kidName.getText());
-        kidding.setBirthWeight(birthWeight.getText());
+        kidding.setBirthWeight(weight);
         kidding.setTattoo(tattoo.getText());
         kidding.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
         kidding.setKidSire(String.valueOf(kidsire.getSelectedItem()));
@@ -274,14 +282,23 @@ public class AddKiddingRecord extends javax.swing.JFrame {
             kidding.setKiddingDate(kDate);
             
             AppUtils.addKidding(kidding, this);
-//            DewormingScreen.dewormingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "DewormingDate", "Dewormer Used", "Dose Admnistered", "Next Due Date", "Goat Tag"}));
-//            AppUtils.fillGoatTable(DewormingScreen.dewormingTable, "");
+            DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Date Bred", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Doe Tag"}));
+            AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
         }
     }//GEN-LAST:event_addNewKiddingBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void birthWeightKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_birthWeightKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)) {
+            birthWeight.setEditable(false);
+        } else {
+            birthWeight.setEditable(true);
+        }
+    }//GEN-LAST:event_birthWeightKeyPressed
 
     /**
      * @param args the command line arguments

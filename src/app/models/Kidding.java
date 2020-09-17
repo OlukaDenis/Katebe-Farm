@@ -17,7 +17,7 @@ public class Kidding {
     private String kidName;
     private String kidSire;
     private String sex;
-    private String birthWeight;
+    private double birthWeight;
 
     public Kidding() {
     }
@@ -78,14 +78,14 @@ public class Kidding {
         this.sex = sex;
     }
 
-    public String getBirthWeight() {
+    public double getBirthWeight() {
         return birthWeight;
     }
 
-    public void setBirthWeight(String birthWeight) {
+    public void setBirthWeight(double birthWeight) {
         this.birthWeight = birthWeight;
     }
-    
+
     
     
 }
