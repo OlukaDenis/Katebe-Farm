@@ -5,6 +5,23 @@
  */
 package app;
 
+import app.models.Kidding;
+import app.screens.DewormingScreen;
+import app.utils.AppUtils;
+import connector.DbConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 /**
  *
  * @author Eco
@@ -14,8 +31,24 @@ public class AddKiddingRecord extends javax.swing.JFrame {
     /**
      * Creates new form AddKiddingRecord
      */
+    Kidding kidding;
+    private static Connection conn;
     public AddKiddingRecord() {
         initComponents();
+        kidding = new Kidding();
+        
+        conn = DbConnection.getConnection();
+       
+       AutoCompleteDecorator.decorate(goatTags);      
+       AutoCompleteDecorator.decorate(kidsire);
+       
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(rbMale);
+        bg.add(rbFemale);
+        rbMale.setSelected(true);
+
+       populateGoatTags();
+       populateKidSire();
     }
 
     /**
@@ -48,7 +81,7 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         tattoo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addNewKiddingBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -129,8 +162,8 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         jPanel1.add(birthWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 220, -1));
 
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel8.setText("Birth Weight");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 100, 30));
+        jLabel8.setText("Birth Weight (kg)");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 100, 30));
         jPanel1.add(tattoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 220, -1));
 
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -141,13 +174,23 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("CANCEL");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 140, 40));
 
-        jButton2.setBackground(new java.awt.Color(61, 149, 119));
-        jButton2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("ADD");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 370, 140, 40));
+        addNewKiddingBtn.setBackground(new java.awt.Color(61, 149, 119));
+        addNewKiddingBtn.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        addNewKiddingBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addNewKiddingBtn.setText("ADD");
+        addNewKiddingBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewKiddingBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addNewKiddingBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 370, 140, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 830, 460));
 
@@ -161,6 +204,84 @@ public class AddKiddingRecord extends javax.swing.JFrame {
     private void rbFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFemaleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbFemaleActionPerformed
+
+    public boolean validateText() {
+        
+        if (tattoo.getText().equals("") || birthWeight.getText().equals("") || kidName.getText().equals("")
+                || dateBred.getDate() == null || kiddingDate.getDate() == null ) {
+            JOptionPane.showMessageDialog(null, "All fields must be filled!");
+            return false;
+        } else if (dateBred.getDate().compareTo(new Date()) > 0) {
+            JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
+            return false;
+        } else {       
+            return true;
+        }
+    }
+    
+     private void populateGoatTags() {
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `sex` = 'Female' ");
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                goatTags.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     private void populateKidSire() {
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `sex` = 'Male' ");
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                kidsire.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+    private void addNewKiddingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewKiddingBtnActionPerformed
+        
+        String sex = "Male";
+        if (rbFemale.isSelected()) {
+            sex = "Female";
+        }
+        
+        kidding.setSex(sex);
+        kidding.setKidName(kidName.getText());
+        kidding.setBirthWeight(birthWeight.getText());
+        kidding.setTattoo(tattoo.getText());
+        kidding.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
+        kidding.setKidSire(String.valueOf(kidsire.getSelectedItem()));
+        
+
+        
+        if (validateText()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dBred = dateFormat.format(dateBred.getDate());            
+            String kDate = dateFormat.format(kiddingDate.getDate());
+
+            kidding.setDateBred(dBred);
+            kidding.setKiddingDate(kDate);
+            
+            AppUtils.addKidding(kidding, this);
+//            DewormingScreen.dewormingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "DewormingDate", "Dewormer Used", "Dose Admnistered", "Next Due Date", "Goat Tag"}));
+//            AppUtils.fillGoatTable(DewormingScreen.dewormingTable, "");
+        }
+    }//GEN-LAST:event_addNewKiddingBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,11 +318,11 @@ public class AddKiddingRecord extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addNewKiddingBtn;
     private javax.swing.JTextField birthWeight;
     private com.toedter.calendar.JDateChooser dateBred;
     private javax.swing.JComboBox<String> goatTags;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

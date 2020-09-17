@@ -118,6 +118,11 @@ public class AddDeworming extends javax.swing.JFrame {
         cancelDeworm.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         cancelDeworm.setForeground(new java.awt.Color(255, 255, 255));
         cancelDeworm.setText("CANCEL");
+        cancelDeworm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelDewormActionPerformed(evt);
+            }
+        });
         getContentPane().add(cancelDeworm, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 150, 40));
 
         addDeworming.setBackground(new java.awt.Color(61, 149, 119));
@@ -179,6 +184,10 @@ public class AddDeworming extends javax.swing.JFrame {
             AppUtils.fillGoatTable(DewormingScreen.dewormingTable, "");
         }
     }//GEN-LAST:event_addDewormingActionPerformed
+
+    private void cancelDewormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDewormActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelDewormActionPerformed
 
     private void populateGoatTags() {
         PreparedStatement ps = null;

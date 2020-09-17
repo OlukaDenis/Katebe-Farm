@@ -3,9 +3,11 @@ package app.utils;
 
 import app.AddDeworming;
 import app.AddGoat;
+import app.AddKiddingRecord;
 import app.UpdateGoat;
 import app.models.Deworming;
 import app.models.Goat;
+import app.models.Kidding;
 import connector.DbConnection;
 import java.awt.Image;
 import java.sql.Connection;
@@ -24,6 +26,9 @@ import javax.swing.table.DefaultTableModel;
 public class AppUtils {
     private static Connection conn = DbConnection.getConnection();
     private static PreparedStatement ps;
+    
+    public AppUtils() {
+    }
     
     public static int countData(String tableName) {
         int total = 0;
@@ -233,6 +238,31 @@ public class AppUtils {
         }
     }
     
+    //KIDDING
+    public static void addKidding(Kidding kidding, AddKiddingRecord addKidding) {
+        try {
+            ps = conn.prepareStatement("INSERT INTO kidding(dateBred, kiddingDate, sex, kidName, kidSire, birthWeight, tattoo, goatID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, kidding.getDateBred());
+            ps.setString(2, kidding.getKiddingDate());
+            ps.setString(3, kidding.getSex());
+            ps.setString(4, kidding.getKidName());            
+            ps.setString(5, kidding.getKidSire());
+            ps.setString(6, kidding.getBirthWeight());
+            ps.setString(7, kidding.getTattoo());
+            ps.setString(8, kidding.getGoatTag());
+            
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "New deworming record added successfully!");
+               addKidding.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+
+        
     public static ImageIcon resizeImage(String path, JLabel label) {
        ImageIcon icon = new ImageIcon(path);
        Image image = icon.getImage();
