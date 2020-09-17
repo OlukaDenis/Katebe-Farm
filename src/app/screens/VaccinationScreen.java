@@ -11,12 +11,12 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  *
  * @author Eco
  */
-public class Vaccination extends javax.swing.JInternalFrame {
+public class VaccinationScreen extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Vaccination
      */
-    public Vaccination() {
+    public VaccinationScreen() {
         initComponents();
         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));

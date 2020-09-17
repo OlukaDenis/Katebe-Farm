@@ -4,10 +4,12 @@ package app.utils;
 import app.AddDeworming;
 import app.AddGoat;
 import app.AddKiddingRecord;
+import app.AddVaccination;
 import app.UpdateGoat;
 import app.models.Deworming;
 import app.models.Goat;
 import app.models.Kidding;
+import app.models.Vaccination;
 import connector.DbConnection;
 import java.awt.Image;
 import java.sql.Connection;
@@ -221,7 +223,7 @@ public class AppUtils {
             Object[] row;
             
             while(rs.next()) {
-                row = new Object[8];
+                row = new Object[6];
                 
                 row[0] = rs.getString(1);                
                 row[1] = rs.getString(2);
@@ -239,6 +241,55 @@ public class AppUtils {
     }
     //End Deworming
     
+    //VACCIINATION
+    
+    public static void addVaccination(Vaccination vaccination, AddVaccination addVaccination) {
+        try {
+            ps = conn.prepareStatement("INSERT INTO deworming(vacinationDate, vaccinationName, nextDueDate, goatID) VALUES (?, ?, ?, ?, ?)");
+            ps.setString(1, vaccination.getVaccinationDate());
+            ps.setString(2, vaccination.getVaccineName());
+            ps.setString(4, vaccination.getNextDueDate());
+            ps.setString(5, vaccination.getGoatTag());
+            
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "New vaccination record added successfully!");
+               addVaccination.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public static void fillVaccinationTable(JTable table, String searchText) {        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM vaccination WHERE CONCAT(id, vacinationDate, vaccinationName, nextDueDate, goatID) LIKE ?");
+            ps.setString(1, "%" + searchText + "%");
+            
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[5];
+                
+                row[0] = rs.getString(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);
+                row[4] = rs.getString(5); 
+                
+                model.addRow(row);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //End Vaccination
+    
     //KIDDING
     public static void addKidding(Kidding kidding, AddKiddingRecord addKidding) {
         try {
@@ -253,7 +304,7 @@ public class AppUtils {
             ps.setString(8, kidding.getGoatTag());
             
             if (ps.executeUpdate() > 0) {
-               JOptionPane.showMessageDialog(null, "New deworming record added successfully!");
+               JOptionPane.showMessageDialog(null, "New kidding record added successfully!");
                addKidding.dispose();
             }
 

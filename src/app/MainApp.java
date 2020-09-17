@@ -9,7 +9,7 @@ import app.models.Goat;
 import app.screens.DewormingScreen;
 import app.screens.DoeKidding;
 import app.screens.Home;
-import app.screens.Vaccination;
+import app.screens.VaccinationScreen;
 import app.utils.AppUtils;
 import java.awt.Color;
 import java.text.ParseException;
@@ -372,7 +372,7 @@ public class MainApp extends javax.swing.JFrame {
 
     private void vaccinationJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vaccinationJpanelMouseClicked
         container.removeAll(); 
-        Vaccination vaccine = new Vaccination();
+        VaccinationScreen vaccine = new VaccinationScreen();
         container.add(vaccine).setVisible(true);
     }//GEN-LAST:event_vaccinationJpanelMouseClicked
 
