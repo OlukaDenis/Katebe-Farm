@@ -245,11 +245,11 @@ public class AppUtils {
     
     public static void addVaccination(Vaccination vaccination, AddVaccination addVaccination) {
         try {
-            ps = conn.prepareStatement("INSERT INTO deworming(vacinationDate, vaccinationName, nextDueDate, goatID) VALUES (?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO vaccination(vaccinationDate, vaccineName, nextDueDate, goatID) VALUES (?, ?, ?, ?)");
             ps.setString(1, vaccination.getVaccinationDate());
             ps.setString(2, vaccination.getVaccineName());
-            ps.setString(4, vaccination.getNextDueDate());
-            ps.setString(5, vaccination.getGoatTag());
+            ps.setString(3, vaccination.getNextDueDate());
+            ps.setString(4, vaccination.getGoatTag());
             
             if (ps.executeUpdate() > 0) {
                JOptionPane.showMessageDialog(null, "New vaccination record added successfully!");
@@ -264,7 +264,7 @@ public class AppUtils {
     
     public static void fillVaccinationTable(JTable table, String searchText) {        
         try {
-            ps = conn.prepareStatement("SELECT * FROM vaccination WHERE CONCAT(id, vacinationDate, vaccinationName, nextDueDate, goatID) LIKE ?");
+            ps = conn.prepareStatement("SELECT * FROM vaccination WHERE CONCAT(id, vaccinationDate, vaccineName, nextDueDate, goatID) LIKE ?");
             ps.setString(1, "%" + searchText + "%");
             
             ResultSet rs = ps.executeQuery();

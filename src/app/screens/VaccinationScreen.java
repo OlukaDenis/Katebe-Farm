@@ -5,7 +5,13 @@
  */
 package app.screens;
 
+import app.AddVaccination;
+import static app.screens.DewormingScreen.dewormingTable;
+import app.utils.AppUtils;
+import java.awt.Color;
+import javax.swing.JFrame;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +22,14 @@ public class VaccinationScreen extends javax.swing.JInternalFrame {
     /**
      * Creates new form Vaccination
      */
+    DefaultTableModel model;
     public VaccinationScreen() {
         initComponents();
+        
+         AppUtils.fillVaccinationTable(vaccinationTable, "");
+        model = (DefaultTableModel)vaccinationTable.getModel();
+        vaccinationTable.setRowHeight(40);
+        vaccinationTable.setSelectionBackground(Color.decode("#66cc99"));
         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
@@ -36,7 +48,7 @@ public class VaccinationScreen extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        vacinationTable = new javax.swing.JTable();
+        vaccinationTable = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(920, 610));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -44,26 +56,31 @@ public class VaccinationScreen extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton2.setText("Add Vaccination");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        vacinationTable.setModel(new javax.swing.table.DefaultTableModel(
+        vaccinationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Vaccination Date", "Vaccine Name", "Next Due Date", "Goat ID"
+                "ID", "Vaccination Date", "Vaccine Name", "Next Due Date", "Goat Tag"
             }
         ));
-        jScrollPane1.setViewportView(vacinationTable);
+        jScrollPane1.setViewportView(vaccinationTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(768, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,11 +96,19 @@ public class VaccinationScreen extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         AddVaccination addVaccine = new AddVaccination();
+        addVaccine.setVisible(true);
+        addVaccine.pack();
+        addVaccine.setLocationRelativeTo(null);
+        addVaccine.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable vacinationTable;
+    public static javax.swing.JTable vaccinationTable;
     // End of variables declaration//GEN-END:variables
 }
