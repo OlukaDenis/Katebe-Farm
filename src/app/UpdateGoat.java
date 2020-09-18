@@ -141,9 +141,10 @@ public class UpdateGoat extends javax.swing.JFrame {
                 updateCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(updateCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 508, -1, -1));
+        jPanel1.add(updateCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 90, 40));
 
         buttonUpdateGoat.setBackground(new java.awt.Color(255, 102, 0));
+        buttonUpdateGoat.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         buttonUpdateGoat.setForeground(new java.awt.Color(255, 255, 255));
         buttonUpdateGoat.setText("Update Goat");
         buttonUpdateGoat.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +152,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 buttonUpdateGoatActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonUpdateGoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 508, -1, -1));
+        jPanel1.add(buttonUpdateGoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 500, 140, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 51, 102));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -161,7 +162,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(701, 508, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, 100, 40));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel8.setText("Buck ID");
@@ -343,7 +344,7 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         jPanel1.add(livingStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 200, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 570));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

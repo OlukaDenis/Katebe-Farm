@@ -376,7 +376,7 @@ public class MainApp extends javax.swing.JFrame {
         container.add(vaccine).setVisible(true);
     }//GEN-LAST:event_vaccinationJpanelMouseClicked
 
-    private void kiddingJpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kiddingJpanelMousePressed
+    public void showKiddingRecords() {
         homeJpanel.setBackground(panelDefault); 
         kiddingJpanel.setBackground(panelClick); 
         vaccinationJpanel.setBackground(panelDefault); 
@@ -386,12 +386,20 @@ public class MainApp extends javax.swing.JFrame {
         kiddingText.setForeground(Color.BLACK);
         homeText.setForeground(Color.WHITE);
         dewormingText.setForeground(Color.WHITE);
+    }
+    
+    public void loadKiddingScreen() {
+        container.removeAll(); 
+        DoeKidding kidding = new DoeKidding();
+        container.add(kidding).setVisible(true);
+    }
+    
+    private void kiddingJpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kiddingJpanelMousePressed
+        showKiddingRecords();
     }//GEN-LAST:event_kiddingJpanelMousePressed
 
     private void kiddingJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kiddingJpanelMouseClicked
-         container.removeAll(); 
-        DoeKidding kidding = new DoeKidding();
-        container.add(kidding).setVisible(true);
+        loadKiddingScreen();
     }//GEN-LAST:event_kiddingJpanelMouseClicked
 
     /**
@@ -432,9 +440,9 @@ public class MainApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane container;
-    private javax.swing.JPanel dewormingJpanel;
+    public static javax.swing.JPanel dewormingJpanel;
     private javax.swing.JLabel dewormingText;
-    private javax.swing.JPanel homeJpanel;
+    public static javax.swing.JPanel homeJpanel;
     private javax.swing.JLabel homeText;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -442,10 +450,10 @@ public class MainApp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel kiddingJpanel;
+    public static javax.swing.JPanel kiddingJpanel;
     private javax.swing.JLabel kiddingText;
     public static javax.swing.JLabel registered_goats;
-    private javax.swing.JPanel vaccinationJpanel;
+    public static javax.swing.JPanel vaccinationJpanel;
     private javax.swing.JLabel vaccintionText;
     // End of variables declaration//GEN-END:variables
 }

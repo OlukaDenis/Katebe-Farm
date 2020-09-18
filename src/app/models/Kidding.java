@@ -10,6 +10,7 @@ package app.models;
  * @author Eco
  */
 public class Kidding {
+    private int id;
     private String goatTag;
     private String tattoo;
     private String dateBred;
@@ -18,10 +19,20 @@ public class Kidding {
     private String kidSire;
     private String sex;
     private double birthWeight;
+    private String dateAdded;
 
     public Kidding() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public String getGoatTag() {
         return goatTag;
     }
@@ -84,6 +95,14 @@ public class Kidding {
 
     public void setBirthWeight(double birthWeight) {
         this.birthWeight = birthWeight;
+    }
+
+    public String getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(String dateAdded) {
+        this.dateAdded = dateAdded;
     }
 
     

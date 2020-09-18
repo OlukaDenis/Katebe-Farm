@@ -6,6 +6,7 @@ import app.AddGoat;
 import app.AddKiddingRecord;
 import app.AddVaccination;
 import app.UpdateGoat;
+import app.UpdateKiddingRecord;
 import app.models.Deworming;
 import app.models.Goat;
 import app.models.Kidding;
@@ -193,6 +194,9 @@ public class AppUtils {
         return goat;
     }
     
+    // End Goat
+    
+    
     //DEWORMING
     public static void addDeworming(Deworming deworming, AddDeworming addDeworming) {
         try {
@@ -318,29 +322,31 @@ public class AppUtils {
 
     public static void fillKiddingTable(JTable table, String searchText) {        
         try {
-            ps = conn.prepareStatement("SELECT * FROM kidding WHERE CONCAT(ID, dateBred, kiddingDate, sex, kidName, kidSire, birthWeight, tattoo, goatID) LIKE ?");
+            ps = conn.prepareStatement("SELECT * FROM kidding WHERE CONCAT(id, dateBred, kiddingDate, sex, kidName, kidSire, birthWeight, tattoo, goatID) LIKE ?");
             ps.setString(1, "%" + searchText + "%");
             
             ResultSet rs = ps.executeQuery();
             DefaultTableModel model = (DefaultTableModel)table.getModel();
             
             Object[] row;
+            Kidding kidding;
             
             while(rs.next()) {
-                row = new Object[9];
+                row = new Object[10];
                 int days = Helpers.daysBetweenDate(rs.getString(3));
                 String numDays = String.valueOf(days) + " days left";
                 
-                row[0] = rs.getString(9);                
-                row[1] = rs.getString(2);
-                row[2] = rs.getString(3);
-                row[3] = rs.getString(4);
-                row[4] = rs.getString(5);
-                row[5] = rs.getString(6); 
-                row[6] = rs.getString(7); 
-                row[7] = rs.getString(8); 
-                row[8] = numDays;
-                
+                row[0] = rs.getInt(1);
+                row[1] = rs.getString(9);                
+                row[2] = rs.getString(2);
+                row[3] = rs.getString(3);
+                row[4] = rs.getString(4);
+                row[5] = rs.getString(5);
+                row[6] = rs.getString(6); 
+                row[7] = rs.getDouble(7); 
+                row[8] = rs.getString(8); 
+                row[9] = numDays;
+                               
                 model.addRow(row);
 
             }
@@ -348,6 +354,81 @@ public class AppUtils {
             Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
              JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+    }
+    
+    public static void updateKiddingRecord(Kidding kidding, UpdateKiddingRecord updateKidding) {
+        try {
+            ps = conn.prepareStatement("UPDATE kidding SET dateBred = ?, kiddingDate = ?, sex = ?, kidName = ?, kidSire = ?, birthWeight = ?, tattoo = ?, goatID = ? WHERE id = ?");
+
+            ps.setString(1, kidding.getDateBred());
+            ps.setString(2, kidding.getKiddingDate());
+            ps.setString(3, kidding.getSex());
+            ps.setString(4, kidding.getKidName());
+            ps.setString(5, kidding.getKidSire());
+            ps.setDouble(6, kidding.getBirthWeight());
+            ps.setString(7, kidding.getTattoo());
+            ps.setString(8, kidding.getGoatTag());
+            ps.setInt(9, kidding.getId());
+
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "Kidding record updated successfully!");
+               updateKidding.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error while updating kidding records!");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public static void deleteKidding(int kiddingID, UpdateKiddingRecord updateKidding) {
+        try {
+            ps = conn.prepareStatement("DELETE FROM `kidding` WHERE id = ?");
+            ps.setInt(1, kiddingID);
+
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "Kidding record deleted successfully!");
+               updateKidding.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+     public static Kidding singleKidding(String kiddingId) {
+        PreparedStatement preparedStatement = null;
+        Kidding kidding = null;
+        try {
+            preparedStatement = conn.prepareStatement("SELECT * FROM kidding WHERE id = ? ");
+            preparedStatement.setString(1, kiddingId);
+            
+            ResultSet rs = preparedStatement.executeQuery();
+                     
+            while(rs.next()) {
+                kidding = new Kidding();
+                kidding.setId(rs.getInt(1));
+                kidding.setDateBred(rs.getString(2));  
+                kidding.setKiddingDate(rs.getString(3));
+                kidding.setSex(rs.getString(4));
+                kidding.setKidName(rs.getString(5));
+                kidding.setKidSire(rs.getString(6));
+                kidding.setBirthWeight(rs.getDouble(7));
+                kidding.setTattoo(rs.getString(8));
+                kidding.setGoatTag(rs.getString(9));
+                kidding.setDateAdded(rs.getString(10));  
+
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+        return kidding;
     }
     
     // End Kidding

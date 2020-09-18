@@ -6,6 +6,8 @@
 package app.screens;
 
 import app.AddKiddingRecord;
+import app.UpdateKiddingRecord;
+import app.models.Kidding;
 import static app.screens.DewormingScreen.dewormingTable;
 import app.utils.AppUtils;
 import java.awt.Color;
@@ -61,9 +63,14 @@ public class DoeKidding extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"
+                "ID", "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"
             }
         ));
+        kiddingTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                kiddingTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(kiddingTable);
 
         addKiddingBtn.setText("Add Kidding Record");
@@ -104,6 +111,20 @@ public class DoeKidding extends javax.swing.JInternalFrame {
         kidding.setLocationRelativeTo(null);
         kidding.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_addKiddingBtnActionPerformed
+
+    private void kiddingTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kiddingTableMouseClicked
+         int rowIndex = kiddingTable.getSelectedRow();
+         Kidding mKidding = AppUtils.singleKidding(model.getValueAt(rowIndex, 0).toString());
+         
+         UpdateKiddingRecord updateKidding = new UpdateKiddingRecord();
+        updateKidding.getSelectedKidding(mKidding);
+
+        updateKidding.setVisible(true);
+        updateKidding.pack();
+        updateKidding.setLocationRelativeTo(null);
+        updateKidding.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+         
+    }//GEN-LAST:event_kiddingTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
