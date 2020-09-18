@@ -14,7 +14,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,8 +72,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         dateBred = new com.toedter.calendar.JDateChooser();
-        kiddingDate = new com.toedter.calendar.JDateChooser();
-        jLabel3 = new javax.swing.JLabel();
         kidName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -114,7 +116,7 @@ public class AddKiddingRecord extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(kidsire, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 220, -1));
+        jPanel1.add(kidsire, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 220, -1));
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Goat Tag");
@@ -124,11 +126,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         jLabel4.setText("Date Bred");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 30));
         jPanel1.add(dateBred, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 30));
-        jPanel1.add(kiddingDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 210, 30));
-
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel3.setText("Kidding Date");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, 30));
         jPanel1.add(kidName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 220, -1));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -137,7 +134,7 @@ public class AddKiddingRecord extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel6.setText("Kid Sire");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 60, 30));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 60, 30));
 
         rbMale.setText("Male");
         rbMale.addActionListener(new java.awt.event.ActionListener() {
@@ -166,11 +163,11 @@ public class AddKiddingRecord extends javax.swing.JFrame {
                 birthWeightKeyPressed(evt);
             }
         });
-        jPanel1.add(birthWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 220, -1));
+        jPanel1.add(birthWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 220, -1));
 
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel8.setText("Birth Weight (kg)");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 100, 30));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 100, 30));
         jPanel1.add(tattoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 220, -1));
 
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -214,8 +211,10 @@ public class AddKiddingRecord extends javax.swing.JFrame {
 
     public boolean validateText() {
         
-        if (tattoo.getText().equals("") || birthWeight.getText().equals("") || kidName.getText().equals("")
-                || dateBred.getDate() == null || kiddingDate.getDate() == null ) {
+        if (tattoo.getText().equals("") || birthWeight.getText().equals("") 
+                || birthWeight.getText() == null
+                || kidName.getText().equals("")
+                || dateBred.getDate() == null ) {
             JOptionPane.showMessageDialog(null, "All fields must be filled!");
             return false;
         } else if (dateBred.getDate().compareTo(new Date()) > 0) {
@@ -275,15 +274,27 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         
         if (validateText()) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String dBred = dateFormat.format(dateBred.getDate());            
-            String kDate = dateFormat.format(kiddingDate.getDate());
-
+            String dBred = dateFormat.format(dateBred.getDate());
             kidding.setDateBred(dBred);
-            kidding.setKiddingDate(kDate);
             
-            AppUtils.addKidding(kidding, this);
-            DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Date Bred", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Doe Tag"}));
-            AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
+            Calendar calendar = Calendar.getInstance();
+            
+            try {
+                calendar.setTime(dateFormat.parse(dBred));
+                calendar.add(Calendar.DATE, 155); //Add estimated day of birth
+                String kidDate = dateFormat.format(calendar.getTime());
+                System.out.println("Estimate day: " + kidDate);
+                kidding.setKiddingDate(kidDate);              
+                
+                AppUtils.addKidding(kidding, this);
+                DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"Doe Tag", "Date Bred", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"}));
+                AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
+                
+            } catch (ParseException ex) {
+                Logger.getLogger(AddKiddingRecord.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+             JOptionPane.showMessageDialog(null, "Please check the missing fields.");
         }
     }//GEN-LAST:event_addNewKiddingBtnActionPerformed
 
@@ -342,7 +353,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -352,7 +362,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField kidName;
-    private com.toedter.calendar.JDateChooser kiddingDate;
     private javax.swing.JComboBox<String> kidsire;
     private javax.swing.JRadioButton rbFemale;
     private javax.swing.JRadioButton rbMale;

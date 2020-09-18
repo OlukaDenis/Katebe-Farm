@@ -61,7 +61,7 @@ public class DoeKidding extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Doe Tag"
+                "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"
             }
         ));
         jScrollPane1.setViewportView(kiddingTable);

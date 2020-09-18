@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -316,7 +318,7 @@ public class AppUtils {
 
     public static void fillKiddingTable(JTable table, String searchText) {        
         try {
-            ps = conn.prepareStatement("SELECT * FROM kidding WHERE CONCAT(id, dateBred, kiddingDate, sex, kidName, kidSire, birthWeight, tattoo, goatID) LIKE ?");
+            ps = conn.prepareStatement("SELECT * FROM kidding WHERE CONCAT(ID, dateBred, kiddingDate, sex, kidName, kidSire, birthWeight, tattoo, goatID) LIKE ?");
             ps.setString(1, "%" + searchText + "%");
             
             ResultSet rs = ps.executeQuery();
@@ -326,16 +328,18 @@ public class AppUtils {
             
             while(rs.next()) {
                 row = new Object[9];
+                int days = Helpers.daysBetweenDate(rs.getString(3));
+                String numDays = String.valueOf(days) + " days left";
                 
-                row[0] = rs.getString(1);                
+                row[0] = rs.getString(9);                
                 row[1] = rs.getString(2);
                 row[2] = rs.getString(3);
                 row[3] = rs.getString(4);
                 row[4] = rs.getString(5);
                 row[5] = rs.getString(6); 
-                row[6] = rs.getDouble(7); 
+                row[6] = rs.getString(7); 
                 row[7] = rs.getString(8); 
-                row[8] = rs.getString(9); 
+                row[8] = numDays;
                 
                 model.addRow(row);
 
@@ -348,6 +352,9 @@ public class AppUtils {
     
     // End Kidding
         
+    
+    //Helper functions
+           
     public static ImageIcon resizeImage(String path, JLabel label) {
        ImageIcon icon = new ImageIcon(path);
        Image image = icon.getImage();
