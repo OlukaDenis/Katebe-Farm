@@ -46,7 +46,7 @@ public class ViewPicture extends javax.swing.JFrame {
 
         picJPanel.setBackground(new java.awt.Color(255, 255, 255));
         picJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        picJPanel.add(viewPictureLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, 580, 570));
+        picJPanel.add(viewPictureLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 600, 590));
 
         getContentPane().add(picJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 600));
 

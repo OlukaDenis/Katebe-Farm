@@ -6,7 +6,8 @@
 package app;
 
 import app.models.Vaccination;
-import app.screens.VaccinationScreen;
+import app.screens.GoatOwnerScreen;
+import app.screens.HealthScreen;
 import app.utils.AppUtils;
 import connector.DbConnection;
 import java.sql.Connection;
@@ -189,8 +190,8 @@ public class AddVaccination extends javax.swing.JFrame {
             vaccination.setVaccinationDate(vDate);
 
             AppUtils.addVaccination(vaccination, this);
-            VaccinationScreen.vaccinationTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Vaccination Date", "Vaccinaiton Name", "Next Due Date", "Goat Tag"}));
-            AppUtils.fillVaccinationTable(VaccinationScreen.vaccinationTable, "");
+            HealthScreen.vaccinationTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Vaccination Date", "Vaccinaiton Name", "Next Due Date", "Goat Tag"}));
+            AppUtils.fillVaccinationTable(HealthScreen.vaccinationTable, "");
         }
     }//GEN-LAST:event_addVaccinationBtnActionPerformed
 

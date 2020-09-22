@@ -17,13 +17,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Eco
  */
-public class VaccinationScreen extends javax.swing.JInternalFrame {
+public class GoatOwnerScreen extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Vaccination
      */
     DefaultTableModel model;
-    public VaccinationScreen() {
+    public GoatOwnerScreen() {
         initComponents();
         
          AppUtils.fillVaccinationTable(vaccinationTable, "");

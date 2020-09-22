@@ -285,6 +285,7 @@ public class UpdateGoat extends javax.swing.JFrame {
         chooseFront.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         chooseFront.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chooseFront.setText("Choose front");
+        chooseFront.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         chooseFront.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chooseFrontMouseClicked(evt);
@@ -295,6 +296,7 @@ public class UpdateGoat extends javax.swing.JFrame {
         chooseSide.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         chooseSide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chooseSide.setText("Choose side");
+        chooseSide.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         chooseSide.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chooseSideMouseClicked(evt);
@@ -305,6 +307,7 @@ public class UpdateGoat extends javax.swing.JFrame {
         chooseRear.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         chooseRear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chooseRear.setText("Choose rear");
+        chooseRear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         chooseRear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chooseRearMouseClicked(evt);
@@ -313,7 +316,7 @@ public class UpdateGoat extends javax.swing.JFrame {
         jPanel1.add(chooseRear, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 110, -1));
 
         jLabel10.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jLabel10.setText("Current status");
+        jLabel10.setText("Living status");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 416, -1, 30));
 
         jPanel1.add(updateCurrentStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 208, -1));
@@ -349,7 +352,7 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         jPanel1.add(livingStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 200, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

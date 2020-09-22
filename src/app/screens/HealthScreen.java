@@ -8,7 +8,7 @@ package app.screens;
 import app.AddDeworming;
 import app.AddVaccination;
 import static app.screens.Home.AllGoatsTable;
-import static app.screens.VaccinationScreen.vaccinationTable;
+import static app.screens.GoatOwnerScreen.vaccinationTable;
 import app.utils.AppUtils;
 import java.awt.Color;
 import javax.swing.JFrame;
