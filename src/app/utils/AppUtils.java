@@ -5,6 +5,7 @@ import app.AddDeworming;
 import app.AddGoat;
 import app.AddKiddingRecord;
 import app.AddVaccination;
+import app.AddVaccine;
 import app.UpdateGoat;
 import app.UpdateKiddingRecord;
 import app.models.Deworming;
@@ -249,7 +250,7 @@ public class AppUtils {
     
     //VACCIINATION
     
-    public static void addVaccination(Vaccination vaccination, AddVaccination addVaccination) {
+    public static void addVaccination(Vaccination vaccination, AddVaccine addVaccination) {
         try {
             ps = conn.prepareStatement("INSERT INTO vaccination(vaccinationDate, vaccineName, nextDueDate, goatID) VALUES (?, ?, ?, ?)");
             ps.setString(1, vaccination.getVaccinationDate());
