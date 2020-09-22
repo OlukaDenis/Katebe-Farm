@@ -87,6 +87,7 @@ public class UpdateGoat extends javax.swing.JFrame {
         updateCurrentStatus = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        printBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         livingStatus = new javax.swing.JComboBox<>();
 
@@ -327,6 +328,13 @@ public class UpdateGoat extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Update Record");
 
+        printBtn.setText("Print");
+        printBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -334,14 +342,18 @@ public class UpdateGoat extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(346, 346, 346)
                 .addComponent(jLabel1)
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
+                .addComponent(printBtn)
+                .addGap(35, 35, 35))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(printBtn))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 70));
@@ -621,6 +633,17 @@ public class UpdateGoat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chooseRearMouseClicked
 
+    private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBtnActionPerformed
+        // TODO add your handling code here:
+        PrintReport report = new PrintReport();
+        report.selectedGoat(goat);
+        
+        report.setVisible(true);
+        report.pack();
+        report.setLocationRelativeTo(null);
+        report.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_printBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -680,6 +703,7 @@ public class UpdateGoat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JComboBox<String> livingStatus;
+    private javax.swing.JButton printBtn;
     public static com.toedter.calendar.JDateChooser updateBirthDate;
     public static javax.swing.JTextField updateBreed;
     private javax.swing.JTextField updateBuckID;
