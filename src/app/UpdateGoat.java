@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,6 +35,7 @@ public class UpdateGoat extends javax.swing.JFrame {
      * Creates new form UpdateGoat
      */
     private Goat goat;
+    
     public UpdateGoat() {
         initComponents();
         ButtonGroup bg = new ButtonGroup();
@@ -190,6 +192,7 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         updateFrontImage.setBackground(new java.awt.Color(255, 255, 255));
         updateFrontImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateFrontImage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateFrontImage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateFrontImageMouseClicked(evt);
@@ -219,6 +222,7 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         updateSideImage.setBackground(new java.awt.Color(255, 255, 255));
         updateSideImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateSideImage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateSideImage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateSideImageMouseClicked(evt);
@@ -248,6 +252,7 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         updateRearImage.setBackground(new java.awt.Color(255, 255, 255));
         updateRearImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        updateRearImage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateRearImage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateRearImageMouseClicked(evt);
@@ -499,18 +504,52 @@ public class UpdateGoat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_updateDoeIDActionPerformed
 
+    private void openViewPic() {
+        ViewPicture updateGoat = new ViewPicture();
+
+        updateGoat.setVisible(true);
+        updateGoat.pack();
+        updateGoat.setLocationRelativeTo(null);
+        updateGoat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+    
     private void updateFrontImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateFrontImageMouseClicked
-         
+       
+        ImageIcon image = new ImageIcon(new ImageIcon(goat.getImage_front())
+                .getImage()
+                .getScaledInstance(600, 
+                        600, 
+                        Image.SCALE_SMOOTH)
+        );
+        
+        ViewPicture.imageIcon = image;
+        openViewPic();
     }//GEN-LAST:event_updateFrontImageMouseClicked
 
     private void updateSideImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSideImageMouseClicked
         // TODO add your handling code here:
+        ImageIcon image = new ImageIcon(new ImageIcon(goat.getImage_side())
+                .getImage()
+                .getScaledInstance(600, 
+                        600, 
+                        Image.SCALE_SMOOTH)
+        );
         
+        ViewPicture.imageIcon = image;
+         openViewPic();
     }//GEN-LAST:event_updateSideImageMouseClicked
 
     private void updateRearImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateRearImageMouseClicked
         // TODO add your handling code here:
+        ImageIcon image = new ImageIcon(new ImageIcon(goat.getImage_rear())
+                .getImage()
+                .getScaledInstance(600, 
+                        600, 
+                        Image.SCALE_SMOOTH)
+        );
         
+        ViewPicture.imageIcon = image;
+        openViewPic();
     }//GEN-LAST:event_updateRearImageMouseClicked
 
     private void chooseFrontMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseFrontMouseClicked
