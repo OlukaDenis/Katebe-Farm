@@ -5,6 +5,7 @@
  */
 package app;
 
+import app.models.GoatOwner;
 import app.models.Vaccination;
 import app.screens.GoatOwnerScreen;
 import app.screens.HealthScreen;
@@ -26,19 +27,19 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  *
  * @author Eco
  */
-public class AddVaccination extends javax.swing.JFrame {
+public class AddOwner extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddVaccination
+     * Creates new form AddOwner
      */
-    Vaccination vaccination;
+    GoatOwner goatOwner;
    private static Connection conn;
-    public AddVaccination() {
+    public AddOwner() {
         initComponents();
         
         conn = DbConnection.getConnection();
         
-        vaccination = new Vaccination();
+        goatOwner = new GoatOwner();
          AutoCompleteDecorator.decorate(goatTags);
        populateGoatTags();
     }
@@ -58,13 +59,15 @@ public class AddVaccination extends javax.swing.JFrame {
         goatTags = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        vaccinationDate = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        nextDueDate = new com.toedter.calendar.JDateChooser();
-        vaccinaitonName = new javax.swing.JTextField();
+        ownerPhone = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cancelDeworm = new javax.swing.JButton();
         addVaccinationBtn = new javax.swing.JButton();
+        ownerName = new javax.swing.JTextField();
+        ownerAddress = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        ownerFarm = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,23 +76,23 @@ public class AddVaccination extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("New Vaccination Record");
+        jLabel1.setText("Add Goat Owner");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(291, 291, 291)
+                .addGap(338, 338, 338)
                 .addComponent(jLabel1)
-                .addContainerGap(385, Short.MAX_VALUE))
+                .addContainerGap(408, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 60));
@@ -103,19 +106,17 @@ public class AddVaccination extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 41, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel4.setText("Vaccination Date");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, 30));
-        jPanel1.add(vaccinationDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 220, 30));
+        jLabel4.setText("Name");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel3.setText("Next Due Date");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, 30));
-        jPanel1.add(nextDueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 220, 30));
-        jPanel1.add(vaccinaitonName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 220, -1));
+        jLabel3.setText("Address");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, 30));
+        jPanel1.add(ownerPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 220, -1));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel5.setText("Vaccinnation Name");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, 30));
+        jLabel5.setText("Phone");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, -1, 30));
 
         cancelDeworm.setBackground(new java.awt.Color(255, 102, 102));
         cancelDeworm.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -138,6 +139,13 @@ public class AddVaccination extends javax.swing.JFrame {
             }
         });
         jPanel1.add(addVaccinationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 160, 40));
+        jPanel1.add(ownerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, -1));
+        jPanel1.add(ownerAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 220, -1));
+
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel6.setText("Farm");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, 30));
+        jPanel1.add(ownerFarm, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 220, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 850, 420));
 
@@ -165,12 +173,9 @@ public class AddVaccination extends javax.swing.JFrame {
     
     public boolean validateText() {
         
-        if (vaccinaitonName.getText().equals("") 
-                || vaccinationDate.getDate() == null || nextDueDate.getDate() == null ) {
+        if (ownerPhone.getText().equals("") || ownerName.getText().equals("")
+                || ownerAddress.getText().equals("") || ownerFarm.getText().equals("") ) {
             JOptionPane.showMessageDialog(null, "All fields must be filled!");
-            return false;
-        } else if (vaccinationDate.getDate().compareTo(new Date()) > 0) {
-            JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
             return false;
         } else {       
             return true;
@@ -178,20 +183,16 @@ public class AddVaccination extends javax.swing.JFrame {
     }
     
     private void addVaccinationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVaccinationBtnActionPerformed
-        vaccination.setVaccineName(vaccinaitonName.getText());
-        vaccination.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
-
+        goatOwner.setName(ownerName.getText());
+        goatOwner.setAdress(ownerAddress.getText());
+        goatOwner.setFarm(ownerFarm.getText());
+        goatOwner.setPhone(ownerPhone.getText());
+        goatOwner.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
+        
         if (validateText()) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String dueDate = dateFormat.format(nextDueDate.getDate());
-            String vDate = dateFormat.format(vaccinationDate.getDate());
-
-            vaccination.setNextDueDate(dueDate);
-            vaccination.setVaccinationDate(vDate);
-
-            AppUtils.addVaccination(vaccination, this);
-            HealthScreen.vaccinationTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Vaccination Date", "Vaccinaiton Name", "Next Due Date", "Goat Tag"}));
-            AppUtils.fillVaccinationTable(HealthScreen.vaccinationTable, "");
+            AppUtils.addGoatOwner(goatOwner, this);
+            GoatOwnerScreen.ownerTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Address", "Phone", "Farm", "Goat Tag"}));
+            AppUtils.fillGoatOwnerTable(GoatOwnerScreen.ownerTable, "");
         }
     }//GEN-LAST:event_addVaccinationBtnActionPerformed
 
@@ -212,20 +213,21 @@ public class AddVaccination extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddVaccination.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddVaccination.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddVaccination.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddVaccination.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddVaccination().setVisible(true);
+                new AddOwner().setVisible(true);
             }
         });
     }
@@ -239,10 +241,12 @@ public class AddVaccination extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private com.toedter.calendar.JDateChooser nextDueDate;
-    private javax.swing.JTextField vaccinaitonName;
-    private com.toedter.calendar.JDateChooser vaccinationDate;
+    private javax.swing.JTextField ownerAddress;
+    private javax.swing.JTextField ownerFarm;
+    private javax.swing.JTextField ownerName;
+    private javax.swing.JTextField ownerPhone;
     // End of variables declaration//GEN-END:variables
 }

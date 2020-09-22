@@ -4,12 +4,15 @@ package app.utils;
 import app.AddDeworming;
 import app.AddGoat;
 import app.AddKiddingRecord;
-import app.AddVaccination;
 import app.AddVaccine;
+
+import app.AddOwner;
+
 import app.UpdateGoat;
 import app.UpdateKiddingRecord;
 import app.models.Deworming;
 import app.models.Goat;
+import app.models.GoatOwner;
 import app.models.Kidding;
 import app.models.Vaccination;
 import connector.DbConnection;
@@ -251,6 +254,7 @@ public class AppUtils {
     //VACCIINATION
     
     public static void addVaccination(Vaccination vaccination, AddVaccine addVaccination) {
+
         try {
             ps = conn.prepareStatement("INSERT INTO vaccination(vaccinationDate, vaccineName, nextDueDate, goatID) VALUES (?, ?, ?, ?)");
             ps.setString(1, vaccination.getVaccinationDate());
@@ -296,6 +300,58 @@ public class AppUtils {
         }
     }
     //End Vaccination
+    
+    //GOAT OWNER
+    
+    public static void addGoatOwner(GoatOwner goatOwner, AddOwner addOwner) {
+        try {
+            ps = conn.prepareStatement("INSERT INTO goatowner(name, address, phone, farm, goatID) VALUES (?, ?, ?, ?, ?)");
+            ps.setString(1, goatOwner.getName());
+            ps.setString(2, goatOwner.getAdress());
+            ps.setString(3, goatOwner.getPhone());
+            ps.setString(4, goatOwner.getFarm());
+            ps.setString(5, goatOwner.getGoatTag());
+            
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "New goat owner added successfully!");
+               addOwner.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public static void fillGoatOwnerTable(JTable table, String searchText) {        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM goatowner WHERE CONCAT(id, name, address, phone, farm, goatID) LIKE ?");
+            ps.setString(1, "%" + searchText + "%");
+            
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[6];
+                
+                row[0] = rs.getInt(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);
+                row[4] = rs.getString(5); 
+                row[5] = rs.getString(6);
+                
+                model.addRow(row);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    //End Owner
     
     //KIDDING
     public static void addKidding(Kidding kidding, AddKiddingRecord addKidding) {

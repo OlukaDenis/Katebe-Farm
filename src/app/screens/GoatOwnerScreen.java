@@ -5,7 +5,7 @@
  */
 package app.screens;
 
-import app.AddVaccination;
+import app.AddOwner;
 import static app.screens.HealthScreen.dewormingTable;
 import app.utils.AppUtils;
 import java.awt.Color;
@@ -26,10 +26,10 @@ public class GoatOwnerScreen extends javax.swing.JInternalFrame {
     public GoatOwnerScreen() {
         initComponents();
         
-         AppUtils.fillVaccinationTable(vaccinationTable, "");
-        model = (DefaultTableModel)vaccinationTable.getModel();
-        vaccinationTable.setRowHeight(40);
-        vaccinationTable.setSelectionBackground(Color.decode("#66cc99"));
+         AppUtils.fillGoatOwnerTable(ownerTable, "");
+        model = (DefaultTableModel)ownerTable.getModel();
+        ownerTable.setRowHeight(40);
+        ownerTable.setSelectionBackground(Color.decode("#66cc99"));
         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
@@ -48,29 +48,29 @@ public class GoatOwnerScreen extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        vaccinationTable = new javax.swing.JTable();
+        ownerTable = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(920, 610));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setText("Add Vaccination");
+        jButton2.setText("Add Owner");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        vaccinationTable.setModel(new javax.swing.table.DefaultTableModel(
+        ownerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Vaccination Date", "Vaccine Name", "Next Due Date", "Goat Tag"
+                "ID", "Name", "Address", "Phone", "Farm", "Goat Tag"
             }
         ));
-        jScrollPane1.setViewportView(vaccinationTable);
+        jScrollPane1.setViewportView(ownerTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,7 +79,7 @@ public class GoatOwnerScreen extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jButton2)
-                .addContainerGap(768, Short.MAX_VALUE))
+                .addContainerGap(795, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,11 +97,11 @@ public class GoatOwnerScreen extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         AddVaccination addVaccine = new AddVaccination();
-        addVaccine.setVisible(true);
-        addVaccine.pack();
-        addVaccine.setLocationRelativeTo(null);
-        addVaccine.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        AddOwner addOwner = new AddOwner();
+        addOwner.setVisible(true);
+        addOwner.pack();
+        addOwner.setLocationRelativeTo(null);
+        addOwner.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -109,6 +109,6 @@ public class GoatOwnerScreen extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable vaccinationTable;
+    public static javax.swing.JTable ownerTable;
     // End of variables declaration//GEN-END:variables
 }

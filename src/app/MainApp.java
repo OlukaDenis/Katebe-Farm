@@ -160,14 +160,14 @@ public class MainApp extends javax.swing.JFrame {
 
         vaccintionText.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         vaccintionText.setForeground(new java.awt.Color(255, 255, 255));
-        vaccintionText.setText("VACCINATION RECORDS");
+        vaccintionText.setText("GOAT OWNERS");
 
         javax.swing.GroupLayout vaccinationJpanelLayout = new javax.swing.GroupLayout(vaccinationJpanel);
         vaccinationJpanel.setLayout(vaccinationJpanelLayout);
         vaccinationJpanelLayout.setHorizontalGroup(
             vaccinationJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vaccinationJpanelLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(94, 94, 94)
                 .addComponent(vaccintionText)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

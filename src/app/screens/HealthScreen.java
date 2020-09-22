@@ -6,14 +6,15 @@
 package app.screens;
 
 import app.AddDeworming;
-import app.AddVaccination;
+import app.AddOwner;
+import app.AddVaccine;
 import static app.screens.Home.AllGoatsTable;
-import static app.screens.GoatOwnerScreen.vaccinationTable;
 import app.utils.AppUtils;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import static app.screens.GoatOwnerScreen.ownerTable;
 
 /**
  *
@@ -193,7 +194,7 @@ public class HealthScreen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_addDewormingRecordActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        AddVaccination addVaccine = new AddVaccination();
+        AddVaccine addVaccine = new AddVaccine();
         addVaccine.setVisible(true);
         addVaccine.pack();
         addVaccine.setLocationRelativeTo(null);
