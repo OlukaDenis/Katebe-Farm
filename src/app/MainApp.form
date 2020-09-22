@@ -42,7 +42,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="homeJpanel" alignment="0" max="32767" attributes="0"/>
               <Component id="vaccinationJpanel" alignment="1" max="32767" attributes="0"/>
-              <Component id="dewormingJpanel" alignment="1" max="32767" attributes="0"/>
+              <Component id="healthJpanel" alignment="1" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -69,7 +69,7 @@
                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                   <Component id="homeJpanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="dewormingJpanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="healthJpanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="vaccinationJpanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -102,15 +102,15 @@
             <Property name="text" type="java.lang.String" value="KATEBE FARM"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="dewormingJpanel">
+        <Container class="javax.swing.JPanel" name="healthJpanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="99" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dewormingJpanelMousePressed"/>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dewormingJpanelMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="healthJpanelMouseClicked"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="healthJpanelMousePressed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -120,7 +120,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                       <Component id="dewormingText" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -145,7 +145,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="DEWORMING RECORDS"/>
+                <Property name="text" type="java.lang.String" value="HEALTH RECORDS"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -6,7 +6,7 @@
 package app;
 
 import app.models.Goat;
-import app.screens.DewormingScreen;
+import app.screens.HealthScreen;
 import app.screens.DoeKidding;
 import app.screens.Home;
 import app.screens.VaccinationScreen;
@@ -40,7 +40,7 @@ public class MainApp extends javax.swing.JFrame {
         fontColor = new Color(0, 0, 0);
         homeJpanel.setBackground(panelClick); 
         homeText.setForeground(fontColor);
-        dewormingJpanel.setBackground(panelDefault);
+        healthJpanel.setBackground(panelDefault);
         
         Home home = new Home();
         container.add(home).setVisible(true);
@@ -59,7 +59,7 @@ public class MainApp extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        dewormingJpanel = new javax.swing.JPanel();
+        healthJpanel = new javax.swing.JPanel();
         dewormingText = new javax.swing.JLabel();
         homeJpanel = new javax.swing.JPanel();
         homeText = new javax.swing.JLabel();
@@ -86,32 +86,32 @@ public class MainApp extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("KATEBE FARM");
 
-        dewormingJpanel.setBackground(new java.awt.Color(51, 153, 102));
-        dewormingJpanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                dewormingJpanelMousePressed(evt);
-            }
+        healthJpanel.setBackground(new java.awt.Color(51, 153, 102));
+        healthJpanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dewormingJpanelMouseClicked(evt);
+                healthJpanelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                healthJpanelMousePressed(evt);
             }
         });
 
         dewormingText.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         dewormingText.setForeground(new java.awt.Color(255, 255, 255));
-        dewormingText.setText("DEWORMING RECORDS");
+        dewormingText.setText("HEALTH RECORDS");
 
-        javax.swing.GroupLayout dewormingJpanelLayout = new javax.swing.GroupLayout(dewormingJpanel);
-        dewormingJpanel.setLayout(dewormingJpanelLayout);
-        dewormingJpanelLayout.setHorizontalGroup(
-            dewormingJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dewormingJpanelLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
+        javax.swing.GroupLayout healthJpanelLayout = new javax.swing.GroupLayout(healthJpanel);
+        healthJpanel.setLayout(healthJpanelLayout);
+        healthJpanelLayout.setHorizontalGroup(
+            healthJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(healthJpanelLayout.createSequentialGroup()
+                .addGap(86, 86, 86)
                 .addComponent(dewormingText)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        dewormingJpanelLayout.setVerticalGroup(
-            dewormingJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dewormingJpanelLayout.createSequentialGroup()
+        healthJpanelLayout.setVerticalGroup(
+            healthJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(healthJpanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(dewormingText)
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -216,7 +216,7 @@ public class MainApp extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(homeJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(vaccinationJpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(dewormingJpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(healthJpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -238,7 +238,7 @@ public class MainApp extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addComponent(homeJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dewormingJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(healthJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(vaccinationJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -326,7 +326,7 @@ public class MainApp extends javax.swing.JFrame {
         homeJpanel.setBackground(panelClick); 
         kiddingJpanel.setBackground(panelDefault); 
         vaccinationJpanel.setBackground(panelDefault); 
-        dewormingJpanel.setBackground(panelDefault);
+        healthJpanel.setBackground(panelDefault);
         
         vaccintionText.setForeground(Color.WHITE);
         kiddingText.setForeground(Color.WHITE);
@@ -334,17 +334,17 @@ public class MainApp extends javax.swing.JFrame {
         dewormingText.setForeground(Color.WHITE);
     }//GEN-LAST:event_homeJpanelMousePressed
 
-    private void dewormingJpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dewormingJpanelMousePressed
+    private void healthJpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_healthJpanelMousePressed
         homeJpanel.setBackground(panelDefault); 
         kiddingJpanel.setBackground(panelDefault); 
         vaccinationJpanel.setBackground(panelDefault); 
-        dewormingJpanel.setBackground(panelClick);
+        healthJpanel.setBackground(panelClick);
         
         vaccintionText.setForeground(Color.WHITE);
         kiddingText.setForeground(Color.WHITE);
         homeText.setForeground(Color.WHITE);
         dewormingText.setForeground(Color.BLACK);
-    }//GEN-LAST:event_dewormingJpanelMousePressed
+    }//GEN-LAST:event_healthJpanelMousePressed
 
     private void homeJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeJpanelMouseClicked
         container.removeAll();
@@ -352,17 +352,17 @@ public class MainApp extends javax.swing.JFrame {
         container.add(home).setVisible(true);
     }//GEN-LAST:event_homeJpanelMouseClicked
 
-    private void dewormingJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dewormingJpanelMouseClicked
+    private void healthJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_healthJpanelMouseClicked
         container.removeAll(); 
-        DewormingScreen deworm = new DewormingScreen();
+        HealthScreen deworm = new HealthScreen();
         container.add(deworm).setVisible(true);
-    }//GEN-LAST:event_dewormingJpanelMouseClicked
+    }//GEN-LAST:event_healthJpanelMouseClicked
 
     private void vaccinationJpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vaccinationJpanelMousePressed
         homeJpanel.setBackground(panelDefault); 
         kiddingJpanel.setBackground(panelDefault); 
         vaccinationJpanel.setBackground(panelClick); 
-        dewormingJpanel.setBackground(panelDefault);
+        healthJpanel.setBackground(panelDefault);
         
         vaccintionText.setForeground(Color.BLACK);
         kiddingText.setForeground(Color.WHITE);
@@ -380,7 +380,7 @@ public class MainApp extends javax.swing.JFrame {
         homeJpanel.setBackground(panelDefault); 
         kiddingJpanel.setBackground(panelClick); 
         vaccinationJpanel.setBackground(panelDefault); 
-        dewormingJpanel.setBackground(panelDefault);
+        healthJpanel.setBackground(panelDefault);
         
         vaccintionText.setForeground(Color.WHITE);
         kiddingText.setForeground(Color.BLACK);
@@ -440,8 +440,8 @@ public class MainApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane container;
-    public static javax.swing.JPanel dewormingJpanel;
     private javax.swing.JLabel dewormingText;
+    public static javax.swing.JPanel healthJpanel;
     public static javax.swing.JPanel homeJpanel;
     private javax.swing.JLabel homeText;
     private javax.swing.JButton jButton1;

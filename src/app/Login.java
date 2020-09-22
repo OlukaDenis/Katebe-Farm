@@ -78,7 +78,7 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(phone_number, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 142, -1));
 
-        user_password.setText("admin");
+        user_password.setText("ADMIN");
         jPanel1.add(user_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 140, -1));
 
         button_login.setBackground(new java.awt.Color(61, 149, 119));

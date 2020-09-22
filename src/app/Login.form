@@ -91,7 +91,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="user_password">
           <Properties>
-            <Property name="text" type="java.lang.String" value="admin"/>
+            <Property name="text" type="java.lang.String" value="ADMIN"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

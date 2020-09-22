@@ -8,7 +8,7 @@ package app.screens;
 import app.AddKiddingRecord;
 import app.UpdateKiddingRecord;
 import app.models.Kidding;
-import static app.screens.DewormingScreen.dewormingTable;
+import static app.screens.HealthScreen.dewormingTable;
 import app.utils.AppUtils;
 import java.awt.Color;
 import javax.swing.JFrame;

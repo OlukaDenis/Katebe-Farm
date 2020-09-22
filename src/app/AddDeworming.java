@@ -6,7 +6,7 @@
 package app;
 
 import app.models.Deworming;
-import app.screens.DewormingScreen;
+import app.screens.HealthScreen;
 import app.utils.AppUtils;
 import connector.DbConnection;
 import java.sql.Connection;
@@ -164,8 +164,8 @@ public class AddDeworming extends javax.swing.JFrame {
             deworming.setDewormingDate(dDate);
             
             AppUtils.addDeworming(deworming, this);
-            DewormingScreen.dewormingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "DewormingDate", "Dewormer Used", "Dose Admnistered", "Next Due Date", "Goat Tag"}));
-            AppUtils.fillGoatTable(DewormingScreen.dewormingTable, "");
+            HealthScreen.dewormingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "DewormingDate", "Dewormer Used", "Dose Admnistered", "Next Due Date", "Goat Tag"}));
+            AppUtils.fillGoatTable(HealthScreen.dewormingTable, "");
         }
     }//GEN-LAST:event_addDewormingActionPerformed
 

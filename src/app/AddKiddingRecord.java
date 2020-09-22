@@ -6,7 +6,7 @@
 package app;
 
 import app.models.Kidding;
-import app.screens.DewormingScreen;
+import app.screens.HealthScreen;
 import app.screens.DoeKidding;
 import app.utils.AppUtils;
 import connector.DbConnection;
@@ -72,8 +72,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         dateBred = new com.toedter.calendar.JDateChooser();
-        kidName = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         rbMale = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
@@ -81,8 +79,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         goatTags = new javax.swing.JComboBox<>();
         birthWeight = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        tattoo = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         addNewKiddingBtn = new javax.swing.JButton();
 
@@ -120,17 +116,12 @@ public class AddKiddingRecord extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Goat Tag");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Date Bred");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 30));
         jPanel1.add(dateBred, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 30));
-        jPanel1.add(kidName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 220, -1));
-
-        jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel5.setText("Kid Name");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 70, 30));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel6.setText("Kid Sire");
@@ -142,11 +133,11 @@ public class AddKiddingRecord extends javax.swing.JFrame {
                 rbMaleActionPerformed(evt);
             }
         });
-        jPanel1.add(rbMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
+        jPanel1.add(rbMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 60, -1));
 
         jLabel7.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel7.setText("Sex");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 30, -1));
 
         rbFemale.setText("Female");
         rbFemale.addActionListener(new java.awt.event.ActionListener() {
@@ -154,9 +145,9 @@ public class AddKiddingRecord extends javax.swing.JFrame {
                 rbFemaleActionPerformed(evt);
             }
         });
-        jPanel1.add(rbFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
+        jPanel1.add(rbFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 80, -1));
 
-        jPanel1.add(goatTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 210, -1));
+        jPanel1.add(goatTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 210, -1));
 
         birthWeight.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -168,11 +159,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel8.setText("Birth Weight (kg)");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 100, 30));
-        jPanel1.add(tattoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 220, -1));
-
-        jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel9.setText("Tattoo");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 60, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -183,7 +169,7 @@ public class AddKiddingRecord extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 140, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 140, 40));
 
         addNewKiddingBtn.setBackground(new java.awt.Color(61, 149, 119));
         addNewKiddingBtn.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -194,7 +180,7 @@ public class AddKiddingRecord extends javax.swing.JFrame {
                 addNewKiddingBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(addNewKiddingBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 370, 140, 40));
+        jPanel1.add(addNewKiddingBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 350, 140, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 830, 460));
 
@@ -211,9 +197,8 @@ public class AddKiddingRecord extends javax.swing.JFrame {
 
     public boolean validateText() {
         
-        if (tattoo.getText().equals("") || birthWeight.getText().equals("") 
+        if ( birthWeight.getText().equals("") 
                 || birthWeight.getText() == null
-                || kidName.getText().equals("")
                 || dateBred.getDate() == null ) {
             JOptionPane.showMessageDialog(null, "All fields must be filled!");
             return false;
@@ -264,9 +249,7 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         
         double weight = Double.parseDouble(birthWeight.getText());
         kidding.setSex(sex);
-        kidding.setKidName(kidName.getText());
         kidding.setBirthWeight(weight);
-        kidding.setTattoo(tattoo.getText());
         kidding.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
         kidding.setKidSire(String.valueOf(kidsire.getSelectedItem()));
         
@@ -287,7 +270,7 @@ public class AddKiddingRecord extends javax.swing.JFrame {
                 kidding.setKiddingDate(kidDate);              
                 
                 AppUtils.addKidding(kidding, this);
-                DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Doe Tag", "Date Bred", "Kidding Date", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"}));
+                DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"}));
                 AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
                                 
             } catch (ParseException ex) {
@@ -354,17 +337,13 @@ public class AddKiddingRecord extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField kidName;
     private javax.swing.JComboBox<String> kidsire;
     private javax.swing.JRadioButton rbFemale;
     private javax.swing.JRadioButton rbMale;
-    private javax.swing.JTextField tattoo;
     // End of variables declaration//GEN-END:variables
 }
