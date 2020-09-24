@@ -9,7 +9,13 @@ import app.models.Goat;
 import app.models.GoatOwner;
 import app.utils.AppUtils;
 import connector.DbConnection;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import static jdk.nashorn.internal.objects.Global.undefined;
 
 /**
@@ -85,17 +92,64 @@ public class PrintReport extends javax.swing.JFrame {
         }
         
         if (owner != null || owner != undefined) {
-            goatOwnerName.setText(owner.getName());
-            goatOwnerAddress.setText(owner.getAdress());
-            goatOwnerPhone.setText(owner.getPhone());
-            goatOwnerFarm.setText(owner.getFarm());
-        } else {
-            System.out.println("Null");
-            goatOwnerName.setText("No record");
-            goatOwnerAddress.setText("No record");
-            goatOwnerPhone.setText("No record");
-            goatOwnerFarm.setText("No record");
+            
+            if (owner.getName() != null) {
+                goatOwnerName.setText(owner.getName());
+            } else {
+                goatOwnerName.setText("No record");
+            }
+           
+            if (owner.getAdress()!= null) {
+                 goatOwnerAddress.setText(owner.getAdress());
+            } else {
+                goatOwnerAddress.setText("No record");
+            }
+           
+            if (owner.getPhone()!= null) {
+                goatOwnerPhone.setText(owner.getPhone());
+            } else {
+                goatOwnerPhone.setText("No record");
+            }
+           
+            if (owner.getFarm()!= null) {
+                goatOwnerFarm.setText(owner.getFarm());
+            } else {
+                 goatOwnerFarm.setText("No record");
+            }
         }
+    }
+    
+    private void PrintGoatReport(JPanel panel) {
+       
+       PrinterJob job = PrinterJob.getPrinterJob();
+       job.setJobName("Print Goat Record");
+       job.setPrintable(new Printable() {
+           @Override
+           public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+
+               if (pageIndex > 0) {
+                   return Printable.NO_SUCH_PAGE;
+               }
+               
+               Graphics2D graphics2D = (Graphics2D)graphics;
+               
+               graphics2D.translate(pageFormat.getImageableX()*2, pageFormat.getImageableY()*2);
+               graphics2D.scale(0.5, 0.5);
+               
+               panel.paint(graphics2D);
+               
+               return Printable.PAGE_EXISTS;
+           }
+       });
+       boolean doPrint = job.printDialog();
+       
+       if (doPrint) {
+           try {
+               job.print();
+           } catch (PrinterException e) {
+               JOptionPane.showMessageDialog(null, "Print error: " + e.getMessage());
+           }
+       }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,7 +161,7 @@ public class PrintReport extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        printJPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -136,6 +190,8 @@ public class PrintReport extends javax.swing.JFrame {
         goatOwnerFarm = new javax.swing.JLabel();
         goatOwnerName = new javax.swing.JLabel();
         goatOwnerPhone = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        printReport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -143,8 +199,8 @@ public class PrintReport extends javax.swing.JFrame {
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        printJPanel.setBackground(new java.awt.Color(255, 255, 255));
+        printJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -153,12 +209,12 @@ public class PrintReport extends javax.swing.JFrame {
         jLabel1.setText("KATEBE FARM LIMITED ANIMAL PROFILE RECORD");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 820, 80));
+        printJPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 820, 80));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel3.add(goatImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 250));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 290, 270));
+        printJPanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 290, 270));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -203,7 +259,7 @@ public class PrintReport extends javax.swing.JFrame {
         jLabel9.setText("Sire Tag NO:");
         jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 490, 330));
+        printJPanel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 490, 330));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -241,14 +297,28 @@ public class PrintReport extends javax.swing.JFrame {
         goatOwnerPhone.setText("90768790");
         jPanel5.add(goatOwnerPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 20));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 420, 350));
+        printJPanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 420, 350));
+        printJPanel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -60, 870, 60));
 
-        jScrollPane2.setViewportView(jPanel1);
+        jScrollPane2.setViewportView(printJPanel);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 660));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 870, 600));
+
+        printReport.setText("Print Report");
+        printReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printReportActionPerformed(evt);
+            }
+        });
+        getContentPane().add(printReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 170, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void printReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printReportActionPerformed
+        // TODO add your handling code here:
+        PrintGoatReport(printJPanel);
+    }//GEN-LAST:event_printReportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,13 +379,15 @@ public class PrintReport extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel printJPanel;
+    private javax.swing.JButton printReport;
     // End of variables declaration//GEN-END:variables
 }
