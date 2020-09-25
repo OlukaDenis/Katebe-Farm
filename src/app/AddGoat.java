@@ -61,9 +61,8 @@ public class AddGoat extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        goat_source = new javax.swing.JTextField();
         goat_name = new javax.swing.JTextField();
-        goat_breed = new javax.swing.JTextField();
+        goat_source = new javax.swing.JTextField();
         rb_male = new javax.swing.JRadioButton();
         rb_female = new javax.swing.JRadioButton();
         button_add_goat = new javax.swing.JButton();
@@ -87,6 +86,7 @@ public class AddGoat extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         currentStatus = new javax.swing.JComboBox<>();
+        goat_breed = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,13 +124,6 @@ public class AddGoat extends javax.swing.JFrame {
         jLabel7.setText("Birth Date");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 343, -1, -1));
 
-        goat_source.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goat_sourceActionPerformed(evt);
-            }
-        });
-        jPanel1.add(goat_source, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 287, 213, -1));
-
         goat_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goat_nameActionPerformed(evt);
@@ -138,12 +131,12 @@ public class AddGoat extends javax.swing.JFrame {
         });
         jPanel1.add(goat_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 135, 213, -1));
 
-        goat_breed.addActionListener(new java.awt.event.ActionListener() {
+        goat_source.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goat_breedActionPerformed(evt);
+                goat_sourceActionPerformed(evt);
             }
         });
-        jPanel1.add(goat_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 188, 213, -1));
+        jPanel1.add(goat_source, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 213, -1));
 
         rb_male.setText("Male");
         rb_male.addActionListener(new java.awt.event.ActionListener() {
@@ -295,31 +288,37 @@ public class AddGoat extends javax.swing.JFrame {
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 300, -1, 107));
 
         chooseFront.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        chooseFront.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chooseFront.setText("Choose front");
+        chooseFront.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         chooseFront.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chooseFrontMouseClicked(evt);
             }
         });
-        jPanel1.add(chooseFront, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, -1, -1));
+        jPanel1.add(chooseFront, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, 110, -1));
 
         chooseSide.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        chooseSide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chooseSide.setText("Choose side");
+        chooseSide.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         chooseSide.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chooseSideMouseClicked(evt);
             }
         });
-        jPanel1.add(chooseSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, -1, -1));
+        jPanel1.add(chooseSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 110, -1));
 
         chooseRear.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        chooseRear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chooseRear.setText("Choose rear");
+        chooseRear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         chooseRear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chooseRearMouseClicked(evt);
             }
         });
-        jPanel1.add(chooseRear, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 410, -1, -1));
+        jPanel1.add(chooseRear, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 410, 110, -1));
 
         jPanel2.setBackground(new java.awt.Color(61, 149, 119));
 
@@ -358,6 +357,9 @@ public class AddGoat extends javax.swing.JFrame {
         });
         jPanel1.add(currentStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 186, 210, 30));
 
+        goat_breed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Local", "Exotic" }));
+        jPanel1.add(goat_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 220, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -378,17 +380,13 @@ public class AddGoat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_goat_idActionPerformed
 
-    private void goat_sourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goat_sourceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_goat_sourceActionPerformed
-
     private void goat_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goat_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_goat_nameActionPerformed
 
-    private void goat_breedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goat_breedActionPerformed
+    private void goat_sourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goat_sourceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_goat_breedActionPerformed
+    }//GEN-LAST:event_goat_sourceActionPerformed
 
     private void rb_maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_maleActionPerformed
         // TODO add your handling code here:
@@ -404,8 +402,8 @@ public class AddGoat extends javax.swing.JFrame {
 
     public boolean validateText() {
         
-        if (goat_id.getText().equals("") || goat_name.getText().equals("") || goat_breed.getText().equals("")
-                || goat_birth_date.getDate() == null || goat_source.getText().equals("") ) {
+        if (goat_id.getText().equals("") || goat_name.getText().equals("") || goat_source.getText().equals("")
+                || goat_birth_date.getDate() == null ) {
             JOptionPane.showMessageDialog(null, "All fields must be filled!");
             return false;
         } else if (goat_birth_date.getDate().compareTo(new Date()) > 0) {
@@ -423,7 +421,7 @@ public class AddGoat extends javax.swing.JFrame {
         }
         goat.setID(goat_id.getText());
         goat.setName(goat_name.getText());
-        goat.setBreed(goat_breed.getText());
+        goat.setBreed(goat_breed.getSelectedItem().toString());
         goat.setSex(sex);
         goat.setSource(goat_source.getText());
         goat.setBuck_id(buck_id.getText());        
@@ -584,7 +582,7 @@ public class AddGoat extends javax.swing.JFrame {
     private javax.swing.JTextField doe_id;
     private javax.swing.JLabel frontImage;
     private com.toedter.calendar.JDateChooser goat_birth_date;
-    private javax.swing.JTextField goat_breed;
+    private javax.swing.JComboBox<String> goat_breed;
     private javax.swing.JTextField goat_id;
     private javax.swing.JTextField goat_name;
     private javax.swing.JTextField goat_source;

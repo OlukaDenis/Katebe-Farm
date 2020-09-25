@@ -113,6 +113,7 @@ public class UpdateKiddingRecord extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 60));
 
+        jPanel1.setBackground(new java.awt.Color(229, 230, 232));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.add(kidsire, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 220, -1));
