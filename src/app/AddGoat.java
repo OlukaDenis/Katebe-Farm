@@ -435,7 +435,7 @@ public class AddGoat extends javax.swing.JFrame {
             
             AppUtils.addNewGoat(goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
-            Home.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
+            Home.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"Goat Tag", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
             AppUtils.fillGoatTable(Home.AllGoatsTable, "");
         }
         

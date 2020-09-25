@@ -34,6 +34,7 @@ public class Home extends javax.swing.JInternalFrame {
      */
     private DefaultTableModel model;
     private static Connection conn;
+    private PreparedStatement ps;
      
     public Home() {
         initComponents();
@@ -73,7 +74,7 @@ public class Home extends javax.swing.JInternalFrame {
         statusFilter = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
         filterBtn = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        clearFilters = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         sexFilter = new javax.swing.JComboBox<>();
         breedFilter = new javax.swing.JComboBox<>();
@@ -146,10 +147,15 @@ public class Home extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel5.setText("Clear Filters");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clearFilters.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        clearFilters.setForeground(new java.awt.Color(255, 153, 153));
+        clearFilters.setText("Clear Filters");
+        clearFilters.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clearFilters.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                clearFiltersMousePressed(evt);
+            }
+        });
 
         jLabel6.setText("Sex");
 
@@ -187,7 +193,7 @@ public class Home extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(filterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(clearFilters)
                 .addGap(62, 62, 62))
         );
         jPanel2Layout.setVerticalGroup(
@@ -206,7 +212,7 @@ public class Home extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(statusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterBtn)
-                    .addComponent(jLabel5)
+                    .addComponent(clearFilters)
                     .addComponent(jLabel6)
                     .addComponent(sexFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(breedFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -289,19 +295,58 @@ public class Home extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_searchGoatKeyTyped
 
     private void filterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBtnActionPerformed
-        PreparedStatement ps = null;
+       
         try {
+            
             String status = statusFilter.getSelectedItem().toString();
             String breed  = breedFilter.getSelectedItem().toString();
             String sex = sexFilter.getSelectedItem().toString();
             
-            ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `breed` = ? AND `currentStatus` = ? AND `sex` = ? ");
-            ps.setString(1, breed);
-            ps.setString(2, status);
-            ps.setString(3, sex);
+            if (status.equals("None") && breed.equals("None") && sex.equals("None") ) {
+                ps = conn.prepareStatement("SELECT * FROM goat WHERE CONCAT(ID, name, breed, sex, source, birthdate, buckID, doeID) LIKE ?");
+                ps.setString(1, "%" + "" + "%");
+            }
             
+            if (!status.equals("None") && !breed.equals("None") && !sex.equals("None") ) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `breed` = ? AND `currentStatus` = ? AND `sex` = ? ");
+                ps.setString(1, breed);
+                ps.setString(2, status);
+                ps.setString(3, sex);
+            } 
+            //Single filters
+            if (!status.equals("None") && breed.equals("None") && sex.equals("None")) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `currentStatus` = ?");
+                ps.setString(1, status);
+            } 
+            if (status.equals("None") && !breed.equals("None") && sex.equals("None")) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `breed` = ?");
+                ps.setString(1, breed);
+            } 
+            if (status.equals("None") && breed.equals("None") && !sex.equals("None")) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `sex` = ?");
+                ps.setString(1, sex);
+            } 
+            
+            //Double filters
+            if (!status.equals("None") && !breed.equals("None") && sex.equals("None")) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `currentStatus` = ? AND `breed` = ?");
+                ps.setString(1, status);
+                ps.setString(2, breed);
+            } 
+            if (!status.equals("None") && breed.equals("None") && !sex.equals("None")) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `currentStatus` = ? AND `sex` = ?");
+                ps.setString(1, status);
+                ps.setString(2, sex);
+            } 
+            if (status.equals("None") && !breed.equals("None") && !sex.equals("None")) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `breed` = ? AND `sex` = ?");
+                ps.setString(1, breed);
+                ps.setString(2, sex);
+            } 
+            
+                        
             ResultSet rs = ps.executeQuery();
-            DefaultTableModel model = new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"});
+            DefaultTableModel model = new DefaultTableModel(null, new Object[]{"Goat Tag", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"});
             
             Object[] row;
             
@@ -328,16 +373,24 @@ public class Home extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_filterBtnActionPerformed
 
+    private void clearFiltersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearFiltersMousePressed
+       breedFilter.setSelectedItem("None");
+       sexFilter.setSelectedItem("None");
+       statusFilter.setSelectedItem("None");
+       AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"Goat Tag", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
+       AppUtils.fillGoatTable(Home.AllGoatsTable, "");
+    }//GEN-LAST:event_clearFiltersMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable AllGoatsTable;
     private javax.swing.JComboBox<String> breedFilter;
+    private javax.swing.JLabel clearFilters;
     private javax.swing.JButton filterBtn;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
