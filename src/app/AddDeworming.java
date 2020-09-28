@@ -32,6 +32,7 @@ public class AddDeworming extends javax.swing.JFrame {
      */
     Deworming deworming;
     private static Connection conn;
+    
     public AddDeworming() {
         initComponents();
         deworming = new Deworming();

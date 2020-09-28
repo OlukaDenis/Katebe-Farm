@@ -7,6 +7,7 @@ import app.AddKiddingRecord;
 import app.AddVaccine;
 
 import app.AddOwner;
+import app.AddTreatment;
 
 import app.UpdateGoat;
 import app.UpdateKiddingRecord;
@@ -14,6 +15,7 @@ import app.models.Deworming;
 import app.models.Goat;
 import app.models.GoatOwner;
 import app.models.Kidding;
+import app.models.Treatment;
 import app.models.Vaccination;
 import connector.DbConnection;
 import java.awt.Image;
@@ -250,6 +252,54 @@ public class AppUtils {
         }
     }
     //End Deworming
+    
+    
+    //Treatment
+    public static void addTreatment(Treatment treatment, AddTreatment addTreatment) {
+        try {
+            ps = conn.prepareStatement("INSERT INTO othertreament(treatmentDate, description, goatID) VALUES (?, ?, ?)");
+            ps.setString(1, treatment.getTreatmentDate());
+            ps.setString(2, treatment.getDescription());
+            ps.setString(3, treatment.getGoatTag());
+            
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "New treament record added successfully!");
+               addTreatment.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public static void fillTreatmentTable(JTable table, String searchText) {        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM othertreament WHERE CONCAT(id, treatmentDate, description, goatID) LIKE ?");
+            ps.setString(1, "%" + searchText + "%");
+            
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[4];
+                
+                row[0] = rs.getString(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);  
+                
+                model.addRow(row);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //End treatment
+    
     
     //VACCIINATION
     
