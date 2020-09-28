@@ -40,7 +40,7 @@ public class Home extends javax.swing.JInternalFrame {
         initComponents();
         
         conn = DbConnection.getConnection();             
-//        AutoCompleteDecorator.decorate(filterGoatTag);
+        AutoCompleteDecorator.decorate(goatTags);
        
         AppUtils.fillGoatTable(AllGoatsTable, "");
         model = (DefaultTableModel)AllGoatsTable.getModel();
@@ -51,7 +51,7 @@ public class Home extends javax.swing.JInternalFrame {
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
         
-        
+        populateGoatTags();
     }
 
     /**
@@ -78,6 +78,11 @@ public class Home extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         sexFilter = new javax.swing.JComboBox<>();
         breedFilter = new javax.swing.JComboBox<>();
+        jSeparator2 = new javax.swing.JSeparator();
+        showChildrenBtn = new javax.swing.JButton();
+        childrenComboBox = new javax.swing.JComboBox<>();
+        goatTags = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(920, 610));
@@ -163,11 +168,21 @@ public class Home extends javax.swing.JInternalFrame {
 
         breedFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Local", "Exotic" }));
 
+        showChildrenBtn.setText("Show children");
+        showChildrenBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showChildrenBtnActionPerformed(evt);
+            }
+        });
+
+        childrenComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Male Children", "Female Children" }));
+
+        jLabel2.setText("Filter Children");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jButton2)
@@ -178,23 +193,40 @@ public class Home extends javax.swing.JInternalFrame {
                 .addGap(49, 49, 49))
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(breedFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sexFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(filterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(clearFilters)
-                .addGap(62, 62, 62))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(breedFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(statusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(goatTags, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(childrenComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(sexFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addComponent(filterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(clearFilters)
+                        .addGap(62, 62, 62))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(showChildrenBtn)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addComponent(jSeparator2)
+            .addComponent(jScrollPane1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,8 +248,17 @@ public class Home extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(sexFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(breedFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(showChildrenBtn)
+                    .addComponent(childrenComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goatTags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -230,8 +271,8 @@ public class Home extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -254,7 +295,7 @@ public class Home extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_AllGoatsTableMouseClicked
 
     private void populateGoatTags() {
-//        filterGoatTag.addItem("None");
+//        goatTags.addItem("None");
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement("SELECT * FROM `goat`");
@@ -262,7 +303,7 @@ public class Home extends javax.swing.JInternalFrame {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()) {
-//                filterGoatTag.addItem(rs.getString(1));
+                goatTags.addItem(rs.getString(1));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
@@ -346,7 +387,7 @@ public class Home extends javax.swing.JInternalFrame {
             
                         
             ResultSet rs = ps.executeQuery();
-            DefaultTableModel model = new DefaultTableModel(null, new Object[]{"Goat Tag", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"});
+            DefaultTableModel filterModel = new DefaultTableModel(null, new Object[]{"Goat Tag", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"});
             
             Object[] row;
             
@@ -362,11 +403,11 @@ public class Home extends javax.swing.JInternalFrame {
                 row[6] = rs.getString(7);
                 row[7] = rs.getString(8); 
                 
-                model.addRow(row);
+                filterModel.addRow(row);
 
             }
             
-            AllGoatsTable.setModel(model);
+            AllGoatsTable.setModel(filterModel);
         } catch (SQLException ex) {
             Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
              JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -381,22 +422,79 @@ public class Home extends javax.swing.JInternalFrame {
        AppUtils.fillGoatTable(Home.AllGoatsTable, "");
     }//GEN-LAST:event_clearFiltersMousePressed
 
+    private void showChildrenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showChildrenBtnActionPerformed
+        try {
+            String goatTag = goatTags.getSelectedItem().toString();
+            String sex = childrenComboBox.getSelectedItem().toString();
+            
+            if (sex.equalsIgnoreCase("All")) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `buckID` = ? OR `doeID` = ?");
+                ps.setString(1, goatTag);
+                ps.setString(2, goatTag);
+            }
+            
+            if (sex.equalsIgnoreCase("Male Children")) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE (`buckID` = ? OR `doeID` = ?) AND `sex` = 'Male' ");
+                ps.setString(1, goatTag);
+                ps.setString(2, goatTag);
+            }
+            
+            if (sex.equalsIgnoreCase("Female Children")) {
+                ps = conn.prepareStatement("SELECT * FROM `goat` WHERE (`buckID` = ? OR `doeID` = ?) AND `sex` = 'Female' ");
+                ps.setString(1, goatTag);
+                ps.setString(2, goatTag);
+            }
+            
+             ResultSet rs = ps.executeQuery();
+            DefaultTableModel childModel = new DefaultTableModel(null, new Object[]{"Goat Tag", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"});
+            
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[8];
+                
+                row[0] = rs.getString(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);
+                row[4] = rs.getString(5);
+                row[5] = rs.getString(6);                
+                row[6] = rs.getString(7);
+                row[7] = rs.getString(8); 
+                
+                childModel.addRow(row);
+
+            }
+            
+            AllGoatsTable.setModel(childModel);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_showChildrenBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable AllGoatsTable;
     private javax.swing.JComboBox<String> breedFilter;
+    private javax.swing.JComboBox<String> childrenComboBox;
     private javax.swing.JLabel clearFilters;
     private javax.swing.JButton filterBtn;
+    private javax.swing.JComboBox<String> goatTags;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField searchGoat;
     private javax.swing.JComboBox<String> sexFilter;
+    private javax.swing.JButton showChildrenBtn;
     private javax.swing.JComboBox<String> statusFilter;
     // End of variables declaration//GEN-END:variables
 }

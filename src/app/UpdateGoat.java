@@ -8,11 +8,16 @@ package app;
 import app.models.Goat;
 import app.screens.Home;
 import app.utils.AppUtils;
+import connector.DbConnection;
 import java.awt.FileDialog;
 import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -35,12 +41,22 @@ public class UpdateGoat extends javax.swing.JFrame {
      * Creates new form UpdateGoat
      */
     private Goat goat;
+    private static Connection conn;
+    private PreparedStatement ps;
     
     public UpdateGoat() {
         initComponents();
+        
+        conn = DbConnection.getConnection();             
+        AutoCompleteDecorator.decorate(buckTags);
+        AutoCompleteDecorator.decorate(doeTags);
+        
         ButtonGroup bg = new ButtonGroup();
         bg.add(updateMale);
         bg.add(updateFemale);
+        
+        populateBucks();
+        populateDoes();
     }
 
     /**
@@ -70,9 +86,7 @@ public class UpdateGoat extends javax.swing.JFrame {
         buttonUpdateGoat = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        updateBuckID = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        updateDoeID = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         updateFrontImage = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -90,6 +104,8 @@ public class UpdateGoat extends javax.swing.JFrame {
         printBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         livingStatus = new javax.swing.JComboBox<>();
+        buckTags = new javax.swing.JComboBox<>();
+        doeTags = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -105,8 +121,8 @@ public class UpdateGoat extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 173, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jLabel3.setText("ID");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 113, -1, -1));
+        jLabel3.setText("Goat Tag");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
         jPanel1.add(updateGoatName, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 167, 216, -1));
 
         updateMale.setText("Male");
@@ -168,26 +184,12 @@ public class UpdateGoat extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, 100, 40));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jLabel8.setText("Buck ID");
+        jLabel8.setText("Buck Tag");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 106, -1, 30));
 
-        updateBuckID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBuckIDActionPerformed(evt);
-            }
-        });
-        jPanel1.add(updateBuckID, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 208, -1));
-
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jLabel9.setText("Doe ID");
+        jLabel9.setText("Doe Tag");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 156, -1, 30));
-
-        updateDoeID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateDoeIDActionPerformed(evt);
-            }
-        });
-        jPanel1.add(updateDoeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 208, -1));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -320,7 +322,7 @@ public class UpdateGoat extends javax.swing.JFrame {
         jLabel10.setText("Living status");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 416, -1, 30));
 
-        jPanel1.add(updateCurrentStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 208, -1));
+        jPanel1.add(updateCurrentStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 208, 30));
 
         jPanel2.setBackground(new java.awt.Color(61, 149, 119));
 
@@ -364,6 +366,10 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         jPanel1.add(livingStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 200, -1));
 
+        jPanel1.add(buckTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 200, 40));
+
+        jPanel1.add(doeTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 200, 40));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 580));
 
         pack();
@@ -373,6 +379,34 @@ public class UpdateGoat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_updateMaleActionPerformed
 
+    private void populateBucks() {
+        try {
+            ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `sex` = 'Male' ");
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                buckTags.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void populateDoes() {
+        try {
+            ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `sex` = 'Female' ");
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                doeTags.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public boolean validateText() {
         
         if (updateGoatID.getText().equals("") || updateGoatName.getText().equals("") || updateBreed.getText().equals("")
@@ -398,8 +432,8 @@ public class UpdateGoat extends javax.swing.JFrame {
         goat.setBreed(updateBreed.getText());
         goat.setSex(sex);
         goat.setSource(updateSource.getText());
-        goat.setBuck_id(updateBuckID.getText());        
-        goat.setDoe_id(updateDoeID.getText());
+        goat.setBuck_id(String.valueOf(buckTags.getSelectedItem()));        
+        goat.setDoe_id(String.valueOf(doeTags.getSelectedItem()));
         goat.setCurrentStatus(String.valueOf(updateCurrentStatus.getSelectedItem()));
         
         if (String.valueOf(livingStatus.getSelectedItem()).equals("Alive")) {
@@ -432,8 +466,8 @@ public class UpdateGoat extends javax.swing.JFrame {
         updateGoatID.setText(goat.getID());
         updateGoatName.setText(goat.getName());
         updateBreed.setText(goat.getBreed());
-        updateBuckID.setText(goat.getBuck_id());
-        updateDoeID.setText(goat.getDoe_id());
+        buckTags.setSelectedItem(goat.getBuck_id());
+        doeTags.setSelectedItem(goat.getDoe_id());
         
         String itemOne = goat.getCurrentStatus();
         String itemTwo = "";
@@ -510,14 +544,6 @@ public class UpdateGoat extends javax.swing.JFrame {
         // cancel 
         this.dispose();
     }//GEN-LAST:event_updateCancelActionPerformed
-
-    private void updateBuckIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBuckIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateBuckIDActionPerformed
-
-    private void updateDoeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDoeIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateDoeIDActionPerformed
 
     private void openViewPic() {
         ViewPicture updateGoat = new ViewPicture();
@@ -680,10 +706,12 @@ public class UpdateGoat extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> buckTags;
     private javax.swing.JButton buttonUpdateGoat;
     private javax.swing.JLabel chooseFront;
     private javax.swing.JLabel chooseRear;
     private javax.swing.JLabel chooseSide;
+    private javax.swing.JComboBox<String> doeTags;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -706,10 +734,8 @@ public class UpdateGoat extends javax.swing.JFrame {
     private javax.swing.JButton printBtn;
     public static com.toedter.calendar.JDateChooser updateBirthDate;
     public static javax.swing.JTextField updateBreed;
-    private javax.swing.JTextField updateBuckID;
     private javax.swing.JButton updateCancel;
     private javax.swing.JComboBox<String> updateCurrentStatus;
-    private javax.swing.JTextField updateDoeID;
     public static javax.swing.JRadioButton updateFemale;
     private javax.swing.JLabel updateFrontImage;
     public static javax.swing.JTextField updateGoatID;
