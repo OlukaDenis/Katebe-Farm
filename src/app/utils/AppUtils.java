@@ -406,13 +406,11 @@ public class AppUtils {
     //KIDDING
     public static void addKidding(Kidding kidding, AddKiddingRecord addKidding) {
         try {
-            ps = conn.prepareStatement("INSERT INTO kidding(dateBred, kiddingDate, sex, kidSire, birthWeight, goatID) VALUES (?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO kidding(dateBred, kiddingDate, kidSire, goatID) VALUES (?, ?, ?, ?)");
             ps.setString(1, kidding.getDateBred());
-            ps.setString(2, kidding.getKiddingDate());
-            ps.setString(3, kidding.getSex());          
-            ps.setString(4, kidding.getKidSire());
-            ps.setDouble(5, kidding.getBirthWeight());
-            ps.setString(6, kidding.getGoatTag());
+            ps.setString(2, kidding.getKiddingDate());         
+            ps.setString(3, kidding.getKidSire());
+            ps.setString(4, kidding.getGoatTag());
             
             if (ps.executeUpdate() > 0) {
                JOptionPane.showMessageDialog(null, "New kidding record added successfully!");

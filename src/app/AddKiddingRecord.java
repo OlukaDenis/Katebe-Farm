@@ -46,11 +46,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
        
        AutoCompleteDecorator.decorate(goatTags);      
        AutoCompleteDecorator.decorate(kidsire);
-       
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(rbMale);
-        bg.add(rbFemale);
-        rbMale.setSelected(true);
 
        populateGoatTags();
        populateKidSire();
@@ -73,12 +68,7 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         dateBred = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        rbMale = new javax.swing.JRadioButton();
-        jLabel7 = new javax.swing.JLabel();
-        rbFemale = new javax.swing.JRadioButton();
         goatTags = new javax.swing.JComboBox<>();
-        birthWeight = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         addNewKiddingBtn = new javax.swing.JButton();
 
@@ -96,27 +86,27 @@ public class AddKiddingRecord extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(315, 315, 315)
+                .addGap(162, 162, 162)
                 .addComponent(jLabel1)
-                .addContainerGap(346, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 60));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 60));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(kidsire, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 220, -1));
+        jPanel1.add(kidsire, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 220, -1));
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Goat Tag");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Date Bred");
@@ -125,40 +115,9 @@ public class AddKiddingRecord extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel6.setText("Kid Sire");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 60, 30));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 60, 30));
 
-        rbMale.setText("Male");
-        rbMale.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbMaleActionPerformed(evt);
-            }
-        });
-        jPanel1.add(rbMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 60, -1));
-
-        jLabel7.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jLabel7.setText("Sex");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 30, -1));
-
-        rbFemale.setText("Female");
-        rbFemale.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbFemaleActionPerformed(evt);
-            }
-        });
-        jPanel1.add(rbFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 80, -1));
-
-        jPanel1.add(goatTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 210, -1));
-
-        birthWeight.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                birthWeightKeyPressed(evt);
-            }
-        });
-        jPanel1.add(birthWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 220, -1));
-
-        jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel8.setText("Birth Weight (kg)");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 100, 30));
+        jPanel1.add(goatTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 210, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -169,7 +128,7 @@ public class AddKiddingRecord extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 140, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 140, 40));
 
         addNewKiddingBtn.setBackground(new java.awt.Color(61, 149, 119));
         addNewKiddingBtn.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -180,26 +139,16 @@ public class AddKiddingRecord extends javax.swing.JFrame {
                 addNewKiddingBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(addNewKiddingBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 350, 140, 40));
+        jPanel1.add(addNewKiddingBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 140, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 830, 460));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 580, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rbMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbMaleActionPerformed
-
-    private void rbFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFemaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbFemaleActionPerformed
-
     public boolean validateText() {
         
-        if ( birthWeight.getText().equals("") 
-                || birthWeight.getText() == null
-                || dateBred.getDate() == null ) {
+        if (dateBred.getDate() == null ) {
             JOptionPane.showMessageDialog(null, "All fields must be filled!");
             return false;
         } else if (dateBred.getDate().compareTo(new Date()) > 0) {
@@ -242,14 +191,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
      
     private void addNewKiddingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewKiddingBtnActionPerformed
         
-        String sex = "Male";
-        if (rbFemale.isSelected()) {
-            sex = "Female";
-        }
-        
-        double weight = Double.parseDouble(birthWeight.getText());
-        kidding.setSex(sex);
-        kidding.setBirthWeight(weight);
         kidding.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
         kidding.setKidSire(String.valueOf(kidsire.getSelectedItem()));
         
@@ -284,15 +225,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void birthWeightKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_birthWeightKeyPressed
-        char c = evt.getKeyChar();
-        if(Character.isLetter(c)) {
-            birthWeight.setEditable(false);
-        } else {
-            birthWeight.setEditable(true);
-        }
-    }//GEN-LAST:event_birthWeightKeyPressed
 
     /**
      * @param args the command line arguments
@@ -330,7 +262,6 @@ public class AddKiddingRecord extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNewKiddingBtn;
-    private javax.swing.JTextField birthWeight;
     private com.toedter.calendar.JDateChooser dateBred;
     private javax.swing.JComboBox<String> goatTags;
     private javax.swing.JButton jButton1;
@@ -338,12 +269,8 @@ public class AddKiddingRecord extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox<String> kidsire;
-    private javax.swing.JRadioButton rbFemale;
-    private javax.swing.JRadioButton rbMale;
     // End of variables declaration//GEN-END:variables
 }
