@@ -5,6 +5,23 @@
  */
 package app;
 
+import app.models.Expense;
+import app.models.Vaccination;
+import app.screens.MonetaryScreen;
+import app.utils.AppUtils;
+import connector.DbConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 /**
  *
  * @author Eco
@@ -14,8 +31,17 @@ public class AddExpense extends javax.swing.JFrame {
     /**
      * Creates new form AddExpense
      */
+    private static Connection conn;
+    private Expense vaccination;
+       
     public AddExpense() {
         initComponents();
+        
+        conn = DbConnection.getConnection();
+        
+        vaccination = new Expense();
+        AutoCompleteDecorator.decorate(goatTags);
+        populateGoatTags();
     }
 
     /**
@@ -56,6 +82,12 @@ public class AddExpense extends javax.swing.JFrame {
         jLabel4.setText("Expense Date");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, 30));
         jPanel1.add(expenseDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 220, 30));
+
+        expenseCost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                expenseCostKeyPressed(evt);
+            }
+        });
         jPanel1.add(expenseCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 220, -1));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -123,23 +155,61 @@ public class AddExpense extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelDewormActionPerformed
 
+    private void populateGoatTags() {
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("SELECT * FROM goat");
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                goatTags.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+      public boolean validateText() {
+        
+        if (expenseItem.getText().equals("") 
+                || expenseDate.getDate() == null || expenseItem.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "All fields must be filled!");
+            return false;
+        } else if (expenseDate.getDate().compareTo(new Date()) > 0) {
+            JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
+            return false;
+        } else {       
+            return true;
+        }
+    }
+      
     private void addVaccinationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVaccinationBtnActionPerformed
-        vaccination.setVaccineName(expenseCost.getText());
+        vaccination.setCost(Integer.parseInt(expenseCost.getText()));
+        vaccination.setItem(expenseItem.getText());
         vaccination.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
 
         if (validateText()) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String dueDate = dateFormat.format(nextDueDate.getDate());
-            String vDate = dateFormat.format(expenseDate.getDate());
+            String eDate = dateFormat.format(expenseDate.getDate());
 
-            vaccination.setNextDueDate(dueDate);
-            vaccination.setVaccinationDate(vDate);
+            vaccination.setExpenseDate(eDate);
 
-            AppUtils.addVaccination(vaccination, this);
-            HealthScreen.vaccinationTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Vaccination Date", "Vaccinaiton Name", "Next Due Date", "Goat Tag"}));
-            AppUtils.fillVaccinationTable(HealthScreen.vaccinationTable, "");
+            AppUtils.addExpense(vaccination, this);
+            MonetaryScreen.expenseTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Exepense Date", "Item", "Cost", "Goat Tag"}));
+            AppUtils.fillExpenseTable(MonetaryScreen.expenseTable, "");
         }
     }//GEN-LAST:event_addVaccinationBtnActionPerformed
+
+    private void expenseCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_expenseCostKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)) {
+            expenseCost.setEditable(false);
+        } else {
+            expenseCost.setEditable(true);
+        }
+    }//GEN-LAST:event_expenseCostKeyPressed
 
     /**
      * @param args the command line arguments

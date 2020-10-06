@@ -12,7 +12,7 @@ package app.models;
 public class Expense {
     private String expenseDate;
     private String item;
-    private String cost;
+    private int cost;
     private String goatTag;
 
     public Expense() {
@@ -34,13 +34,14 @@ public class Expense {
         this.item = item;
     }
 
-    public String getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
+
 
     public String getGoatTag() {
         return goatTag;

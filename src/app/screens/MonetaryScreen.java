@@ -18,16 +18,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Eco
  */
-public class Monetary extends javax.swing.JInternalFrame {
+public class MonetaryScreen extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Monetary
+     * Creates new form MonetaryScreen
      */
     private DefaultTableModel model;
-    public Monetary() {
+    public MonetaryScreen() {
         initComponents();
         
-        AppUtils.fillGoatOwnerTable(expenseTable, "");
+        AppUtils.fillExpenseTable(expenseTable, "");
         model = (DefaultTableModel)expenseTable.getModel();
         expenseTable.setRowHeight(40);
         expenseTable.setSelectionBackground(Color.decode("#66cc99"));

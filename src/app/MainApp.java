@@ -10,6 +10,7 @@ import app.screens.HealthScreen;
 import app.screens.DoeKidding;
 import app.screens.Home;
 import app.screens.GoatOwnerScreen;
+import app.screens.MonetaryScreen;
 import app.utils.AppUtils;
 import java.awt.Color;
 import java.text.ParseException;
@@ -67,6 +68,8 @@ public class MainApp extends javax.swing.JFrame {
         vaccintionText = new javax.swing.JLabel();
         kiddingJpanel = new javax.swing.JPanel();
         kiddingText = new javax.swing.JLabel();
+        expenseJpanel = new javax.swing.JPanel();
+        expenseText = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         registered_goats = new javax.swing.JLabel();
@@ -181,11 +184,11 @@ public class MainApp extends javax.swing.JFrame {
 
         kiddingJpanel.setBackground(new java.awt.Color(51, 153, 102));
         kiddingJpanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                kiddingJpanelMousePressed(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 kiddingJpanelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                kiddingJpanelMousePressed(evt);
             }
         });
 
@@ -200,14 +203,45 @@ public class MainApp extends javax.swing.JFrame {
             .addGroup(kiddingJpanelLayout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addComponent(kiddingText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         kiddingJpanelLayout.setVerticalGroup(
             kiddingJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kiddingJpanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(kiddingText)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        expenseJpanel.setBackground(new java.awt.Color(51, 153, 102));
+        expenseJpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                expenseJpanelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                expenseJpanelMousePressed(evt);
+            }
+        });
+
+        expenseText.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        expenseText.setForeground(new java.awt.Color(255, 255, 255));
+        expenseText.setText("EXPENSES");
+
+        javax.swing.GroupLayout expenseJpanelLayout = new javax.swing.GroupLayout(expenseJpanel);
+        expenseJpanel.setLayout(expenseJpanelLayout);
+        expenseJpanelLayout.setHorizontalGroup(
+            expenseJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expenseJpanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(expenseText)
+                .addGap(107, 107, 107))
+        );
+        expenseJpanelLayout.setVerticalGroup(
+            expenseJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, expenseJpanelLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(expenseText)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -217,6 +251,7 @@ public class MainApp extends javax.swing.JFrame {
             .addComponent(homeJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(vaccinationJpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(healthJpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kiddingJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -226,7 +261,7 @@ public class MainApp extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
-            .addComponent(kiddingJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(expenseJpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +278,9 @@ public class MainApp extends javax.swing.JFrame {
                 .addComponent(vaccinationJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(kiddingJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(expenseJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 670));
@@ -327,9 +364,11 @@ public class MainApp extends javax.swing.JFrame {
         kiddingJpanel.setBackground(panelDefault); 
         vaccinationJpanel.setBackground(panelDefault); 
         healthJpanel.setBackground(panelDefault);
+        expenseJpanel.setBackground(panelDefault); 
         
         vaccintionText.setForeground(Color.WHITE);
         kiddingText.setForeground(Color.WHITE);
+        expenseText.setForeground(Color.WHITE);
         homeText.setForeground(Color.BLACK);
         dewormingText.setForeground(Color.WHITE);
     }//GEN-LAST:event_homeJpanelMousePressed
@@ -339,9 +378,11 @@ public class MainApp extends javax.swing.JFrame {
         kiddingJpanel.setBackground(panelDefault); 
         vaccinationJpanel.setBackground(panelDefault); 
         healthJpanel.setBackground(panelClick);
+        expenseJpanel.setBackground(panelDefault); 
         
         vaccintionText.setForeground(Color.WHITE);
         kiddingText.setForeground(Color.WHITE);
+        expenseText.setForeground(Color.WHITE);
         homeText.setForeground(Color.WHITE);
         dewormingText.setForeground(Color.BLACK);
     }//GEN-LAST:event_healthJpanelMousePressed
@@ -363,9 +404,11 @@ public class MainApp extends javax.swing.JFrame {
         kiddingJpanel.setBackground(panelDefault); 
         vaccinationJpanel.setBackground(panelClick); 
         healthJpanel.setBackground(panelDefault);
+        expenseJpanel.setBackground(panelDefault); 
         
         vaccintionText.setForeground(Color.BLACK);
         kiddingText.setForeground(Color.WHITE);
+        expenseText.setForeground(Color.WHITE);
         homeText.setForeground(Color.WHITE);
         dewormingText.setForeground(Color.WHITE);
     }//GEN-LAST:event_vaccinationJpanelMousePressed
@@ -381,9 +424,11 @@ public class MainApp extends javax.swing.JFrame {
         kiddingJpanel.setBackground(panelClick); 
         vaccinationJpanel.setBackground(panelDefault); 
         healthJpanel.setBackground(panelDefault);
+        expenseJpanel.setBackground(panelDefault); 
         
         vaccintionText.setForeground(Color.WHITE);
         kiddingText.setForeground(Color.BLACK);
+        expenseText.setForeground(Color.WHITE);
         homeText.setForeground(Color.WHITE);
         dewormingText.setForeground(Color.WHITE);
     }
@@ -401,6 +446,26 @@ public class MainApp extends javax.swing.JFrame {
     private void kiddingJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kiddingJpanelMouseClicked
         loadKiddingScreen();
     }//GEN-LAST:event_kiddingJpanelMouseClicked
+
+    private void expenseJpanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenseJpanelMousePressed
+        homeJpanel.setBackground(panelDefault); 
+        kiddingJpanel.setBackground(panelDefault); 
+        vaccinationJpanel.setBackground(panelDefault); 
+        expenseJpanel.setBackground(panelClick); 
+        healthJpanel.setBackground(panelDefault);
+        
+        vaccintionText.setForeground(Color.WHITE);
+        expenseText.setForeground(Color.BLACK);
+        kiddingText.setForeground(Color.WHITE);
+        homeText.setForeground(Color.WHITE);
+        dewormingText.setForeground(Color.WHITE);
+    }//GEN-LAST:event_expenseJpanelMousePressed
+
+    private void expenseJpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenseJpanelMouseClicked
+        container.removeAll(); 
+        MonetaryScreen monetary = new MonetaryScreen();
+        container.add(monetary).setVisible(true);
+    }//GEN-LAST:event_expenseJpanelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -441,6 +506,8 @@ public class MainApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane container;
     private javax.swing.JLabel dewormingText;
+    public static javax.swing.JPanel expenseJpanel;
+    private javax.swing.JLabel expenseText;
     public static javax.swing.JPanel healthJpanel;
     public static javax.swing.JPanel homeJpanel;
     private javax.swing.JLabel homeText;

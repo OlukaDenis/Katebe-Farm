@@ -2,6 +2,7 @@
 package app.utils;
 
 import app.AddDeworming;
+import app.AddExpense;
 import app.AddGoat;
 import app.AddKiddingRecord;
 import app.AddVaccine;
@@ -12,6 +13,7 @@ import app.AddTreatment;
 import app.UpdateGoat;
 import app.UpdateKiddingRecord;
 import app.models.Deworming;
+import app.models.Expense;
 import app.models.Goat;
 import app.models.GoatOwner;
 import app.models.Kidding;
@@ -350,6 +352,57 @@ public class AppUtils {
         }
     }
     //End Vaccination
+    
+    
+    //EXPENSE
+    public static void addExpense(Expense expense, AddExpense addExpense) {
+
+        try {
+            ps = conn.prepareStatement("INSERT INTO expenses(expenseDate, item, cost, goatID) VALUES (?, ?, ?, ?)");
+            ps.setString(1, expense.getExpenseDate());
+            ps.setString(2, expense.getItem());
+            ps.setInt(3, expense.getCost());
+            ps.setString(4, expense.getGoatTag());
+            
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "New vaccination record added successfully!");
+               addExpense.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public static void fillExpenseTable(JTable table, String searchText) {        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM expenses WHERE CONCAT(id, expenseDate, item, cost, goatID) LIKE ?");
+            ps.setString(1, "%" + searchText + "%");
+            
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[5];
+                String price = Helpers.formatCurrency(rs.getInt(4));
+                
+                row[0] = rs.getString(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = price;
+                row[4] = rs.getString(5); 
+                
+                model.addRow(row);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //End Expense
     
     //GOAT OWNER
     
