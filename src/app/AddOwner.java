@@ -147,7 +147,7 @@ public class AddOwner extends javax.swing.JFrame {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, 30));
         jPanel1.add(ownerFarm, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 220, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 850, 420));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 880, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
