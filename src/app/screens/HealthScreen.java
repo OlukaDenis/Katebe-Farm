@@ -7,6 +7,7 @@ package app.screens;
 
 import app.AddDeworming;
 import app.AddOwner;
+import app.AddTreatment;
 import app.AddVaccine;
 import static app.screens.Home.AllGoatsTable;
 import app.utils.AppUtils;
@@ -38,6 +39,12 @@ public class HealthScreen extends javax.swing.JInternalFrame {
         model = (DefaultTableModel)vaccinationTable.getModel();
         vaccinationTable.setRowHeight(40);
         vaccinationTable.setSelectionBackground(Color.decode("#66cc99"));
+        
+        AppUtils.fillTreatmentTable(treatmentTable, "");
+        model = (DefaultTableModel)treatmentTable.getModel();
+        treatmentTable.setRowHeight(40);
+        treatmentTable.setSelectionBackground(Color.decode("#66cc99"));
+        
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
@@ -63,6 +70,9 @@ public class HealthScreen extends javax.swing.JInternalFrame {
         vaccinationTable = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        addTreatment = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        treatmentTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(920, 610));
@@ -96,7 +106,7 @@ public class HealthScreen extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(addDewormingRecord)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,10 +114,12 @@ public class HealthScreen extends javax.swing.JInternalFrame {
                 .addGap(12, 12, 12)
                 .addComponent(addDewormingRecord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("DEWORMING", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         vaccinationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,7 +142,7 @@ public class HealthScreen extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton2)
@@ -142,23 +154,51 @@ public class HealthScreen extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("VACCINATION", jPanel4);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        addTreatment.setText("Add Treatment");
+        addTreatment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTreatmentActionPerformed(evt);
+            }
+        });
+
+        treatmentTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Treatment Date", "Description", "Goat Tag"
+            }
+        ));
+        jScrollPane3.setViewportView(treatmentTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 908, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(addTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane3)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 623, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(addTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("OTHERS", jPanel2);
+        jTabbedPane1.addTab("OTHER TREATMENT", jPanel2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -201,9 +241,18 @@ public class HealthScreen extends javax.swing.JInternalFrame {
         addVaccine.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void addTreatmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTreatmentActionPerformed
+        AddTreatment addTreat = new AddTreatment();
+        addTreat.setVisible(true);
+        addTreat.pack();
+        addTreat.setLocationRelativeTo(null);
+        addTreat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_addTreatmentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDewormingRecord;
+    private javax.swing.JButton addTreatment;
     public static javax.swing.JTable dewormingTable;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
@@ -212,7 +261,9 @@ public class HealthScreen extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    public static javax.swing.JTable treatmentTable;
     public static javax.swing.JTable vaccinationTable;
     // End of variables declaration//GEN-END:variables
 }

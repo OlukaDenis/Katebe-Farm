@@ -2,18 +2,22 @@
 package app.utils;
 
 import app.AddDeworming;
+import app.AddExpense;
 import app.AddGoat;
 import app.AddKiddingRecord;
 import app.AddVaccine;
 
 import app.AddOwner;
+import app.AddTreatment;
 
 import app.UpdateGoat;
 import app.UpdateKiddingRecord;
 import app.models.Deworming;
+import app.models.Expense;
 import app.models.Goat;
 import app.models.GoatOwner;
 import app.models.Kidding;
+import app.models.Treatment;
 import app.models.Vaccination;
 import connector.DbConnection;
 import java.awt.Image;
@@ -251,6 +255,54 @@ public class AppUtils {
     }
     //End Deworming
     
+    
+    //Treatment
+    public static void addTreatment(Treatment treatment, AddTreatment addTreatment) {
+        try {
+            ps = conn.prepareStatement("INSERT INTO othertreament(treatmentDate, description, goatID) VALUES (?, ?, ?)");
+            ps.setString(1, treatment.getTreatmentDate());
+            ps.setString(2, treatment.getDescription());
+            ps.setString(3, treatment.getGoatTag());
+            
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "New treament record added successfully!");
+               addTreatment.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public static void fillTreatmentTable(JTable table, String searchText) {        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM othertreament WHERE CONCAT(id, treatmentDate, description, goatID) LIKE ?");
+            ps.setString(1, "%" + searchText + "%");
+            
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[4];
+                
+                row[0] = rs.getString(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);  
+                
+                model.addRow(row);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //End treatment
+    
+    
     //VACCIINATION
     
     public static void addVaccination(Vaccination vaccination, AddVaccine addVaccination) {
@@ -300,6 +352,57 @@ public class AppUtils {
         }
     }
     //End Vaccination
+    
+    
+    //EXPENSE
+    public static void addExpense(Expense expense, AddExpense addExpense) {
+
+        try {
+            ps = conn.prepareStatement("INSERT INTO expenses(expenseDate, item, cost, goatID) VALUES (?, ?, ?, ?)");
+            ps.setString(1, expense.getExpenseDate());
+            ps.setString(2, expense.getItem());
+            ps.setInt(3, expense.getCost());
+            ps.setString(4, expense.getGoatTag());
+            
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "New vaccination record added successfully!");
+               addExpense.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public static void fillExpenseTable(JTable table, String searchText) {        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM expenses WHERE CONCAT(id, expenseDate, item, cost, goatID) LIKE ?");
+            ps.setString(1, "%" + searchText + "%");
+            
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[5];
+                String price = Helpers.formatCurrency(rs.getInt(4));
+                
+                row[0] = rs.getString(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = price;
+                row[4] = rs.getString(5); 
+                
+                model.addRow(row);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //End Expense
     
     //GOAT OWNER
     
@@ -356,13 +459,11 @@ public class AppUtils {
     //KIDDING
     public static void addKidding(Kidding kidding, AddKiddingRecord addKidding) {
         try {
-            ps = conn.prepareStatement("INSERT INTO kidding(dateBred, kiddingDate, sex, kidSire, birthWeight, goatID) VALUES (?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO kidding(dateBred, kiddingDate, kidSire, goatID) VALUES (?, ?, ?, ?)");
             ps.setString(1, kidding.getDateBred());
-            ps.setString(2, kidding.getKiddingDate());
-            ps.setString(3, kidding.getSex());          
-            ps.setString(4, kidding.getKidSire());
-            ps.setDouble(5, kidding.getBirthWeight());
-            ps.setString(6, kidding.getGoatTag());
+            ps.setString(2, kidding.getKiddingDate());         
+            ps.setString(3, kidding.getKidSire());
+            ps.setString(4, kidding.getGoatTag());
             
             if (ps.executeUpdate() > 0) {
                JOptionPane.showMessageDialog(null, "New kidding record added successfully!");

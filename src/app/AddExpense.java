@@ -5,10 +5,9 @@
  */
 package app;
 
-import app.models.GoatOwner;
+import app.models.Expense;
 import app.models.Vaccination;
-import app.screens.GoatOwnerScreen;
-import app.screens.HealthScreen;
+import app.screens.MonetaryScreen;
 import app.utils.AppUtils;
 import connector.DbConnection;
 import java.sql.Connection;
@@ -27,21 +26,22 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  *
  * @author Eco
  */
-public class AddOwner extends javax.swing.JFrame {
+public class AddExpense extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddOwner
+     * Creates new form AddExpense
      */
-    GoatOwner goatOwner;
-   private static Connection conn;
-    public AddOwner() {
+    private static Connection conn;
+    private Expense vaccination;
+       
+    public AddExpense() {
         initComponents();
         
         conn = DbConnection.getConnection();
         
-        goatOwner = new GoatOwner();
-         AutoCompleteDecorator.decorate(goatTags);
-       populateGoatTags();
+        vaccination = new Expense();
+        AutoCompleteDecorator.decorate(goatTags);
+        populateGoatTags();
     }
 
     /**
@@ -53,49 +53,22 @@ public class AddOwner extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         goatTags = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        ownerPhone = new javax.swing.JTextField();
+        expenseDate = new com.toedter.calendar.JDateChooser();
+        expenseCost = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cancelDeworm = new javax.swing.JButton();
         addVaccinationBtn = new javax.swing.JButton();
-        ownerName = new javax.swing.JTextField();
-        ownerAddress = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        ownerFarm = new javax.swing.JTextField();
+        expenseItem = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel2.setBackground(new java.awt.Color(61, 149, 119));
-
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Add Goat Owner");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(338, 338, 338)
-                .addComponent(jLabel1)
-                .addContainerGap(408, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 60));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -106,17 +79,20 @@ public class AddOwner extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 41, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel4.setText("Name");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, 30));
+        jLabel4.setText("Expense Date");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, 30));
+        jPanel1.add(expenseDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 220, 30));
 
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel3.setText("Address");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, 30));
-        jPanel1.add(ownerPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 220, -1));
+        expenseCost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                expenseCostKeyPressed(evt);
+            }
+        });
+        jPanel1.add(expenseCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 220, -1));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel5.setText("Phone");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, -1, 30));
+        jLabel5.setText("Cost");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, 30));
 
         cancelDeworm.setBackground(new java.awt.Color(255, 102, 102));
         cancelDeworm.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -139,15 +115,38 @@ public class AddOwner extends javax.swing.JFrame {
             }
         });
         jPanel1.add(addVaccinationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 160, 40));
-        jPanel1.add(ownerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, -1));
-        jPanel1.add(ownerAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 220, -1));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel6.setText("Farm");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, 30));
-        jPanel1.add(ownerFarm, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 220, -1));
+        jLabel6.setText("Item");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, 30));
+        jPanel1.add(expenseItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 220, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 880, 430));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 840, 390));
+
+        jPanel2.setBackground(new java.awt.Color(61, 149, 119));
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("New Expense Record");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(291, 291, 291)
+                .addComponent(jLabel1)
+                .addContainerGap(360, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -170,31 +169,47 @@ public class AddOwner extends javax.swing.JFrame {
             Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public boolean validateText() {
+     
+      public boolean validateText() {
         
-        if (ownerPhone.getText().equals("") || ownerName.getText().equals("")
-                || ownerAddress.getText().equals("") || ownerFarm.getText().equals("") ) {
+        if (expenseItem.getText().equals("") 
+                || expenseDate.getDate() == null || expenseItem.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "All fields must be filled!");
+            return false;
+        } else if (expenseDate.getDate().compareTo(new Date()) > 0) {
+            JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
             return false;
         } else {       
             return true;
         }
     }
-    
+      
     private void addVaccinationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVaccinationBtnActionPerformed
-        goatOwner.setName(ownerName.getText());
-        goatOwner.setAdress(ownerAddress.getText());
-        goatOwner.setFarm(ownerFarm.getText());
-        goatOwner.setPhone(ownerPhone.getText());
-        goatOwner.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
-        
+        vaccination.setCost(Integer.parseInt(expenseCost.getText()));
+        vaccination.setItem(expenseItem.getText());
+        vaccination.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
+
         if (validateText()) {
-            AppUtils.addGoatOwner(goatOwner, this);
-            GoatOwnerScreen.ownerTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Address", "Phone", "Farm", "Goat Tag"}));
-            AppUtils.fillGoatOwnerTable(GoatOwnerScreen.ownerTable, "");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String eDate = dateFormat.format(expenseDate.getDate());
+
+            vaccination.setExpenseDate(eDate);
+
+            AppUtils.addExpense(vaccination, this);
+            MonetaryScreen.expenseTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Exepense Date", "Item", "Cost", "Goat Tag"}));
+            AppUtils.fillExpenseTable(MonetaryScreen.expenseTable, "");
         }
     }//GEN-LAST:event_addVaccinationBtnActionPerformed
+
+    private void expenseCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_expenseCostKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)) {
+            expenseCost.setEditable(false);
+        } else {
+            expenseCost.setEditable(true);
+        }
+    }//GEN-LAST:event_expenseCostKeyPressed
 
     /**
      * @param args the command line arguments
@@ -213,21 +228,20 @@ public class AddOwner extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddExpense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddExpense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddExpense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddExpense.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddOwner().setVisible(true);
+                new AddExpense().setVisible(true);
             }
         });
     }
@@ -235,18 +249,16 @@ public class AddOwner extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addVaccinationBtn;
     private javax.swing.JButton cancelDeworm;
+    private javax.swing.JTextField expenseCost;
+    private com.toedter.calendar.JDateChooser expenseDate;
+    private javax.swing.JTextField expenseItem;
     private javax.swing.JComboBox<String> goatTags;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField ownerAddress;
-    private javax.swing.JTextField ownerFarm;
-    private javax.swing.JTextField ownerName;
-    private javax.swing.JTextField ownerPhone;
     // End of variables declaration//GEN-END:variables
 }

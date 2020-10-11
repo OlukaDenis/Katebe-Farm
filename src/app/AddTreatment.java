@@ -5,9 +5,7 @@
  */
 package app;
 
-import app.models.GoatOwner;
-import app.models.Vaccination;
-import app.screens.GoatOwnerScreen;
+import app.models.Treatment;
 import app.screens.HealthScreen;
 import app.utils.AppUtils;
 import connector.DbConnection;
@@ -27,21 +25,22 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  *
  * @author Eco
  */
-public class AddOwner extends javax.swing.JFrame {
+public class AddTreatment extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddOwner
+     * Creates new form AddTreatment
      */
-    GoatOwner goatOwner;
-   private static Connection conn;
-    public AddOwner() {
+    private Treatment treatment;
+    private static Connection conn;
+    
+    public AddTreatment() {
         initComponents();
+        treatment = new Treatment();
         
         conn = DbConnection.getConnection();
-        
-        goatOwner = new GoatOwner();
-         AutoCompleteDecorator.decorate(goatTags);
-       populateGoatTags();
+       
+        AutoCompleteDecorator.decorate(goatTags);
+        populateGoatTags();
     }
 
     /**
@@ -58,16 +57,13 @@ public class AddOwner extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         goatTags = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        ownerPhone = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        addTreatment = new javax.swing.JButton();
         cancelDeworm = new javax.swing.JButton();
-        addVaccinationBtn = new javax.swing.JButton();
-        ownerName = new javax.swing.JTextField();
-        ownerAddress = new javax.swing.JTextField();
+        treatmentDate = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        treatmentDescription = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
-        ownerFarm = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -76,47 +72,49 @@ public class AddOwner extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Add Goat Owner");
+        jLabel1.setText("New Treatment Record");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(338, 338, 338)
+                .addGap(186, 186, 186)
                 .addComponent(jLabel1)
-                .addContainerGap(408, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 60));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 60));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(goatTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(343, 42, 153, -1));
+        jPanel1.add(goatTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 153, -1));
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Goat Tag");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 41, -1, 30));
-
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel4.setText("Name");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, 30));
-
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel3.setText("Address");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, 30));
-        jPanel1.add(ownerPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 220, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, 30));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel5.setText("Phone");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, -1, 30));
+        jLabel5.setText("Treatment Description");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, 30));
+
+        addTreatment.setBackground(new java.awt.Color(61, 149, 119));
+        addTreatment.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        addTreatment.setForeground(new java.awt.Color(255, 255, 255));
+        addTreatment.setText("ADD");
+        addTreatment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTreatmentActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addTreatment, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 160, 40));
 
         cancelDeworm.setBackground(new java.awt.Color(255, 102, 102));
         cancelDeworm.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -127,34 +125,23 @@ public class AddOwner extends javax.swing.JFrame {
                 cancelDewormActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelDeworm, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 150, 40));
+        jPanel1.add(cancelDeworm, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 150, 40));
+        jPanel1.add(treatmentDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 220, 30));
 
-        addVaccinationBtn.setBackground(new java.awt.Color(61, 149, 119));
-        addVaccinationBtn.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        addVaccinationBtn.setForeground(new java.awt.Color(255, 255, 255));
-        addVaccinationBtn.setText("ADD");
-        addVaccinationBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addVaccinationBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(addVaccinationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 160, 40));
-        jPanel1.add(ownerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, -1));
-        jPanel1.add(ownerAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 220, -1));
+        treatmentDescription.setColumns(20);
+        treatmentDescription.setRows(5);
+        jScrollPane1.setViewportView(treatmentDescription);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel6.setText("Farm");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, 30));
-        jPanel1.add(ownerFarm, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 220, -1));
+        jLabel6.setText("Treatment Date");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 880, 430));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 590, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cancelDewormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDewormActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_cancelDewormActionPerformed
 
     private void populateGoatTags() {
         PreparedStatement ps = null;
@@ -173,28 +160,37 @@ public class AddOwner extends javax.swing.JFrame {
     
     public boolean validateText() {
         
-        if (ownerPhone.getText().equals("") || ownerName.getText().equals("")
-                || ownerAddress.getText().equals("") || ownerFarm.getText().equals("") ) {
+        if (treatmentDescription.getText().equals("")
+                || treatmentDate.getDate() == null ) {
             JOptionPane.showMessageDialog(null, "All fields must be filled!");
+            return false;
+        } else if (treatmentDate.getDate().compareTo(new Date()) > 0) {
+            JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
             return false;
         } else {       
             return true;
         }
     }
     
-    private void addVaccinationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVaccinationBtnActionPerformed
-        goatOwner.setName(ownerName.getText());
-        goatOwner.setAdress(ownerAddress.getText());
-        goatOwner.setFarm(ownerFarm.getText());
-        goatOwner.setPhone(ownerPhone.getText());
-        goatOwner.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
-        
+    private void addTreatmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTreatmentActionPerformed
+        treatment.setDescription(treatmentDescription.getText());
+        treatment.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
+    
         if (validateText()) {
-            AppUtils.addGoatOwner(goatOwner, this);
-            GoatOwnerScreen.ownerTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Address", "Phone", "Farm", "Goat Tag"}));
-            AppUtils.fillGoatOwnerTable(GoatOwnerScreen.ownerTable, "");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dDate = dateFormat.format(treatmentDate.getDate());
+
+            treatment.setTreatmentDate(dDate);
+
+            AppUtils.addTreatment(treatment, this);
+            HealthScreen.treatmentTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Treatment Date", "Description", "Goat Tag"}));
+            AppUtils.fillTreatmentTable(HealthScreen.treatmentTable, "");
         }
-    }//GEN-LAST:event_addVaccinationBtnActionPerformed
+    }//GEN-LAST:event_addTreatmentActionPerformed
+
+    private void cancelDewormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDewormActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelDewormActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,40 +209,36 @@ public class AddOwner extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddTreatment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddTreatment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddTreatment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddOwner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddTreatment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddOwner().setVisible(true);
+                new AddTreatment().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addVaccinationBtn;
+    private javax.swing.JButton addTreatment;
     private javax.swing.JButton cancelDeworm;
     private javax.swing.JComboBox<String> goatTags;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField ownerAddress;
-    private javax.swing.JTextField ownerFarm;
-    private javax.swing.JTextField ownerName;
-    private javax.swing.JTextField ownerPhone;
+    private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser treatmentDate;
+    private javax.swing.JTextArea treatmentDescription;
     // End of variables declaration//GEN-END:variables
 }

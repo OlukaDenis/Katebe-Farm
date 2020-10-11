@@ -5,6 +5,7 @@
  */
 package app.utils;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,5 +36,13 @@ public class Helpers {
         String today = df.format(now);
         
         return today;
+    }
+    
+    public static String formatCurrency(int money) {
+        Double number = (double) money;
+        DecimalFormat formatter = new DecimalFormat("#,##0");
+        final String formatNum = formatter.format(number);
+        
+        return "UGX " + formatNum;
     }
 }

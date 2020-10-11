@@ -384,6 +384,7 @@ public class AddGoat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void populateBucks() {
+        buckTags.addItem("-Not set-");
         try {
             ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `sex` = 'Male' ");
             
@@ -398,6 +399,7 @@ public class AddGoat extends javax.swing.JFrame {
     }
     
     private void populateDoes() {
+        doeTags.addItem("-Not set-");
         try {
             ps = conn.prepareStatement("SELECT * FROM `goat` WHERE `sex` = 'Female' ");
             
