@@ -194,10 +194,12 @@ public class PrintReport extends javax.swing.JFrame {
         printReport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(891, 876));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(890, 875));
 
         printJPanel.setBackground(new java.awt.Color(255, 255, 255));
         printJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -302,7 +304,7 @@ public class PrintReport extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(printJPanel);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 870, 600));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 870, 590));
 
         printReport.setText("Print Report");
         printReport.addActionListener(new java.awt.event.ActionListener() {
