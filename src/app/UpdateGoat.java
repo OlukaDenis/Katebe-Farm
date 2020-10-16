@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -512,20 +513,55 @@ public class UpdateGoat extends javax.swing.JFrame {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ImageIcon imageFront = new ImageIcon(new ImageIcon(goat.getImage_front())
+        //default image
+        Image defaultImage = null;
+        try {
+            defaultImage = ImageIO.read(getClass().getResource("/images/default.png"));
+        } catch (Exception ex) {
+             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Load front image
+        ImageIcon imageFront;        
+        if (goat.getImage_front() == null) {
+             imageFront = new ImageIcon(new ImageIcon(defaultImage)
+                .getImage()
+                .getScaledInstance(updateFrontImage.getWidth(), updateFrontImage.getWidth(), Image.SCALE_SMOOTH)
+            );
+        } else {
+            imageFront = new ImageIcon(new ImageIcon(goat.getImage_front())
                 .getImage()
                 .getScaledInstance(updateFrontImage.getWidth(), updateFrontImage.getWidth(), Image.SCALE_SMOOTH)
         );
+        }
         
-        ImageIcon imageRear = new ImageIcon(new ImageIcon(goat.getImage_rear())
+        // Load rear image
+        ImageIcon imageRear;
+        if (goat.getImage_rear()== null) {
+            imageRear = new ImageIcon(new ImageIcon(defaultImage)
                 .getImage()
                 .getScaledInstance(updateRearImage.getWidth(), updateRearImage.getWidth(), Image.SCALE_SMOOTH)
-        );
+            );
+        } else {
+             imageRear = new ImageIcon(new ImageIcon(goat.getImage_rear())
+                .getImage()
+                .getScaledInstance(updateRearImage.getWidth(), updateRearImage.getWidth(), Image.SCALE_SMOOTH)
+            );
+        }
         
-        ImageIcon imageSide = new ImageIcon(new ImageIcon(goat.getImage_side())
+        // Load side image
+        ImageIcon imageSide;
+         if (goat.getImage_side()== null) {
+            imageSide = new ImageIcon(new ImageIcon(defaultImage)
                 .getImage()
                 .getScaledInstance(updateSideImage.getWidth(), updateSideImage.getWidth(), Image.SCALE_SMOOTH)
-        );
+            );
+        } else {
+            imageSide = new ImageIcon(new ImageIcon(goat.getImage_side())
+                .getImage()
+                .getScaledInstance(updateSideImage.getWidth(), updateSideImage.getWidth(), Image.SCALE_SMOOTH)
+            );
+         }
         updateFrontImage.setIcon(imageFront);
         updateRearImage.setIcon(imageRear);
         updateSideImage.setIcon(imageSide);
