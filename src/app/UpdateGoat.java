@@ -11,6 +11,7 @@ import app.utils.AppUtils;
 import connector.DbConnection;
 import java.awt.FileDialog;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,6 +45,8 @@ public class UpdateGoat extends javax.swing.JFrame {
     private Goat goat;
     private static Connection conn;
     private PreparedStatement ps;
+    private  Image defaultImage;
+    private byte [] bufferedImage;
     
     public UpdateGoat() {
         initComponents();
@@ -514,9 +517,12 @@ public class UpdateGoat extends javax.swing.JFrame {
         }
         
         //default image
-        Image defaultImage = null;
         try {
             defaultImage = ImageIO.read(getClass().getResource("/images/default.png"));
+            BufferedImage bi = ImageIO.read(getClass().getResource("/images/default.png"));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bi, "png", baos);
+            bufferedImage = baos.toByteArray();
         } catch (Exception ex) {
              Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -528,6 +534,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .getImage()
                 .getScaledInstance(updateFrontImage.getWidth(), updateFrontImage.getWidth(), Image.SCALE_SMOOTH)
             );
+             goat.setImage_front(bufferedImage);
         } else {
             imageFront = new ImageIcon(new ImageIcon(goat.getImage_front())
                 .getImage()
@@ -542,6 +549,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .getImage()
                 .getScaledInstance(updateRearImage.getWidth(), updateRearImage.getWidth(), Image.SCALE_SMOOTH)
             );
+            goat.setImage_rear(bufferedImage);
         } else {
              imageRear = new ImageIcon(new ImageIcon(goat.getImage_rear())
                 .getImage()
@@ -556,6 +564,8 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .getImage()
                 .getScaledInstance(updateSideImage.getWidth(), updateSideImage.getWidth(), Image.SCALE_SMOOTH)
             );
+            
+            goat.setImage_front(bufferedImage);
         } else {
             imageSide = new ImageIcon(new ImageIcon(goat.getImage_side())
                 .getImage()

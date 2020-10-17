@@ -8,6 +8,8 @@ package app;
 import app.models.Treatment;
 import app.screens.HealthScreen;
 import app.utils.AppUtils;
+import app.utils.Helpers;
+import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -160,9 +162,8 @@ public class AddTreatment extends javax.swing.JFrame {
     
     public boolean validateText() {
         
-        if (treatmentDescription.getText().equals("")
-                || treatmentDate.getDate() == null ) {
-            JOptionPane.showMessageDialog(null, "All fields must be filled!");
+        if (treatmentDate.getDate() == null ) {
+            JOptionPane.showMessageDialog(null, "Date must be filled!");
             return false;
         } else if (treatmentDate.getDate().compareTo(new Date()) > 0) {
             JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
@@ -173,7 +174,8 @@ public class AddTreatment extends javax.swing.JFrame {
     }
     
     private void addTreatmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTreatmentActionPerformed
-        treatment.setDescription(treatmentDescription.getText());
+        String treat = treatmentDescription.getText();
+        treatment.setDescription((treat.isEmpty()) ? DEFAULT_TEXT : treat);
         treatment.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
     
         if (validateText()) {

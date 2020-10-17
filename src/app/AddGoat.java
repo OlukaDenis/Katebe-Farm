@@ -8,6 +8,7 @@ package app;
 import app.models.Goat;
 import app.screens.Home;
 import app.utils.AppUtils;
+import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.awt.FileDialog;
 import java.awt.Image;
@@ -462,7 +463,7 @@ public class AddGoat extends javax.swing.JFrame {
         goat.setID(goat_id.getText());
        
         if (goat_name.getText().isEmpty()) {
-             goat.setName("-Not set-");
+             goat.setName(DEFAULT_TEXT);
         } else {
              goat.setName(goat_name.getText());
         }
@@ -470,7 +471,7 @@ public class AddGoat extends javax.swing.JFrame {
         goat.setSex(sex);
         
         if (goat_source.getText().isEmpty()) {
-             goat.setSource("-Not set-");
+             goat.setSource(DEFAULT_TEXT);
         } else {
              goat.setSource(goat_source.getText());
         }

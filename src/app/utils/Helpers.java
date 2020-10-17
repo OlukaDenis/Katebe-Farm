@@ -20,7 +20,7 @@ public class Helpers {
     public Helpers() {
     }
     
-    
+    public final static String DEFAULT_TEXT = "-Not set-";
     public static int daysBetweenDate(String dueDate) {
         LocalDate dt1 = LocalDate.parse(currentDate());
         LocalDate dt2 = LocalDate.parse(dueDate);

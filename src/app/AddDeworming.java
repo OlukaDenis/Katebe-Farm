@@ -8,6 +8,7 @@ package app;
 import app.models.Deworming;
 import app.screens.HealthScreen;
 import app.utils.AppUtils;
+import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -151,13 +152,26 @@ public class AddDeworming extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addDewormingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDewormingActionPerformed
-        deworming.setDewormUsed(dDewormerUsed.getText());
-        deworming.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
-        deworming.setDoseAdministered(dDoseAdministered.getText());
-      
+        
+        String dw = dDewormerUsed.getText();
+        String dose = dDoseAdministered.getText();
+        
+        if (dw.isEmpty()) {
+            deworming.setDewormUsed(DEFAULT_TEXT);
+        } else {
+            deworming.setDewormUsed(dw);
+        }
+        
+        if (dose.isEmpty()) {
+            deworming.setDoseAdministered(DEFAULT_TEXT);
+        } else {
+            deworming.setDoseAdministered(dose);
+        }
+        
+        deworming.setGoatTag(String.valueOf(goatTags.getSelectedItem()));      
 
         if (validateText()) {
-             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String dueDate = dateFormat.format(dNextDueDate.getDate());            
             String dDate = dateFormat.format(dDewormingDate.getDate());
 
@@ -166,7 +180,7 @@ public class AddDeworming extends javax.swing.JFrame {
             
             AppUtils.addDeworming(deworming, this);
             HealthScreen.dewormingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "DewormingDate", "Dewormer Used", "Dose Admnistered", "Next Due Date", "Goat Tag"}));
-            AppUtils.fillGoatTable(HealthScreen.dewormingTable, "");
+            AppUtils.fillDewormingTable(HealthScreen.dewormingTable, "");
         }
     }//GEN-LAST:event_addDewormingActionPerformed
 
@@ -192,9 +206,8 @@ public class AddDeworming extends javax.swing.JFrame {
     
     public boolean validateText() {
         
-        if (dDewormerUsed.getText().equals("") || dDoseAdministered.getText().equals("")
-                || dDewormingDate.getDate() == null || dNextDueDate.getDate() == null ) {
-            JOptionPane.showMessageDialog(null, "All fields must be filled!");
+        if (dDewormingDate.getDate() == null || dNextDueDate.getDate() == null ) {
+            JOptionPane.showMessageDialog(null, "Dates must be filled!");
             return false;
         } else if (dDewormingDate.getDate().compareTo(new Date()) > 0) {
             JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");

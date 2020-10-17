@@ -155,15 +155,14 @@ public class AppUtils {
                 
                 row[0] = rs.getString(1); 
                 
-                row[1] = (name == null || name == "") ? "-Not set-" : name;
+                row[1] =  name;
                 row[2] = rs.getString(3);
                 row[3] = rs.getString(4);
-                row[4] = (source == null) ? "-Not set-" : source;
-                row[5] = (bd == null) ? "-Not set-" : bd;                
+                row[4] = source;
+                row[5] =  bd;                
                 row[6] = rs.getString(7);
                 row[7] = rs.getString(8);
 
-                System.out.println(name);
                 model.addRow(row);
 
             }

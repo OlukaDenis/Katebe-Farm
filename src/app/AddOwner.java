@@ -10,6 +10,7 @@ import app.models.Vaccination;
 import app.screens.GoatOwnerScreen;
 import app.screens.HealthScreen;
 import app.utils.AppUtils;
+import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -183,17 +184,25 @@ public class AddOwner extends javax.swing.JFrame {
     }
     
     private void addVaccinationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVaccinationBtnActionPerformed
-        goatOwner.setName(ownerName.getText());
-        goatOwner.setAdress(ownerAddress.getText());
-        goatOwner.setFarm(ownerFarm.getText());
-        goatOwner.setPhone(ownerPhone.getText());
-        goatOwner.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
+        String name = ownerName.getText();
+        String address = ownerAddress.getText();
+        String farm = ownerFarm.getText();
+        String phone = ownerPhone.getText();
+        String tag = String.valueOf(goatTags.getSelectedItem());
         
-        if (validateText()) {
+        goatOwner.setName( (name.isEmpty()) ? DEFAULT_TEXT : name);
+        goatOwner.setAdress((address.isEmpty()) ? DEFAULT_TEXT : address);
+        goatOwner.setFarm((farm.isEmpty()) ? DEFAULT_TEXT : farm);
+        goatOwner.setPhone((phone.isEmpty()) ? DEFAULT_TEXT : phone);
+        
+        if (!tag.isEmpty()) {
+            goatOwner.setGoatTag(tag);
+
             AppUtils.addGoatOwner(goatOwner, this);
             GoatOwnerScreen.ownerTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Address", "Phone", "Farm", "Goat Tag"}));
             AppUtils.fillGoatOwnerTable(GoatOwnerScreen.ownerTable, "");
         }
+        
     }//GEN-LAST:event_addVaccinationBtnActionPerformed
 
     /**
