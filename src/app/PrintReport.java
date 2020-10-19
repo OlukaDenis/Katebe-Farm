@@ -25,6 +25,9 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import static jdk.nashorn.internal.objects.Global.undefined;
 
 /**
@@ -66,6 +69,40 @@ public class PrintReport extends javax.swing.JFrame {
         );
         goatImage.setIcon(imageSide);
         getOwnerInfo();
+        getHealthRecords(healthRecordsTable);
+    }
+    
+    public void getHealthRecords(JTable table) {
+        PreparedStatement ps = null;
+        
+        try {
+           String sql = "SELECT dewormingDate, dewormerUsed, doseAdministered, vaccineName, vaccinationDate "
+                + "FROM deworming "
+                + "LEFT JOIN vaccination "
+                + "ON deworming.goatID=vaccination.goatID "
+                + "WHERE deworming.goatID=?";
+            ps = conn.prepareStatement(sql); 
+             ps.setString(1, goat.getID());
+            ResultSet rs = ps.executeQuery();
+            
+          DefaultTableModel model = (DefaultTableModel)table.getModel();           
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[5];
+                
+                row[0] = rs.getString(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);
+                row[4] = rs.getString(5);
+                
+                model.addRow(row);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void getOwnerInfo() {
@@ -191,6 +228,8 @@ public class PrintReport extends javax.swing.JFrame {
         goatOwnerName = new javax.swing.JLabel();
         goatOwnerPhone = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        healthRecordsTable = new javax.swing.JTable();
         printReport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -299,8 +338,20 @@ public class PrintReport extends javax.swing.JFrame {
         goatOwnerPhone.setText("90768790");
         jPanel5.add(goatOwnerPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 20));
 
-        printJPanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 420, 350));
+        printJPanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 420, 280));
         printJPanel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -60, 870, 60));
+
+        healthRecordsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Deworming date", "Dewormer Used", "Dose Administered", "Vaccination Name", "Vaccination date"
+            }
+        ));
+        jScrollPane1.setViewportView(healthRecordsTable);
+
+        printJPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 820, 810, 300));
 
         jScrollPane2.setViewportView(printJPanel);
 
@@ -369,6 +420,7 @@ public class PrintReport extends javax.swing.JFrame {
     private javax.swing.JLabel goatOwnerPhone;
     private javax.swing.JLabel goatSireTag;
     private javax.swing.JLabel goatTag;
+    private javax.swing.JTable healthRecordsTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -386,6 +438,7 @@ public class PrintReport extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

@@ -9,6 +9,7 @@ import app.models.Expense;
 import app.models.Vaccination;
 import app.screens.MonetaryScreen;
 import app.utils.AppUtils;
+import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -172,9 +173,8 @@ public class AddExpense extends javax.swing.JFrame {
      
       public boolean validateText() {
         
-        if (expenseItem.getText().equals("") 
-                || expenseDate.getDate() == null || expenseItem.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "All fields must be filled!");
+        if (expenseDate.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Date must be filled!");
             return false;
         } else if (expenseDate.getDate().compareTo(new Date()) > 0) {
             JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
@@ -185,8 +185,12 @@ public class AddExpense extends javax.swing.JFrame {
     }
       
     private void addVaccinationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVaccinationBtnActionPerformed
-        vaccination.setCost(Integer.parseInt(expenseCost.getText()));
-        vaccination.setItem(expenseItem.getText());
+        String cost = expenseCost.getText();
+        String item = expenseItem.getText();
+        
+        vaccination.setCost( (cost.isEmpty()) ? 0 : Integer.parseInt(cost));
+        vaccination.setItem( (item.isEmpty()) ? DEFAULT_TEXT : item);
+        
         vaccination.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
 
         if (validateText()) {

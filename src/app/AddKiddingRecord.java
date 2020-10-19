@@ -9,6 +9,7 @@ import app.models.Kidding;
 import app.screens.HealthScreen;
 import app.screens.DoeKidding;
 import app.utils.AppUtils;
+import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -190,35 +191,39 @@ public class AddKiddingRecord extends javax.swing.JFrame {
     }
      
     private void addNewKiddingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewKiddingBtnActionPerformed
-        
-        kidding.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
-        kidding.setKidSire(String.valueOf(kidsire.getSelectedItem()));
-        
-
-        
-        if (validateText()) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String dBred = dateFormat.format(dateBred.getDate());
-            kidding.setDateBred(dBred);
+        String tag = String.valueOf(goatTags.getSelectedItem());  
+        if (tag.isEmpty() || tag == null) {
+            JOptionPane.showMessageDialog(null, "No female goats found.");
             
-            Calendar calendar = Calendar.getInstance();
-            
-            try {
-                calendar.setTime(dateFormat.parse(dBred));
-                calendar.add(Calendar.DATE, 155); //Add estimated day of birth
-                String kidDate = dateFormat.format(calendar.getTime());
-                System.out.println("Estimate day: " + kidDate);
-                kidding.setKiddingDate(kidDate);              
-                
-                AppUtils.addKidding(kidding, this);
-                DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"}));
-                AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
-                                
-            } catch (ParseException ex) {
-                Logger.getLogger(AddKiddingRecord.class.getName()).log(Level.SEVERE, null, ex);
-            }
         } else {
-             JOptionPane.showMessageDialog(null, "Please check the missing fields.");
+            kidding.setGoatTag(tag);
+             kidding.setKidSire(String.valueOf(kidsire.getSelectedItem()));
+
+            if (validateText()) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String dBred = dateFormat.format(dateBred.getDate());
+                kidding.setDateBred(dBred);
+
+                Calendar calendar = Calendar.getInstance();
+
+                try {
+                    calendar.setTime(dateFormat.parse(dBred));
+                    calendar.add(Calendar.DATE, 155); //Add estimated day of birth
+                    String kidDate = dateFormat.format(calendar.getTime());
+                    System.out.println("Estimate day: " + kidDate);
+                    kidding.setKiddingDate(kidDate);    
+                    
+                    System.out.println(tag);
+
+//                    AppUtils.addKidding(kidding, this);
+//                    DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"}));
+//                    AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
+
+                } catch (ParseException ex) {
+                    Logger.getLogger(AddKiddingRecord.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+             
         }
     }//GEN-LAST:event_addNewKiddingBtnActionPerformed
 

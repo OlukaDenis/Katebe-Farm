@@ -8,6 +8,7 @@ package app;
 import app.models.Goat;
 import app.screens.Home;
 import app.utils.AppUtils;
+import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.awt.FileDialog;
 import java.awt.Image;
@@ -439,14 +440,17 @@ public class AddGoat extends javax.swing.JFrame {
 
     public boolean validateText() {
         
-        if (goat_id.getText().equals("") || goat_name.getText().equals("") || goat_source.getText().equals("")
-                || goat_birth_date.getDate() == null ) {
-            JOptionPane.showMessageDialog(null, "All fields must be filled!");
+        if (goat_id.getText().equals("") ) {
+            JOptionPane.showMessageDialog(null, "Goat tag must be provided!");
             return false;
-        } else if (goat_birth_date.getDate().compareTo(new Date()) > 0) {
+        } else if (goat_birth_date.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Please provide the birthday");
+            return false;
+        }else if (goat_birth_date.getDate().compareTo(new Date()) > 0) {
             JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
             return false;
-        } else {       
+            
+        }else {       
             return true;
         }
     }
@@ -457,10 +461,21 @@ public class AddGoat extends javax.swing.JFrame {
             sex = "Female";
         }
         goat.setID(goat_id.getText());
-        goat.setName(goat_name.getText());
+       
+        if (goat_name.getText().isEmpty()) {
+             goat.setName(DEFAULT_TEXT);
+        } else {
+             goat.setName(goat_name.getText());
+        }
         goat.setBreed(goat_breed.getSelectedItem().toString());
         goat.setSex(sex);
-        goat.setSource(goat_source.getText());
+        
+        if (goat_source.getText().isEmpty()) {
+             goat.setSource(DEFAULT_TEXT);
+        } else {
+             goat.setSource(goat_source.getText());
+        }
+       
         goat.setBuck_id(buckTags.getSelectedItem().toString());        
         goat.setDoe_id(doeTags.getSelectedItem().toString());
         goat.setCurrentStatus(String.valueOf(currentStatus.getSelectedItem()));

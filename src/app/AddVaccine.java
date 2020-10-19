@@ -14,6 +14,7 @@ package app;
 import app.models.Vaccination;
 import app.screens.HealthScreen;
 import app.utils.AppUtils;
+import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -167,9 +168,8 @@ public class AddVaccine extends javax.swing.JFrame {
      
       public boolean validateText() {
         
-        if (vaccinaitonName.getText().equals("") 
-                || vaccinationDate.getDate() == null || nextDueDate.getDate() == null ) {
-            JOptionPane.showMessageDialog(null, "All fields must be filled!");
+        if (vaccinationDate.getDate() == null || nextDueDate.getDate() == null ) {
+            JOptionPane.showMessageDialog(null, "Dates must be filled!");
             return false;
         } else if (vaccinationDate.getDate().compareTo(new Date()) > 0) {
             JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
@@ -180,7 +180,9 @@ public class AddVaccine extends javax.swing.JFrame {
     }
      
     private void addVaccinationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVaccinationBtnActionPerformed
-        vaccination.setVaccineName(vaccinaitonName.getText());
+        String name = vaccinaitonName.getText();
+        vaccination.setVaccineName( (name.isEmpty()) ? DEFAULT_TEXT : name);
+        
         vaccination.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
 
         if (validateText()) {
