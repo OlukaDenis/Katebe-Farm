@@ -94,11 +94,11 @@ public class Home extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Goat Tag", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"
+                "Goat Tag", "Name", "Breed", "Sex", "Source", "Weight", "BirthDate", "BuckID", "DoeID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

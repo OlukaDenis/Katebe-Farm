@@ -147,7 +147,7 @@ public class AppUtils {
             Object[] row;
             
             while(rs.next()) {
-                row = new Object[8];
+                row = new Object[9];
                 
                 String name = rs.getString(2);
                 String source = rs.getString(5);
@@ -159,15 +159,52 @@ public class AppUtils {
                 row[2] = rs.getString(3);
                 row[3] = rs.getString(4);
                 row[4] = source;
-                row[5] =  bd;                
-                row[6] = rs.getString(7);
-                row[7] = rs.getString(8);
+                row[5] =  getRecentWeight(rs.getString(1));
+                row[6] =  bd;                               
+                row[7] = rs.getString(7);
+                row[8] = rs.getString(8);
 
                 model.addRow(row);
 
             }
         } catch (SQLException ex) {
             Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static String getRecentWeight(String tag) {
+        double weight = 0.0;
+         try {
+            ps = conn.prepareStatement("SELECT quantity FROM weight WHERE goatID = ? ORDER BY capturedDate DESC LIMIT 1");
+            ps.setString(1, tag);
+            
+            ResultSet rs = ps.executeQuery();           
+            while(rs.next()) {
+                weight = rs.getDouble(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         return String.valueOf(weight);
+    }
+    
+     public static void addWeight(String weight, String tag) {
+        double value = (weight.isEmpty()) ? 0.0 : Double.parseDouble(weight);
+        
+        try {
+            ps = conn.prepareStatement("INSERT INTO weight(capturedDate, quantity, goatID) VALUES (?, ?, ?)");
+            ps.setString(1, Helpers.currentDate());
+            ps.setDouble(2, value);
+            ps.setString(3, tag);
+            
+            if (ps.executeUpdate() > 0) {
+               System.out.println("Add weight sucesss");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println( ex.getMessage());
         }
     }
     

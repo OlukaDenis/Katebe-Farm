@@ -12,16 +12,19 @@ import connector.DbConnection;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,6 +37,7 @@ import static jdk.nashorn.internal.objects.Global.undefined;
  *
  * @author Eco
  */
+
 public class PrintReport extends javax.swing.JFrame {
 
     /**
@@ -41,10 +45,18 @@ public class PrintReport extends javax.swing.JFrame {
      */
     private Goat goat;
     private static Connection conn;
+    private  Image defaultImage;
     
     public PrintReport() {
         initComponents();
         conn = DbConnection.getConnection();
+        
+        //default image
+        try {
+            defaultImage = ImageIO.read(getClass().getResource("/images/default.png"));
+        } catch (Exception ex) {
+             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     
@@ -63,10 +75,20 @@ public class PrintReport extends javax.swing.JFrame {
         goatSireTag.setText(goat.getBuck_id());
         goatDoeTag.setText(goat.getDoe_id());
         
-        ImageIcon imageSide = new ImageIcon(new ImageIcon(goat.getImage_side())
-                .getImage()
-                .getScaledInstance(goatImage.getWidth(), goatImage.getHeight(), Image.SCALE_SMOOTH)
-        );
+        ImageIcon imageSide;
+        if (goat.getImage_side() == null ) {
+                imageSide = new ImageIcon(new ImageIcon(defaultImage)
+                    .getImage()
+                    .getScaledInstance(goatImage.getWidth(), goatImage.getHeight(), Image.SCALE_SMOOTH)
+            );
+            
+        } else {
+            imageSide = new ImageIcon(new ImageIcon(goat.getImage_side())
+                   .getImage()
+                   .getScaledInstance(goatImage.getWidth(), goatImage.getHeight(), Image.SCALE_SMOOTH)
+           );
+        }
+        
         goatImage.setIcon(imageSide);
         getOwnerInfo();
         getHealthRecords(healthRecordsTable);

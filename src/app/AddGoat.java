@@ -8,6 +8,7 @@ package app;
 import app.models.Goat;
 import app.screens.Home;
 import app.utils.AppUtils;
+import app.utils.Helpers;
 import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.awt.FileDialog;
@@ -105,6 +106,8 @@ public class AddGoat extends javax.swing.JFrame {
         goat_breed = new javax.swing.JComboBox<>();
         buckTags = new javax.swing.JComboBox<>();
         doeTags = new javax.swing.JComboBox<>();
+        goatWeight = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,6 +121,14 @@ public class AddGoat extends javax.swing.JFrame {
         goat_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goat_idActionPerformed(evt);
+            }
+        });
+        goat_id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                goat_idKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                goat_idKeyReleased(evt);
             }
         });
         jPanel1.add(goat_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 87, 213, -1));
@@ -227,11 +238,11 @@ public class AddGoat extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(frontImage, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(frontImage, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, -1, -1));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, -1, 110));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -260,7 +271,7 @@ public class AddGoat extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, -1, 107));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, -1, 107));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -300,7 +311,7 @@ public class AddGoat extends javax.swing.JFrame {
                 chooseFrontMouseClicked(evt);
             }
         });
-        jPanel1.add(chooseFront, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, 110, -1));
+        jPanel1.add(chooseFront, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, 110, -1));
 
         chooseSide.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         chooseSide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -311,7 +322,7 @@ public class AddGoat extends javax.swing.JFrame {
                 chooseSideMouseClicked(evt);
             }
         });
-        jPanel1.add(chooseSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 110, -1));
+        jPanel1.add(chooseSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, 110, -1));
 
         chooseRear.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         chooseRear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -322,7 +333,7 @@ public class AddGoat extends javax.swing.JFrame {
                 chooseRearMouseClicked(evt);
             }
         });
-        jPanel1.add(chooseRear, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 410, 110, -1));
+        jPanel1.add(chooseRear, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 420, 110, -1));
 
         jPanel2.setBackground(new java.awt.Color(61, 149, 119));
 
@@ -351,7 +362,7 @@ public class AddGoat extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel10.setText("Doe Tag");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
 
         currentStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "In the farm", "Not in the farm" }));
         currentStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -359,7 +370,7 @@ public class AddGoat extends javax.swing.JFrame {
                 currentStatusActionPerformed(evt);
             }
         });
-        jPanel1.add(currentStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 200, 30));
+        jPanel1.add(currentStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 200, 30));
 
         goat_breed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Local", "Exotic" }));
         jPanel1.add(goat_breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 220, -1));
@@ -367,6 +378,22 @@ public class AddGoat extends javax.swing.JFrame {
         jPanel1.add(buckTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 200, 30));
 
         jPanel1.add(doeTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 200, 30));
+
+        goatWeight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goatWeightActionPerformed(evt);
+            }
+        });
+        goatWeight.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                goatWeightKeyPressed(evt);
+            }
+        });
+        jPanel1.add(goatWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 213, -1));
+
+        jLabel11.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel11.setText("Weight (kg)");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -485,6 +512,8 @@ public class AddGoat extends javax.swing.JFrame {
             String bdate = dateFormat.format(goat_birth_date.getDate());
             goat.setBirthDate(bdate);
             
+            AppUtils.addWeight(goatWeight.getText(), goat_id.getText());
+            
             AppUtils.addNewGoat(goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
             Home.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"Goat Tag", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
@@ -580,6 +609,30 @@ public class AddGoat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_currentStatusActionPerformed
 
+    private void goatWeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goatWeightActionPerformed
+        
+    }//GEN-LAST:event_goatWeightActionPerformed
+
+    private void goatWeightKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_goatWeightKeyPressed
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)) {
+            goatWeight.setEditable(false);
+        } else {
+            goatWeight.setEditable(true);
+        }
+    }//GEN-LAST:event_goatWeightKeyPressed
+
+    private void goat_idKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_goat_idKeyReleased
+        int position = goat_id.getCaretPosition();
+        goat_id.setText(goat_id.getText().toUpperCase());
+        goat_id.setCaretPosition(position);
+        
+    }//GEN-LAST:event_goat_idKeyReleased
+
+    private void goat_idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_goat_idKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_goat_idKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -625,6 +678,7 @@ public class AddGoat extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> currentStatus;
     private javax.swing.JComboBox<String> doeTags;
     private javax.swing.JLabel frontImage;
+    private javax.swing.JTextField goatWeight;
     private com.toedter.calendar.JDateChooser goat_birth_date;
     private javax.swing.JComboBox<String> goat_breed;
     private javax.swing.JTextField goat_id;
@@ -632,6 +686,7 @@ public class AddGoat extends javax.swing.JFrame {
     private javax.swing.JTextField goat_source;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

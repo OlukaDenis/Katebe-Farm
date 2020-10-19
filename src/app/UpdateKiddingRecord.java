@@ -116,25 +116,29 @@ public class UpdateKiddingRecord extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(229, 230, 232));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(kidsire, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 220, -1));
+        jPanel1.add(kidsire, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 220, -1));
 
+        jLabel2.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Goat Tag");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, 30));
 
+        jLabel4.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Date Bred");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 30));
         jPanel1.add(dateBred, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 220, 30));
         jPanel1.add(kidName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 220, -1));
 
+        jLabel5.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel5.setText("Kid Name");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 70, 30));
 
+        jLabel6.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel6.setText("Kid Sire");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 60, 30));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 70, 30));
 
         rbMale.setText("Male");
         rbMale.addActionListener(new java.awt.event.ActionListener() {
@@ -144,6 +148,7 @@ public class UpdateKiddingRecord extends javax.swing.JFrame {
         });
         jPanel1.add(rbMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
 
+        jLabel7.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
         jLabel7.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel7.setText("Sex");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, -1, -1));
@@ -161,13 +166,15 @@ public class UpdateKiddingRecord extends javax.swing.JFrame {
                 birthWeightKeyPressed(evt);
             }
         });
-        jPanel1.add(birthWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 220, -1));
+        jPanel1.add(birthWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, -1));
 
+        jLabel8.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel8.setText("Birth Weight (kg)");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 100, 30));
-        jPanel1.add(tattoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 220, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 140, 30));
+        jPanel1.add(tattoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 220, -1));
 
+        jLabel9.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel9.setText("Tattoo");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 60, 30));
@@ -209,8 +216,9 @@ public class UpdateKiddingRecord extends javax.swing.JFrame {
         jPanel1.add(updateKiddingBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 150, 50));
 
         kiddingDate.setEnabled(false);
-        jPanel1.add(kiddingDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 220, 30));
+        jPanel1.add(kiddingDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 220, 30));
 
+        jLabel10.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
         jLabel10.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel10.setText("Kidding Date");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, 30));
@@ -220,20 +228,56 @@ public class UpdateKiddingRecord extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rbMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbMaleActionPerformed
+    private void updateKiddingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateKiddingBtnActionPerformed
+        String sex = "Male";
+        if (rbFemale.isSelected()) {
+            sex = "Female";
+        }
 
-    private void rbFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFemaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbFemaleActionPerformed
+        double weight = Double.parseDouble(birthWeight.getText());
+        kidding.setSex(sex);
+        kidding.setKidName(kidName.getText());
+        kidding.setBirthWeight(weight);
+        kidding.setTattoo(tattoo.getText());
+        kidding.setGoatTag(goatTag.getText());
+        kidding.setKidSire(String.valueOf(kidsire.getSelectedItem()));
 
-    public void getSelectedKidding(Kidding selectedRecord) {
-           kidding = selectedRecord;
-           if (kidding != null) {
-          populateKidding();
-         }
-    }
+        if (validateText()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dBred = dateFormat.format(dateBred.getDate());
+            kidding.setDateBred(dBred);
+
+            Calendar calendar = Calendar.getInstance();
+
+            try {
+                calendar.setTime(dateFormat.parse(dBred));
+                calendar.add(Calendar.DATE, 155); //Add estimated day of birth
+                String kidDate = dateFormat.format(calendar.getTime());
+                System.out.println("Estimate day: " + kidDate);
+                kidding.setKiddingDate(kidDate);
+
+                AppUtils.updateKiddingRecord(kidding, this);
+                DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"}));
+                AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
+
+            } catch (ParseException ex) {
+                Logger.getLogger(AddKiddingRecord.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please check the missing fields.");
+        }
+    }//GEN-LAST:event_updateKiddingBtnActionPerformed
+
+    private void deleteKiddingRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteKiddingRecordActionPerformed
+        AppUtils.deleteKidding(kidding.getId(), this);
+        DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"}));
+        AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
+    }//GEN-LAST:event_deleteKiddingRecordActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void birthWeightKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_birthWeightKeyPressed
         char c = evt.getKeyChar();
         if(Character.isLetter(c)) {
@@ -243,10 +287,20 @@ public class UpdateKiddingRecord extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_birthWeightKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void rbFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFemaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbFemaleActionPerformed
 
+    private void rbMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbMaleActionPerformed
+
+    public void getSelectedKidding(Kidding selectedRecord) {
+           kidding = selectedRecord;
+           if (kidding != null) {
+          populateKidding();
+         }
+    }
      public boolean validateText() {
         
         if (tattoo.getText().equals("") || birthWeight.getText().equals("") 
@@ -312,52 +366,6 @@ public class UpdateKiddingRecord extends javax.swing.JFrame {
         }
     }
     
-    private void deleteKiddingRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteKiddingRecordActionPerformed
-        AppUtils.deleteKidding(kidding.getId(), this);
-        DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"}));
-        AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
-    }//GEN-LAST:event_deleteKiddingRecordActionPerformed
-
-    private void updateKiddingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateKiddingBtnActionPerformed
-        String sex = "Male";
-        if (rbFemale.isSelected()) {
-            sex = "Female";
-        }
-
-        double weight = Double.parseDouble(birthWeight.getText());
-        kidding.setSex(sex);
-        kidding.setKidName(kidName.getText());
-        kidding.setBirthWeight(weight);
-        kidding.setTattoo(tattoo.getText());
-        kidding.setGoatTag(goatTag.getText());
-        kidding.setKidSire(String.valueOf(kidsire.getSelectedItem()));
-
-        if (validateText()) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String dBred = dateFormat.format(dateBred.getDate());
-            kidding.setDateBred(dBred);
-
-            Calendar calendar = Calendar.getInstance();
-
-            try {
-                calendar.setTime(dateFormat.parse(dBred));
-                calendar.add(Calendar.DATE, 155); //Add estimated day of birth
-                String kidDate = dateFormat.format(calendar.getTime());
-                System.out.println("Estimate day: " + kidDate);
-                kidding.setKiddingDate(kidDate);
-
-                AppUtils.updateKiddingRecord(kidding, this);
-                DoeKidding.kiddingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Doe Tag", "Date Bred", "Kidding Date", "Sex", "Kid Name", "Kid Sire", "Birth Weight", "Tattoo", "Days Remaining"}));
-                AppUtils.fillKiddingTable(DoeKidding.kiddingTable, "");
-
-            } catch (ParseException ex) {
-                Logger.getLogger(AddKiddingRecord.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Please check the missing fields.");
-        }
-    }//GEN-LAST:event_updateKiddingBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */

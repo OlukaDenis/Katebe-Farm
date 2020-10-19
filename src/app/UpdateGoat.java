@@ -47,6 +47,7 @@ public class UpdateGoat extends javax.swing.JFrame {
     private PreparedStatement ps;
     private  Image defaultImage;
     private byte [] bufferedImage;
+    private boolean weightPressed;
     
     public UpdateGoat() {
         initComponents();
@@ -59,6 +60,8 @@ public class UpdateGoat extends javax.swing.JFrame {
         bg.add(updateMale);
         bg.add(updateFemale);
         
+        weightPressed = false;
+                
         populateBucks();
         populateDoes();
     }
@@ -110,6 +113,8 @@ public class UpdateGoat extends javax.swing.JFrame {
         livingStatus = new javax.swing.JComboBox<>();
         buckTags = new javax.swing.JComboBox<>();
         doeTags = new javax.swing.JComboBox<>();
+        goatWeight = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -189,11 +194,11 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel8.setText("Buck Tag");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 106, -1, 30));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, -1, 30));
 
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel9.setText("Doe Tag");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 156, -1, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, -1, 30));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -219,11 +224,11 @@ public class UpdateGoat extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(updateFrontImage, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(updateFrontImage, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 303, -1, -1));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, -1, 110));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -253,7 +258,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 303, -1, 107));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 340, -1, 107));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -283,11 +288,11 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 303, -1, 107));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, -1, 107));
 
         jLabel14.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel14.setText("Select Images");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 280, -1, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
 
         chooseFront.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         chooseFront.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -298,7 +303,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 chooseFrontMouseClicked(evt);
             }
         });
-        jPanel1.add(chooseFront, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 418, 110, -1));
+        jPanel1.add(chooseFront, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, 110, -1));
 
         chooseSide.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         chooseSide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -309,7 +314,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 chooseSideMouseClicked(evt);
             }
         });
-        jPanel1.add(chooseSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 110, -1));
+        jPanel1.add(chooseSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, 110, -1));
 
         chooseRear.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         chooseRear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -320,13 +325,13 @@ public class UpdateGoat extends javax.swing.JFrame {
                 chooseRearMouseClicked(evt);
             }
         });
-        jPanel1.add(chooseRear, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 110, -1));
+        jPanel1.add(chooseRear, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 110, -1));
 
         jLabel10.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel10.setText("Living status");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 416, -1, 30));
 
-        jPanel1.add(updateCurrentStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 208, 30));
+        jPanel1.add(updateCurrentStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 210, 208, 30));
 
         jPanel2.setBackground(new java.awt.Color(61, 149, 119));
 
@@ -359,7 +364,7 @@ public class UpdateGoat extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(printBtn))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 70));
@@ -370,9 +375,25 @@ public class UpdateGoat extends javax.swing.JFrame {
 
         jPanel1.add(livingStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 200, -1));
 
-        jPanel1.add(buckTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 200, 40));
+        jPanel1.add(buckTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 200, 40));
 
-        jPanel1.add(doeTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 200, 40));
+        jPanel1.add(doeTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 200, 40));
+
+        goatWeight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goatWeightActionPerformed(evt);
+            }
+        });
+        goatWeight.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                goatWeightKeyPressed(evt);
+            }
+        });
+        jPanel1.add(goatWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 213, -1));
+
+        jLabel12.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel12.setText("Weight (kg)");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 580));
 
@@ -451,6 +472,10 @@ public class UpdateGoat extends javax.swing.JFrame {
             String bdate = dateFormat.format(updateBirthDate.getDate());
             goat.setBirthDate(bdate);
             
+            if (weightPressed) {
+                AppUtils.addWeight(goatWeight.getText(), goat.getID());
+            }
+            
             AppUtils.updateOneGoat(goat, this);
             MainApp.registered_goats.setText(Integer.toString(AppUtils.countData(("goat"))));
             Home.AllGoatsTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Name", "Breed", "Sex", "Source", "BirthDate", "BuckID", "DoeID"}));
@@ -480,6 +505,8 @@ public class UpdateGoat extends javax.swing.JFrame {
         } else if(itemOne.equals("Not in the farm")) {
             itemTwo = "In the farm";
         }
+        
+        goatWeight.setText(AppUtils.getRecentWeight(goat.getID()));
        
         DefaultComboBoxModel dModel = new javax.swing.DefaultComboBoxModel<>(new String[] { itemOne, itemTwo });
         updateCurrentStatus.setModel(dModel);
@@ -716,6 +743,20 @@ public class UpdateGoat extends javax.swing.JFrame {
         report.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_printBtnActionPerformed
 
+    private void goatWeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goatWeightActionPerformed
+
+    }//GEN-LAST:event_goatWeightActionPerformed
+
+    private void goatWeightKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_goatWeightKeyPressed
+        weightPressed = true;
+        char c = evt.getKeyChar();
+        if(Character.isLetter(c)) {
+            goatWeight.setEditable(false);
+        } else {
+            goatWeight.setEditable(true);
+        }
+    }//GEN-LAST:event_goatWeightKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -758,10 +799,12 @@ public class UpdateGoat extends javax.swing.JFrame {
     private javax.swing.JLabel chooseRear;
     private javax.swing.JLabel chooseSide;
     private javax.swing.JComboBox<String> doeTags;
+    private javax.swing.JTextField goatWeight;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
