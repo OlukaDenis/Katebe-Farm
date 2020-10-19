@@ -5,10 +5,10 @@
  */
 package app;
 
-import app.models.Treatment;
+import app.models.Deworming;
+import app.models.Dipping;
 import app.screens.HealthScreen;
 import app.utils.AppUtils;
-import app.utils.Helpers;
 import static app.utils.Helpers.DEFAULT_TEXT;
 import connector.DbConnection;
 import java.sql.Connection;
@@ -27,22 +27,21 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  *
  * @author Eco
  */
-public class AddTreatment extends javax.swing.JFrame {
+public class AddDipping extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddTreatment
+     * Creates new form AddDeworming
      */
-    private Treatment treatment;
+    Dipping dipping;
     private static Connection conn;
     
-    public AddTreatment() {
+    public AddDipping() {
         initComponents();
-        treatment = new Treatment();
-        
+        dipping = new Dipping();
         conn = DbConnection.getConnection();
        
-        AutoCompleteDecorator.decorate(goatTags);
-        populateGoatTags();
+       AutoCompleteDecorator.decorate(goatTags);
+       populateGoatTags();
     }
 
     /**
@@ -58,14 +57,14 @@ public class AddTreatment extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         goatTags = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        addTreatment = new javax.swing.JButton();
         cancelDeworm = new javax.swing.JButton();
-        treatmentDate = new com.toedter.calendar.JDateChooser();
+        addDeworming = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        treatmentDescription = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
+        dippingComments = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        dippingDate = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,49 +73,30 @@ public class AddTreatment extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("New Treatment Record");
+        jLabel1.setText("New Dipping Record");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(186, 186, 186)
+                .addGap(171, 171, 171)
                 .addComponent(jLabel1)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 60));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 60));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(goatTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 153, -1));
-
-        jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel2.setText("Goat Tag");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, 30));
-
-        jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel5.setText("Treatment Description");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, 30));
-
-        addTreatment.setBackground(new java.awt.Color(61, 149, 119));
-        addTreatment.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        addTreatment.setForeground(new java.awt.Color(255, 255, 255));
-        addTreatment.setText("ADD");
-        addTreatment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addTreatmentActionPerformed(evt);
-            }
-        });
-        jPanel1.add(addTreatment, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 160, 40));
+        jPanel1.add(goatTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 230, -1));
 
         cancelDeworm.setBackground(new java.awt.Color(255, 102, 102));
         cancelDeworm.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -127,23 +107,66 @@ public class AddTreatment extends javax.swing.JFrame {
                 cancelDewormActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelDeworm, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 150, 40));
-        jPanel1.add(treatmentDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 220, 30));
+        jPanel1.add(cancelDeworm, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 150, 40));
 
-        treatmentDescription.setColumns(20);
-        treatmentDescription.setRows(5);
-        jScrollPane1.setViewportView(treatmentDescription);
+        addDeworming.setBackground(new java.awt.Color(61, 149, 119));
+        addDeworming.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        addDeworming.setForeground(new java.awt.Color(255, 255, 255));
+        addDeworming.setText("ADD");
+        addDeworming.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDewormingActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addDeworming, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 160, 40));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel7.setText("Goat Tag");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, 30));
 
-        jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel6.setText("Treatment Date");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, 30));
+        dippingComments.setColumns(20);
+        dippingComments.setRows(5);
+        jScrollPane1.setViewportView(dippingComments);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 590, 390));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 250, 130));
+
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel3.setText("Comments");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, 30));
+        jPanel1.add(dippingDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 240, 30));
+
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel4.setText("Dipping Date");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 560, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addDewormingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDewormingActionPerformed
+        
+        String comments = dippingComments.getText();
+        
+         dipping.setComments((comments.isEmpty()) ? DEFAULT_TEXT : comments);
+        
+        dipping.setGoatTag(String.valueOf(goatTags.getSelectedItem()));      
+
+        if (validateText()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dDate = dateFormat.format(dippingDate.getDate());     
+
+            dipping.setDippingDate(dDate);
+            
+            AppUtils.addDipping(dipping, this);
+            HealthScreen.dippingTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Dipping Date", "Comments", "Goat Tag"}));
+            AppUtils.fillDippingTable(HealthScreen.dippingTable, "");
+        }
+    }//GEN-LAST:event_addDewormingActionPerformed
+
+    private void cancelDewormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDewormActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelDewormActionPerformed
 
     private void populateGoatTags() {
         PreparedStatement ps = null;
@@ -160,40 +183,19 @@ public class AddTreatment extends javax.swing.JFrame {
         }
     }
     
+    
     public boolean validateText() {
         
-        if (treatmentDate.getDate() == null ) {
+        if (dippingDate.getDate() == null ) {
             JOptionPane.showMessageDialog(null, "Date must be filled!");
             return false;
-        } else if (treatmentDate.getDate().compareTo(new Date()) > 0) {
+        } else if (dippingDate.getDate().compareTo(new Date()) > 0) {
             JOptionPane.showMessageDialog(null, "Please choose date which is not in the future.");
             return false;
         } else {       
             return true;
         }
     }
-    
-    private void addTreatmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTreatmentActionPerformed
-        String treat = treatmentDescription.getText();
-        treatment.setDescription((treat.isEmpty()) ? DEFAULT_TEXT : treat);
-        treatment.setGoatTag(String.valueOf(goatTags.getSelectedItem()));
-    
-        if (validateText()) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String dDate = dateFormat.format(treatmentDate.getDate());
-
-            treatment.setTreatmentDate(dDate);
-
-            AppUtils.addTreatment(treatment, this);
-            HealthScreen.treatmentTable.setModel(new DefaultTableModel(null, new Object[]{"ID", "Treatment Date", "Description", "Goat Tag"}));
-            AppUtils.fillTreatmentTable(HealthScreen.treatmentTable, "");
-        }
-    }//GEN-LAST:event_addTreatmentActionPerformed
-
-    private void cancelDewormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDewormActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_cancelDewormActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -211,36 +213,37 @@ public class AddTreatment extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddTreatment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDipping.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddTreatment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDipping.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddTreatment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDipping.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddTreatment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDipping.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddTreatment().setVisible(true);
+                new AddDipping().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addTreatment;
+    private javax.swing.JButton addDeworming;
     private javax.swing.JButton cancelDeworm;
+    private javax.swing.JTextArea dippingComments;
+    private com.toedter.calendar.JDateChooser dippingDate;
     private javax.swing.JComboBox<String> goatTags;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JDateChooser treatmentDate;
-    private javax.swing.JTextArea treatmentDescription;
     // End of variables declaration//GEN-END:variables
 }

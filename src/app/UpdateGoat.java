@@ -115,6 +115,7 @@ public class UpdateGoat extends javax.swing.JFrame {
         doeTags = new javax.swing.JComboBox<>();
         goatWeight = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -389,11 +390,22 @@ public class UpdateGoat extends javax.swing.JFrame {
                 goatWeightKeyPressed(evt);
             }
         });
-        jPanel1.add(goatWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 213, -1));
+        jPanel1.add(goatWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 160, -1));
 
         jLabel12.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel12.setText("Weight (kg)");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 123, 0));
+        jLabel13.setText("View weights");
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 270, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 580));
 
@@ -757,6 +769,15 @@ public class UpdateGoat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_goatWeightKeyPressed
 
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        GoatWeights goatWeights = new GoatWeights();
+        goatWeights.getHealthRecords(GoatWeights.goatWeightTable, goat.getID());
+        goatWeights.setVisible(true);
+        goatWeights.pack();
+        goatWeights.setLocationRelativeTo(null);
+        goatWeights.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jLabel13MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -805,6 +826,7 @@ public class UpdateGoat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

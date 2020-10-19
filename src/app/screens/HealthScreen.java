@@ -6,6 +6,7 @@
 package app.screens;
 
 import app.AddDeworming;
+import app.AddDipping;
 import app.AddOwner;
 import app.AddTreatment;
 import app.AddVaccine;
@@ -45,6 +46,11 @@ public class HealthScreen extends javax.swing.JInternalFrame {
         treatmentTable.setRowHeight(40);
         treatmentTable.setSelectionBackground(Color.decode("#66cc99"));
         
+        AppUtils.fillDippingTable(dippingTable, "");
+        model = (DefaultTableModel)dippingTable.getModel();
+        dippingTable.setRowHeight(40);
+        dippingTable.setSelectionBackground(Color.decode("#66cc99"));
+        
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
@@ -73,6 +79,10 @@ public class HealthScreen extends javax.swing.JInternalFrame {
         addTreatment = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         treatmentTable = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        dippingTable = new javax.swing.JTable();
+        addDippingBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(920, 610));
@@ -106,7 +116,7 @@ public class HealthScreen extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(addDewormingRecord)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +124,7 @@ public class HealthScreen extends javax.swing.JInternalFrame {
                 .addGap(12, 12, 12)
                 .addComponent(addDewormingRecord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("DEWORMING", jPanel3);
@@ -142,7 +152,7 @@ public class HealthScreen extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton2)
@@ -154,7 +164,7 @@ public class HealthScreen extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -195,10 +205,35 @@ public class HealthScreen extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addComponent(addTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("OTHER TREATMENT", jPanel2);
+
+        jPanel5.setBackground(new java.awt.Color(244, 244, 244));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dippingTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Dipping Date", "Comments"
+            }
+        ));
+        jScrollPane4.setViewportView(dippingTable);
+
+        jPanel5.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 70, 900, 470));
+
+        addDippingBtn.setText("Add Dipping");
+        addDippingBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addDippingBtnMouseClicked(evt);
+            }
+        });
+        jPanel5.add(addDippingBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 170, 30));
+
+        jTabbedPane1.addTab("DIPPING", jPanel5);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -249,19 +284,32 @@ public class HealthScreen extends javax.swing.JInternalFrame {
         addTreat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_addTreatmentActionPerformed
 
+    private void addDippingBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDippingBtnMouseClicked
+        // TODO add your handling code here:
+        AddDipping addDipping = new AddDipping();
+        addDipping.setVisible(true);
+        addDipping.pack();
+        addDipping.setLocationRelativeTo(null);
+        addDipping.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_addDippingBtnMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDewormingRecord;
+    private javax.swing.JButton addDippingBtn;
     private javax.swing.JButton addTreatment;
     public static javax.swing.JTable dewormingTable;
+    public static javax.swing.JTable dippingTable;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTable treatmentTable;
     public static javax.swing.JTable vaccinationTable;

@@ -2,6 +2,7 @@
 package app.utils;
 
 import app.AddDeworming;
+import app.AddDipping;
 import app.AddExpense;
 import app.AddGoat;
 import app.AddKiddingRecord;
@@ -13,6 +14,7 @@ import app.AddTreatment;
 import app.UpdateGoat;
 import app.UpdateKiddingRecord;
 import app.models.Deworming;
+import app.models.Dipping;
 import app.models.Expense;
 import app.models.Goat;
 import app.models.GoatOwner;
@@ -295,6 +297,52 @@ public class AppUtils {
         }
     }
     //End Deworming
+    
+     //Diping
+    public static void addDipping(Dipping dipping, AddDipping addDipping) {
+        try {
+            ps = conn.prepareStatement("INSERT INTO dipping(dippingDate, comments, goatID) VALUES (?, ?, ?)");
+            ps.setString(1, dipping.getDippingDate());
+            ps.setString(2, dipping.getComments());
+            ps.setString(3, dipping.getGoatTag());
+            
+            if (ps.executeUpdate() > 0) {
+               JOptionPane.showMessageDialog(null, "New dipping record added successfully!");
+               addDipping.dispose();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+    
+    public static void fillDippingTable(JTable table, String searchText) {        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM dipping WHERE CONCAT(id, dippingDate, comments, goatID) LIKE ?");
+            ps.setString(1, "%" + searchText + "%");
+            
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            
+            Object[] row;
+            
+            while(rs.next()) {
+                row = new Object[6];
+                
+                row[0] = rs.getString(1);                
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4); 
+                
+                model.addRow(row);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //End dipping
     
     
     //Treatment
