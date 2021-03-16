@@ -54,19 +54,19 @@ public class AddDeworming extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        dDewormingDate = new com.toedter.calendar.JDateChooser();
-        jLabel3 = new javax.swing.JLabel();
-        dNextDueDate = new com.toedter.calendar.JDateChooser();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        dDewormerUsed = new javax.swing.JTextField();
-        dDoseAdministered = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         cancelDeworm = new javax.swing.JButton();
         addDeworming = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         goatTags = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        dDewormerUsed = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        dDoseAdministered = new javax.swing.JTextField();
+        dDewormingDate = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        dNextDueDate = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -95,26 +95,6 @@ public class AddDeworming extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 60));
-        getContentPane().add(dDewormingDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 220, 30));
-
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel3.setText("Next Due Date");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, -1, 30));
-        getContentPane().add(dNextDueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 220, 30));
-
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel4.setText("Deworming Date");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, 30));
-
-        jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel5.setText("Dewormer Used");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, 30));
-        getContentPane().add(dDewormerUsed, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 220, -1));
-        getContentPane().add(dDoseAdministered, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 220, -1));
-
-        jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel6.setText("Dose Administered");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, -1, 30));
 
         cancelDeworm.setBackground(new java.awt.Color(255, 102, 102));
         cancelDeworm.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -144,7 +124,27 @@ public class AddDeworming extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Goat Tag");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 41, -1, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, 30));
+        jPanel1.add(dDewormerUsed, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 200, -1));
+
+        jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel5.setText("Dewormer Used");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, 30));
+        jPanel1.add(dDoseAdministered, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 220, -1));
+        jPanel1.add(dDewormingDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 220, 30));
+
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel4.setText("Deworming Date");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, 30));
+
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel3.setText("Next Due Date");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, 30));
+
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel6.setText("Dose Administered");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, -1, 30));
+        jPanel1.add(dNextDueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 220, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 810, 430));
 

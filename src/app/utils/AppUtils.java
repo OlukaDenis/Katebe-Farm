@@ -310,7 +310,6 @@ public class AppUtils {
                JOptionPane.showMessageDialog(null, "New dipping record added successfully!");
                addDipping.dispose();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(AppUtils.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, ex.getMessage());
